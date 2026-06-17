@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ブログ｜WorldShift Trade Watch</title>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;background:#f0f4f8;color:#0f172a}
+    a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
+    .hd{background:#0c2340;position:sticky;top:0;z-index:200}
+    .hd-in{max-width:1080px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:12px}
+    .hd-logo{display:flex;align-items:center;gap:8px;color:#fff;flex-shrink:0}
+    .hd-logo img{height:22px;filter:brightness(0) invert(1)}
+    .hd-logo span{font-size:14px;font-weight:700}
+    .hd-tag{font-size:11px;color:rgba(255,255,255,0.4);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+    .hd-rate{font-size:12px;color:rgba(255,255,255,0.6);white-space:nowrap}
+    .hd-rate strong{color:#fff}
+    .g-nav{background:#fff;border-bottom:2px solid #e2e8f0}
+    .g-nav-in{max-width:1080px;margin:0 auto;padding:0 20px;display:flex;overflow-x:auto;scrollbar-width:none}
+    .g-nav-in::-webkit-scrollbar{display:none}
+    .g-nav-tab{display:flex;align-items:center;gap:5px;padding:11px 18px;font-size:13px;font-weight:600;color:#64748b;white-space:nowrap;flex-shrink:0;border-bottom:2px solid transparent;margin-bottom:-2px;transition:color 0.1s,border-color 0.1s}
+    .g-nav-tab:hover{color:#0c2340}
+    .g-nav-tab.act{color:#92400e;border-bottom-color:#92400e}
+    .ext-badge{font-size:9px;background:#e8f0fc;color:#0c2340;padding:1px 4px;border-radius:3px;font-weight:700}
+    .page-hero{background:linear-gradient(135deg,#451a03 0%,#92400e 100%);padding:28px 20px 24px}
+    .ph-in{max-width:1080px;margin:0 auto;display:flex;align-items:center;gap:16px}
+    .ph-icon{font-size:40px;flex-shrink:0}
+    .ph-en{font-size:10px;font-weight:700;letter-spacing:0.14em;color:rgba(255,255,255,0.45);text-transform:uppercase;margin-bottom:4px}
+    .ph-title{font-size:22px;font-weight:700;color:#fff;margin-bottom:5px}
+    .ph-desc{font-size:13px;color:rgba(255,255,255,0.65);line-height:1.6}
+    .page-wrap{max-width:1080px;margin:0 auto;padding:28px 20px 48px}
+
+    /* Coming soon */
+    .coming-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:64px 20px;background:#fff;border:1px solid #e2e8f0;border-radius:14px;text-align:center;gap:16px}
+    .coming-icon{font-size:56px}
+    .coming-title{font-size:22px;font-weight:700;color:#0f172a}
+    .coming-desc{font-size:14px;color:#64748b;line-height:1.75;max-width:440px}
+    .coming-nl{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;justify-content:center}
+    .coming-nl input{padding:9px 13px;border:1px solid #e2e8f0;border-radius:7px;font-size:13px;font-family:inherit;width:240px}
+    .coming-nl input:focus{outline:2px solid #92400e;border-color:transparent}
+    .coming-nl button{background:#92400e;color:#fff;border:none;border-radius:7px;padding:9px 20px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;transition:background 0.12s}
+    .coming-nl button:hover{background:#b45309}
+    .coming-note{font-size:11px;color:#94a3b8}
+
+    /* Placeholder previews */
+    .preview-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}
+    @media(max-width:720px){.preview-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:480px){.preview-grid{grid-template-columns:1fr}}
+    .preview-card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;opacity:0.5;pointer-events:none}
+    .preview-img{width:100%;aspect-ratio:16/9;background:#f1f5f9;display:flex;align-items:center;justify-content:center;font-size:32px}
+    .preview-body{padding:12px 14px}
+    .preview-tag{font-size:10px;font-weight:800;padding:2px 7px;border-radius:3px;background:#fef3c7;color:#92400e;display:inline-block;margin-bottom:6px}
+    .preview-title{font-size:13px;font-weight:600;color:#94a3b8;line-height:1.5}
+    .preview-date{font-size:11px;color:#cbd5e1;margin-top:6px}
+
+    .ft{background:#fff;border-top:1px solid #e2e8f0;padding:28px 0 0;margin-top:8px}
+    .ft-in{max-width:1080px;margin:0 auto;padding:0 20px;display:flex;gap:32px;flex-wrap:wrap}
+    .ft-brand{flex:1;min-width:180px}
+    .ft-logo{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+    .ft-logo img{height:22px}
+    .ft-logo-name{font-size:14px;font-weight:700;color:#0f172a}
+    .ft-about{font-size:12px;color:#64748b;line-height:1.7;max-width:220px}
+    .ft-col{min-width:110px}
+    .ft-col-t{font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px}
+    .ft-col ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+    .ft-col a{font-size:12px;color:#64748b}
+    .ft-col a:hover{color:#0f172a;text-decoration:underline}
+    .ft-bot{max-width:1080px;margin:20px auto 0;padding:12px 20px;border-top:1px solid #f1f5f9;font-size:11px;color:#94a3b8}
+  </style>
+</head>
+<body>
+<header class="hd"><div class="hd-in">
+  <a href="index.html" class="hd-logo"><img src="https://news.worldshift-inc.jp/img/ws-logo.png" alt="WS"/><span>WorldShift Trade Watch</span></a>
+  <span class="hd-tag">アメリカ発・通商ニュースポータル</span>
+  <span class="hd-rate">💱 1 USD = <strong id="rv">—</strong>円</span>
+</div></header>
+<nav class="g-nav"><div class="g-nav-in">
+  <a href="index.html" class="g-nav-tab">🏠 ポータル</a>
+  <a href="news.html"  class="g-nav-tab">📰 NEWS</a>
+  <a href="fda.html"   class="g-nav-tab">🧪 FDA特設</a>
+  <a href="blog.html"  class="g-nav-tab act">✏️ ブログ</a>
+  <a href="https://news.worldshift-inc.jp/glossary.html" class="g-nav-tab">📖 用語集</a>
+  <a href="https://export-lab.jp/" class="g-nav-tab" target="_blank" rel="noopener">👥 コミュニティ <span class="ext-badge">外部</span></a>
+</div></nav>
+
+<div class="page-hero"><div class="ph-in">
+  <div class="ph-icon">✏️</div>
+  <div>
+    <p class="ph-en">Blog</p>
+    <h1 class="ph-title">ブログ</h1>
+    <p class="ph-desc">輸出実務の解説・事例コラム・現場からの視点をお届けします。</p>
+  </div>
+</div></div>
+
+<div class="page-wrap">
+  <div class="coming-wrap">
+    <div class="coming-icon">✏️</div>
+    <h2 class="coming-title">ブログ、準備中です</h2>
+    <p class="coming-desc">輸出実務の解説・事例コラム・スタッフからの現場レポートなど、役立つコンテンツを準備しています。公開をお楽しみに。<br>ニュースレターに登録しておくと、公開時にいち早くお知らせします。</p>
+    <div class="coming-nl">
+      <input type="email" id="nl-e" placeholder="メールアドレス"/>
+      <button id="nl-b">公開時に通知を受け取る</button>
+    </div>
+    <p class="coming-note">いつでも解除できます。</p>
+  </div>
+
+  <p style="font-size:13px;font-weight:700;color:#94a3b8;letter-spacing:0.08em;text-transform:uppercase;margin:28px 0 12px;display:flex;align-items:center;gap:10px">
+    予定コンテンツ
+    <span style="flex:1;height:1px;background:#e2e8f0;display:block"></span>
+  </p>
+  <div class="preview-grid">
+    <div class="preview-card"><div class="preview-img">📦</div><div class="preview-body"><span class="preview-tag">実務解説</span><p class="preview-title">デミニミス終了後の小口輸出、何が変わった？</p><p class="preview-date">近日公開予定</p></div></div>
+    <div class="preview-card"><div class="preview-img">🧪</div><div class="preview-body"><span class="preview-tag">FDA</span><p class="preview-title">食品をアメリカに送るまでの手続きを全部まとめた</p><p class="preview-date">近日公開予定</p></div></div>
+    <div class="preview-card"><div class="preview-img">💰</div><div class="preview-body"><span class="preview-tag">関税</span><p class="preview-title">関税の「重ねがけ」とは？実際の税率の計算例</p><p class="preview-date">近日公開予定</p></div></div>
+  </div>
+</div>
+
+<footer class="ft"><div class="ft-in">
+  <div class="ft-brand"><div class="ft-logo"><img src="https://news.worldshift-inc.jp/img/ws-logo.png" alt=""/><span class="ft-logo-name">WorldShift Trade Watch</span></div><p class="ft-about">アメリカ発の通商ニュースを、日本の輸出者へ。</p></div>
+  <div class="ft-col"><p class="ft-col-t">コンテンツ</p><ul><li><a href="news.html">NEWS</a></li><li><a href="fda.html">FDA特設</a></li><li><a href="blog.html">ブログ</a></li><li><a href="https://news.worldshift-inc.jp/glossary.html">用語集</a></li><li><a href="https://export-lab.jp/" target="_blank">コミュニティ ↗</a></li></ul></div>
+  <div class="ft-col"><p class="ft-col-t">サービス</p><ul><li><a href="https://worldshift-inc.jp/slc/">発送代行</a></li><li><a href="https://worldshift-inc.jp/fda/">FDA代行</a></li><li><a href="https://worldshift-inc.jp/company/">運営会社</a></li></ul></div>
+</div><div class="ft-bot">© 2026 WORLD SHIFT. All rights reserved.</div></footer>
+<script>
+fetch('https://api.exchangerate-api.com/v4/latest/USD').then(r=>r.json()).then(d=>{if(d.rates&&d.rates.JPY)document.getElementById('rv').textContent=d.rates.JPY.toFixed(2);}).catch(()=>{});
+var nb=document.getElementById('nl-b'),ne=document.getElementById('nl-e');
+if(nb&&ne){nb.addEventListener('click',function(){if(!ne.value.trim()||!ne.value.includes('@')){ne.focus();return;}nb.textContent='登録しました ✓';nb.disabled=ne.disabled=true;});}
+</script>
+</body></html>

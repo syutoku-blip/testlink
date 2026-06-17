@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>用語集｜WorldShift Trade Watch</title>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;background:#f0f4f8;color:#0f172a}
+    a{text-decoration:none;color:inherit}
+    .hd{background:#0c2340;position:sticky;top:0;z-index:200}
+    .hd-in{max-width:1080px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:12px}
+    .hd-logo{display:flex;align-items:center;gap:8px;color:#fff;flex-shrink:0}
+    .hd-logo img{height:22px;filter:brightness(0) invert(1)}
+    .hd-logo span{font-size:14px;font-weight:700}
+    .hd-tag{font-size:11px;color:rgba(255,255,255,0.4);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+    .hd-rate{font-size:12px;color:rgba(255,255,255,0.6);white-space:nowrap}
+    .hd-rate strong{color:#fff}
+    .g-nav{background:#fff;border-bottom:2px solid #e2e8f0}
+    .g-nav-in{max-width:1080px;margin:0 auto;padding:0 20px;display:flex;overflow-x:auto;scrollbar-width:none}
+    .g-nav-in::-webkit-scrollbar{display:none}
+    .g-nav-tab{display:flex;align-items:center;gap:5px;padding:11px 18px;font-size:13px;font-weight:600;color:#64748b;white-space:nowrap;flex-shrink:0;border-bottom:2px solid transparent;margin-bottom:-2px;transition:color 0.1s,border-color 0.1s}
+    .g-nav-tab:hover{color:#0c2340}
+    .g-nav-tab.act{color:#5b21b6;border-bottom-color:#5b21b6}
+    .ext-badge{font-size:9px;background:#e8f0fc;color:#0c2340;padding:1px 4px;border-radius:3px;font-weight:700}
+    .page-hero{background:linear-gradient(135deg,#1e1b4b 0%,#4338ca 100%);padding:28px 20px 24px}
+    .ph-in{max-width:1080px;margin:0 auto;display:flex;align-items:center;gap:16px}
+    .ph-icon{font-size:40px;flex-shrink:0}
+    .ph-en{font-size:10px;font-weight:700;letter-spacing:0.14em;color:rgba(255,255,255,0.45);text-transform:uppercase;margin-bottom:4px}
+    .ph-title{font-size:22px;font-weight:700;color:#fff;margin-bottom:5px}
+    .ph-desc{font-size:13px;color:rgba(255,255,255,0.65);line-height:1.6}
+    .page-wrap{max-width:1080px;margin:0 auto;padding:24px 20px 48px}
+
+    /* Search */
+    .search-bar{display:flex;gap:8px;margin-bottom:20px}
+    .search-input{flex:1;padding:10px 14px;border:1px solid #e2e8f0;border-radius:8px;font-size:14px;font-family:inherit;background:#fff;color:#0f172a}
+    .search-input:focus{outline:2px solid #4338ca;border-color:transparent}
+
+    /* Alpha index */
+    .alpha-bar{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:20px}
+    .alpha-btn{font-size:12px;font-weight:700;padding:4px 10px;border-radius:5px;background:#fff;border:1px solid #e2e8f0;color:#475569;cursor:pointer;transition:all 0.1s}
+    .alpha-btn:hover,.alpha-btn.on{background:#4338ca;color:#fff;border-color:#4338ca}
+
+    /* Layout */
+    .layout{display:grid;grid-template-columns:1fr 260px;gap:20px;align-items:start}
+    @media(max-width:780px){.layout{grid-template-columns:1fr}}
+
+    /* Term list */
+    .term-group{background:#fff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin-bottom:16px}
+    .tg-head{padding:10px 16px;background:#f8fafc;border-bottom:1px solid #e2e8f0;font-size:13px;font-weight:700;color:#475569;letter-spacing:0.06em}
+    .term-row{display:flex;gap:16px;padding:14px 16px;border-bottom:1px solid #f1f5f9;transition:background 0.08s;cursor:pointer}
+    .term-row:last-child{border-bottom:none}
+    .term-row:hover{background:#fafaf8}
+    .term-en{font-size:13px;font-weight:700;color:#4338ca;min-width:130px;flex-shrink:0;line-height:1.5}
+    .term-ja{font-size:12px;font-weight:600;color:#475569;min-width:90px;flex-shrink:0;line-height:1.5}
+    .term-def{font-size:12px;color:#64748b;line-height:1.65;flex:1}
+    .term-cat{font-size:10px;font-weight:800;padding:2px 7px;border-radius:3px;white-space:nowrap;flex-shrink:0;align-self:flex-start;margin-top:2px}
+    .tc-fda{background:#dcfce7;color:#166534}
+    .tc-customs{background:#fce7f3;color:#9d174d}
+    .tc-tariff{background:#fef3c7;color:#92400e}
+    .tc-logistics{background:#ede9fe;color:#5b21b6}
+    .tc-market{background:#dbeafe;color:#1e40af}
+
+    /* Sidebar */
+    .sb-block{background:#fff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin-bottom:16px}
+    .sb-head{padding:11px 14px;border-bottom:1px solid #f1f5f9;font-size:13px;font-weight:700;color:#0f172a;display:flex;align-items:center;gap:6px}
+    .cat-link{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid #f1f5f9;text-decoration:none;color:inherit;font-size:13px;transition:background 0.08s}
+    .cat-link:last-child{border-bottom:none}
+    .cat-link:hover{background:#fafafa}
+    .cat-link-name{display:flex;align-items:center;gap:7px;font-weight:600;color:#0f172a}
+    .cat-link-ct{font-size:11px;color:#94a3b8}
+
+    .ft{background:#fff;border-top:1px solid #e2e8f0;padding:28px 0 0;margin-top:8px}
+    .ft-in{max-width:1080px;margin:0 auto;padding:0 20px;display:flex;gap:32px;flex-wrap:wrap}
+    .ft-brand{flex:1;min-width:180px}
+    .ft-logo{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+    .ft-logo img{height:22px}
+    .ft-logo-name{font-size:14px;font-weight:700;color:#0f172a}
+    .ft-about{font-size:12px;color:#64748b;line-height:1.7;max-width:220px}
+    .ft-col{min-width:110px}
+    .ft-col-t{font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px}
+    .ft-col ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+    .ft-col a{font-size:12px;color:#64748b}
+    .ft-col a:hover{color:#0f172a;text-decoration:underline}
+    .ft-bot{max-width:1080px;margin:20px auto 0;padding:12px 20px;border-top:1px solid #f1f5f9;font-size:11px;color:#94a3b8}
+  </style>
+</head>
+<body>
+<header class="hd"><div class="hd-in">
+  <a href="index.html" class="hd-logo"><img src="https://news.worldshift-inc.jp/img/ws-logo.png" alt="WS"/><span>WorldShift Trade Watch</span></a>
+  <span class="hd-tag">アメリカ発・通商ニュースポータル</span>
+  <span class="hd-rate">💱 1 USD = <strong id="rv">—</strong>円</span>
+</div></header>
+<nav class="g-nav"><div class="g-nav-in">
+  <a href="index.html" class="g-nav-tab">🏠 ポータル</a>
+  <a href="news.html"  class="g-nav-tab">📰 NEWS</a>
+  <a href="fda.html"   class="g-nav-tab">🧪 FDA特設</a>
+  <a href="blog.html"  class="g-nav-tab">✏️ ブログ</a>
+  <a href="https://news.worldshift-inc.jp/glossary.html" class="g-nav-tab act">📖 用語集</a>
+  <a href="https://export-lab.jp/" class="g-nav-tab" target="_blank" rel="noopener">👥 コミュニティ <span class="ext-badge">外部</span></a>
+</div></nav>
+
+<div class="page-hero"><div class="ph-in">
+  <div class="ph-icon">📖</div>
+  <div>
+    <p class="ph-en">Glossary</p>
+    <h1 class="ph-title">用語集</h1>
+    <p class="ph-desc">通商実務でよく出てくる用語をわかりやすく解説します。</p>
+  </div>
+</div></div>
+
+<div class="page-wrap">
+  <div class="search-bar">
+    <input type="text" class="search-input" id="gs" placeholder="🔍 用語を検索（例：HTS、FDA、デミニミス）" oninput="gsearch()"/>
+  </div>
+
+  <div class="layout">
+    <div id="term-wrap">
+      <div class="term-group" data-grp="D-F">
+        <div class="tg-head">D – F</div>
+        <div class="term-row" data-kw="デミニミス deminimis 800 免税"><span class="term-en">De Minimis</span><span class="term-ja">デミニミス</span><span class="term-def">米国への少額輸入に適用される800ドルの免税枠。2025年5月に廃止され、少額の小包も正規課税対象となった。</span><span class="term-cat tc-customs">通関</span></div>
+        <div class="term-row" data-kw="DDP 元払い 関税"><span class="term-en">DDP</span><span class="term-ja">関税込み持込渡し</span><span class="term-def">Delivered Duty Paid。輸出者が輸送費・関税・通関費用までを負担する取引条件。eBayなど越境ECで義務化が拡大。</span><span class="term-cat tc-logistics">物流</span></div>
+        <div class="term-row" data-kw="DSHEA サプリ 健康食品"><span class="term-en">DSHEA</span><span class="term-ja">栄養補助食品健康教育法</span><span class="term-def">Dietary Supplement Health and Education Act。米国でサプリを販売する際の根拠法。治療効能の表示は禁止。</span><span class="term-cat tc-fda">FDA</span></div>
+        <div class="term-row" data-kw="FSVP 外国サプライヤー 検証"><span class="term-en">FSVP</span><span class="term-ja">外国サプライヤー検証プログラム</span><span class="term-def">Foreign Supplier Verification Program。FSMAに基づき米国輸入者が外国の食品サプライヤーを検証する義務。</span><span class="term-cat tc-fda">FDA</span></div>
+        <div class="term-row" data-kw="FSMA 食品安全 近代化法"><span class="term-en">FSMA</span><span class="term-ja">食品安全近代化法</span><span class="term-def">Food Safety Modernization Act。2011年に制定された米国の食品安全規制の大改革。施設登録・FSVP・PCQIなどが含まれる。</span><span class="term-cat tc-fda">FDA</span></div>
+        <div class="term-row" data-kw="FTZ 保税地域 関税繰り延べ"><span class="term-en">FTZ</span><span class="term-ja">外国貿易地域</span><span class="term-def">Foreign Trade Zone。米国内にある関税免除・繰り延べ地域。高関税時代の在庫管理・資金繰り策として注目される。</span><span class="term-cat tc-customs">通関</span></div>
+      </div>
+      <div class="term-group" data-grp="H-I">
+        <div class="tg-head">H – I</div>
+        <div class="term-row" data-kw="HTS 関税分類 品目番号"><span class="term-en">HTS Code</span><span class="term-ja">米国関税分類番号</span><span class="term-def">Harmonized Tariff Schedule。米国の輸入品に割り当てられる10桁の品目番号。関税率・規制適用を決める最重要コード。</span><span class="term-cat tc-tariff">関税</span></div>
+        <div class="term-row" data-kw="IEEPA 大統領権限 緊急関税"><span class="term-en">IEEPA</span><span class="term-ja">国際緊急経済権限法</span><span class="term-def">International Emergency Economic Powers Act。大統領が国家非常事態時に関税を発動できる根拠法。2025年の対中・相互関税に利用され、最高裁で違法判決が出た。</span><span class="term-cat tc-tariff">関税</span></div>
+        <div class="term-row" data-kw="ISF 10+2 海上輸送"><span class="term-en">ISF 10+2</span><span class="term-ja">輸入者安全保障申告</span><span class="term-def">Importer Security Filing。海上輸送の積込み24時間前までに提出必須。違反1件につき最大5,000ドルの罰則。</span><span class="term-cat tc-customs">通関</span></div>
+      </div>
+      <div class="term-group" data-grp="M-P">
+        <div class="tg-head">M – P</div>
+        <div class="term-row" data-kw="MoCRA 化粧品 近代化"><span class="term-en">MoCRA</span><span class="term-ja">化粧品規制近代化法</span><span class="term-def">Modernization of Cosmetics Regulation Act。2022年に成立した米国化粧品規制の大改革。施設登録・製品リスティングが義務化。</span><span class="term-cat tc-fda">FDA</span></div>
+        <div class="term-row" data-kw="MPF HMF 手数料 港湾維持税"><span class="term-en">MPF / HMF</span><span class="term-ja">商品処理手数料 / 港湾維持税</span><span class="term-def">Merchandise Processing Fee / Harbor Maintenance Fee。関税とは別に発生する輸入時の手数料。関税だけではない追加コストに注意。</span><span class="term-cat tc-tariff">関税</span></div>
+        <div class="term-row" data-kw="PCQI 食品安全 計画"><span class="term-en">PCQI</span><span class="term-ja">予防コントロール適格者</span><span class="term-def">Preventive Controls Qualified Individual。FSMAが求める食品安全計画の作成・見直し担当者。トレーニング修了が必要。</span><span class="term-cat tc-fda">FDA</span></div>
+        <div class="term-row" data-kw="Prior Notice 事前通知 食品"><span class="term-en">Prior Notice</span><span class="term-ja">事前通知</span><span class="term-def">米国に食品を輸入する際にFDAへ事前に提出する通知。海上8時間・航空4時間・陸路2時間前が期限。未提出は港でホールド。</span><span class="term-cat tc-fda">FDA</span></div>
+        <div class="term-row" data-kw="Prop 65 カリフォルニア 警告ラベル"><span class="term-en">Prop 65</span><span class="term-ja">カリフォルニア州提案65</span><span class="term-def">Safe Drinking Water and Toxic Enforcement Act。特定化学物質を含む製品への警告ラベル義務（カリフォルニア州）。輸入者が標的になりやすい。</span><span class="term-cat tc-customs">通関</span></div>
+      </div>
+      <div class="term-group" data-grp="S-U">
+        <div class="tg-head">S – U</div>
+        <div class="term-row" data-kw="Section 301 対中 知的財産 関税"><span class="term-en">Section 301</span><span class="term-ja">通商法301条関税</span><span class="term-def">対中国知的財産侵害を根拠とした追加関税。中国製部材を使う日本製品も原産地次第で対象になることがある。</span><span class="term-cat tc-tariff">関税</span></div>
+        <div class="term-row" data-kw="232 鉄鋼 アルミ 安全保障"><span class="term-en">Section 232</span><span class="term-ja">安全保障関税</span><span class="term-def">鉄鋼・アルミに課される国家安全保障を根拠とした追加関税。日本からの金属製品も対象で、最大50%まで引き上げられた。</span><span class="term-cat tc-tariff">関税</span></div>
+        <div class="term-row" data-kw="UFLPA 強制労働 新疆 輸入差止"><span class="term-en">UFLPA</span><span class="term-ja">ウイグル強制労働防止法</span><span class="term-def">Uyghur Forced Labor Prevention Act。新疆産品や関連サプライチェーンを強制労働と推定し輸入差止。日本企業のサプライチェーンも無縁でない。</span><span class="term-cat tc-customs">通関</span></div>
+      </div>
+    </div>
+
+    <aside>
+      <div class="sb-block">
+        <div class="sb-head">📂 カテゴリー別</div>
+        <a href="#" class="cat-link" onclick="return false;"><span class="cat-link-name"><span style="background:#dcfce7;color:#166534;font-size:10px;font-weight:800;padding:2px 7px;border-radius:3px">FDA</span> FDA規制</span><span class="cat-link-ct">5語</span></a>
+        <a href="#" class="cat-link" onclick="return false;"><span class="cat-link-name"><span style="background:#fef3c7;color:#92400e;font-size:10px;font-weight:800;padding:2px 7px;border-radius:3px">関税</span> 関税</span><span class="cat-link-ct">5語</span></a>
+        <a href="#" class="cat-link" onclick="return false;"><span class="cat-link-name"><span style="background:#fce7f3;color:#9d174d;font-size:10px;font-weight:800;padding:2px 7px;border-radius:3px">通関</span> 通関ルール</span><span class="cat-link-ct">4語</span></a>
+        <a href="#" class="cat-link" onclick="return false;"><span class="cat-link-name"><span style="background:#ede9fe;color:#5b21b6;font-size:10px;font-weight:800;padding:2px 7px;border-radius:3px">物流</span> 物流</span><span class="cat-link-ct">1語</span></a>
+      </div>
+      <div class="sb-block">
+        <div class="sb-head">🔗 関連ページ</div>
+        <a href="https://news.worldshift-inc.jp/pcqi" class="cat-link"><span class="cat-link-name">📗 FDA食品安全ガイド</span></a>
+        <a href="fda.html" class="cat-link"><span class="cat-link-name">🧪 FDA特設ページ</span></a>
+        <a href="https://worldshift-fda.github.io/checklist/" class="cat-link" target="_blank" rel="noopener"><span class="cat-link-name">✅ チェックリスト ↗</span></a>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<footer class="ft"><div class="ft-in">
+  <div class="ft-brand"><div class="ft-logo"><img src="https://news.worldshift-inc.jp/img/ws-logo.png" alt=""/><span class="ft-logo-name">WorldShift Trade Watch</span></div><p class="ft-about">アメリカ発の通商ニュースを、日本の輸出者へ。</p></div>
+  <div class="ft-col"><p class="ft-col-t">コンテンツ</p><ul><li><a href="news.html">NEWS</a></li><li><a href="fda.html">FDA特設</a></li><li><a href="blog.html">ブログ</a></li><li><a href="https://news.worldshift-inc.jp/glossary.html">用語集</a></li><li><a href="https://export-lab.jp/" target="_blank">コミュニティ ↗</a></li></ul></div>
+  <div class="ft-col"><p class="ft-col-t">サービス</p><ul><li><a href="https://worldshift-inc.jp/slc/">発送代行</a></li><li><a href="https://worldshift-inc.jp/fda/">FDA代行</a></li><li><a href="https://worldshift-inc.jp/company/">運営会社</a></li></ul></div>
+</div><div class="ft-bot">© 2026 WORLD SHIFT. All rights reserved.</div></footer>
+
+<script>
+fetch('https://api.exchangerate-api.com/v4/latest/USD').then(r=>r.json()).then(d=>{if(d.rates&&d.rates.JPY)document.getElementById('rv').textContent=d.rates.JPY.toFixed(2);}).catch(()=>{});
+function gsearch(){
+  var q=document.getElementById('gs').value.trim().toLowerCase();
+  document.querySelectorAll('.term-row').forEach(function(r){
+    r.style.display=(q===''||r.dataset.kw.toLowerCase().includes(q)||r.innerText.toLowerCase().includes(q))?'flex':'none';
+  });
+}
+</script>
+</body></html>

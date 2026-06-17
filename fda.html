@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FDA特設ページ｜WorldShift Trade Watch</title>
+  <meta name="description" content="米国FDA規制の総合情報。FDA最新ニュース・教科書（食品/化粧品）・FDA公式発表・チェックリストをまとめて確認。"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;color:#0f172a;scroll-behavior:smooth}
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+    button{font-family:inherit;cursor:pointer;border:none;background:none}
+
+    /* ══ HEADER ══ */
+    .hd{background:#0c2340;position:sticky;top:0;z-index:300}
+    .hd-in{max-width:1080px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:12px}
+    .hd-logo{display:flex;align-items:center;gap:8px;color:#fff;flex-shrink:0}
+    .hd-logo img{height:22px;filter:brightness(0) invert(1)}
+    .hd-logo-name{font-size:14px;font-weight:700}
+    .hd-tag{font-size:11px;color:rgba(255,255,255,0.4);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+    .hd-rate{font-size:12px;color:rgba(255,255,255,0.6);white-space:nowrap}
+    .hd-rate strong{color:#fff}
+
+    /* ══ PORTAL NAV ══ */
+    .g-nav{background:#fff;border-bottom:2px solid #e2e8f0;position:sticky;top:52px;z-index:200}
+    .g-nav-in{max-width:1080px;margin:0 auto;padding:0 20px;display:flex;overflow-x:auto;scrollbar-width:none}
+    .g-nav-in::-webkit-scrollbar{display:none}
+    .g-nav-tab{display:flex;align-items:center;gap:5px;padding:11px 18px;font-size:13px;font-weight:600;color:#64748b;white-space:nowrap;flex-shrink:0;border-bottom:2px solid transparent;margin-bottom:-2px;transition:color .1s,border-color .1s}
+    .g-nav-tab:hover{color:#0c2340}
+    .g-nav-tab.act{color:#0f7a52;border-bottom-color:#0f7a52}
+    .ext-badge{font-size:9px;background:#e8f0fc;color:#0c2340;padding:1px 4px;border-radius:3px;font-weight:700}
+
+    /* ══ FDA IN-PAGE NAV ══ */
+    .fda-inav{background:#0f7a52;position:sticky;top:100px;z-index:100}
+    .fda-inav-in{max-width:1080px;margin:0 auto;padding:0 20px;display:flex;overflow-x:auto;scrollbar-width:none;gap:0}
+    .fda-inav-in::-webkit-scrollbar{display:none}
+    .fda-inav-tab{display:flex;align-items:center;gap:6px;padding:11px 20px;font-size:13px;font-weight:700;color:rgba(255,255,255,0.65);white-space:nowrap;flex-shrink:0;border-bottom:3px solid transparent;transition:color .1s,border-color .1s}
+    .fda-inav-tab:hover{color:#fff}
+    .fda-inav-tab.on{color:#fff;border-bottom-color:#4ade80}
+
+    /* ══ HERO ══ */
+    .fda-hero{
+      background:#064e3b;
+      position:relative;overflow:hidden;
+      padding:52px 20px 48px;
+    }
+    .fda-hero::before{
+      content:'';position:absolute;inset:0;
+      background:radial-gradient(ellipse 80% 100% at 60% 50%,rgba(74,222,128,0.15) 0%,transparent 70%);
+      pointer-events:none;
+    }
+    .fda-hero-bg{
+      position:absolute;right:0;top:0;bottom:0;width:50%;
+      background:url('https://news.worldshift-inc.jp/img/foodfactory.jpg') center/cover no-repeat;
+      opacity:0.18;mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,0.8) 40%,#000 100%);
+      -webkit-mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,0.8) 40%,#000 100%);
+    }
+    .fda-hero-in{max-width:1080px;margin:0 auto;position:relative;z-index:1;max-width:620px}
+    .fda-hero-en{font-size:11px;font-weight:700;letter-spacing:0.14em;color:rgba(255,255,255,0.45);text-transform:uppercase;margin-bottom:10px}
+    .fda-hero-title{font-size:clamp(26px,4vw,38px);font-weight:700;color:#fff;line-height:1.25;margin-bottom:14px}
+    .fda-hero-title em{color:#4ade80;font-style:normal}
+    .fda-hero-desc{font-size:14px;color:rgba(255,255,255,0.7);line-height:1.75;max-width:480px;margin-bottom:24px}
+    .fda-hero-pills{display:flex;gap:8px;flex-wrap:wrap}
+    .fda-hero-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:999px;padding:6px 14px;font-size:12px;font-weight:600;color:rgba(255,255,255,0.8);transition:background .1s}
+    .fda-hero-pill:hover{background:rgba(255,255,255,0.18)}
+
+    /* ══ SECTION WRAPPERS ══ */
+    /* Each section = a "room" with its own bg */
+
+    /* ── Room: NEWS ── */
+    .room-news{background:#f8fafc;padding:64px 0}
+    .room-news-in{max-width:1080px;margin:0 auto;padding:0 20px}
+
+    /* ── Room: 公式発表 ── */
+    .room-official{background:#fff;padding:64px 0;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0}
+    .room-official-in{max-width:1080px;margin:0 auto;padding:0 20px}
+
+    /* ── Room: 教科書 ── */
+    .room-textbook{
+      background:#064e3b;
+      padding:64px 0;
+      position:relative;overflow:hidden;
+    }
+    .room-textbook::before{content:'';position:absolute;inset:0;background:url('https://news.worldshift-inc.jp/img/foodcargo.jpg') center/cover no-repeat;opacity:0.06;pointer-events:none}
+    .room-textbook-in{max-width:1080px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+
+    /* ── Room: チェックリスト ── */
+    .room-checklist{background:#f0fdf4;padding:64px 0;border-top:4px solid #4ade80}
+    .room-checklist-in{max-width:1080px;margin:0 auto;padding:0 20px}
+
+    /* ── Room: サービス ── */
+    .room-services{background:#0c2340;padding:64px 0}
+    .room-services-in{max-width:1080px;margin:0 auto;padding:0 20px}
+
+    /* ══ COMMON SECTION HEADER ══ */
+    .sec-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:8px}
+    .sec-eyebrow.green{color:#0f7a52}
+    .sec-eyebrow.white{color:rgba(255,255,255,0.5)}
+    .sec-eyebrow.navy{color:#475569}
+    .sec-title{font-size:clamp(20px,3vw,28px);font-weight:700;line-height:1.3;margin-bottom:10px}
+    .sec-title.dark{color:#0f172a}
+    .sec-title.light{color:#fff}
+    .sec-desc{font-size:14px;line-height:1.75;margin-bottom:32px;max-width:560px}
+    .sec-desc.muted{color:#64748b}
+    .sec-desc.light{color:rgba(255,255,255,0.65)}
+    .sec-hdr{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+    .sec-more{font-size:13px;font-weight:700;color:#0f7a52;white-space:nowrap}
+    .sec-more:hover{text-decoration:underline}
+    .sec-more.light{color:#4ade80}
+    .sec-more.light:hover{text-decoration:underline}
+
+    /* ══ NEWS GRID ══ */
+    .news-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:20px}
+    @media(max-width:720px){.news-grid{grid-template-columns:1fr}}
+
+    /* Featured big card */
+    .ncard-feat{
+      background:#fff;border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;
+      display:flex;flex-direction:column;
+      text-decoration:none;color:inherit;
+      transition:box-shadow .15s,transform .15s;
+    }
+    .ncard-feat:hover{box-shadow:0 8px 28px rgba(0,0,0,0.09);transform:translateY(-2px)}
+    .ncard-feat-img{width:100%;aspect-ratio:16/9;object-fit:cover}
+    .ncard-feat-body{padding:18px 20px 20px;flex:1;display:flex;flex-direction:column}
+    .ncard-feat-body h2{font-size:16px;font-weight:700;color:#0f172a;line-height:1.5;margin:7px 0 8px}
+    .ncard-feat-body p{font-size:13px;color:#64748b;line-height:1.65;flex:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .ncard-feat-body .meta{font-size:11px;color:#94a3b8;margin-top:10px}
+
+    /* Small news cards column */
+    .news-sub{display:flex;flex-direction:column;gap:12px}
+    .ncard-sm{
+      background:#fff;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;
+      display:flex;gap:12px;
+      text-decoration:none;color:inherit;
+      transition:box-shadow .12s,transform .12s;
+      padding:0;
+    }
+    .ncard-sm:hover{box-shadow:0 4px 16px rgba(0,0,0,0.08);transform:translateY(-1px)}
+    .ncard-sm-img{width:96px;height:72px;object-fit:cover;flex-shrink:0}
+    .ncard-sm-body{padding:10px 12px 10px 0;flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:4px}
+    .ncard-sm-body h3{font-size:12px;font-weight:600;color:#0f172a;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+    /* Category pills */
+    .gcat{display:inline-block;font-size:10px;font-weight:800;padding:2px 8px;border-radius:4px;letter-spacing:.03em}
+    .gc-fda     {background:#dcfce7;color:#166534}
+    .gc-market  {background:#dbeafe;color:#1e40af}
+    .gc-tariff  {background:#fef3c7;color:#92400e}
+    .gc-breaking{background:#fee2e2;color:#991b1b}
+    .art-date   {font-size:11px;color:#94a3b8}
+
+    /* ══ OFFICIAL ANNOUNCEMENTS ══ */
+    .official-list{display:flex;flex-direction:column;gap:0;background:#fff;border:1px solid #e2e8f0;border-radius:14px;overflow:hidden}
+    .off-item{
+      display:flex;gap:16px;padding:18px 20px;
+      border-bottom:1px solid #f1f5f9;
+      text-decoration:none;color:inherit;
+      transition:background .08s;
+    }
+    .off-item:last-child{border-bottom:none}
+    .off-item:hover{background:#f8fffe}
+    .off-dot-col{padding-top:5px;flex-shrink:0}
+    .off-dot{width:9px;height:9px;border-radius:50%;background:#cbd5e1}
+    .off-dot.new{background:#16a34a}
+    .off-body{flex:1;min-width:0}
+    .off-meta{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+    .new-badge{font-size:9px;font-weight:800;background:#dcfce7;color:#166534;padding:2px 7px;border-radius:4px;letter-spacing:.04em}
+    .off-title{font-size:13px;font-weight:700;color:#0f172a;line-height:1.5;margin-bottom:4px}
+    .off-summary{font-size:12px;color:#64748b;line-height:1.65}
+
+    /* ══ TEXTBOOK (dark bg) ══ */
+    /* Category big cards */
+    .tb-cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px}
+    @media(max-width:640px){.tb-cat-grid{grid-template-columns:1fr}}
+    .tb-cat-card{
+      border-radius:14px;overflow:hidden;
+      display:flex;flex-direction:column;
+      text-decoration:none;color:inherit;
+      position:relative;
+      transition:transform .15s,box-shadow .15s;
+      min-height:200px;
+    }
+    .tb-cat-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,0.3)}
+    .tb-cat-cover{
+      position:absolute;inset:0;
+      background-size:cover;background-position:center;
+    }
+    .tb-cat-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.3) 50%,rgba(0,0,0,0.1) 100%)}
+    .tb-cat-body{position:relative;z-index:1;padding:20px;margin-top:auto}
+    .tb-cat-icon{font-size:32px;margin-bottom:8px}
+    .tb-cat-en{font-size:10px;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,0.55);text-transform:uppercase;margin-bottom:4px}
+    .tb-cat-name{font-size:20px;font-weight:700;color:#fff;margin-bottom:6px}
+    .tb-cat-desc{font-size:12px;color:rgba(255,255,255,0.7);line-height:1.55}
+    .tb-cat-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px}
+    .tb-cat-tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.85)}
+
+    /* Subcategory row items (below big cards) */
+    .tb-sub-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    @media(max-width:860px){.tb-sub-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:480px){.tb-sub-grid{grid-template-columns:1fr 1fr}}
+    .tb-sub-card{
+      background:rgba(255,255,255,0.07);
+      border:1px solid rgba(255,255,255,0.12);
+      border-radius:10px;padding:14px 16px;
+      text-decoration:none;color:inherit;
+      transition:background .1s,border-color .1s;
+      display:flex;flex-direction:column;gap:6px;
+    }
+    .tb-sub-card:hover{background:rgba(255,255,255,0.13);border-color:rgba(255,255,255,0.25)}
+    .tb-sub-icon{font-size:20px}
+    .tb-sub-tag{font-size:10px;font-weight:700;color:rgba(255,255,255,0.45);letter-spacing:.06em;text-transform:uppercase}
+    .tb-sub-title{font-size:12px;font-weight:600;color:#fff;line-height:1.45}
+    .tb-sub-meta{font-size:11px;color:rgba(255,255,255,0.45);line-height:1.4}
+
+    /* ══ CHECKLIST ROOM ══ */
+    .cl-inner{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
+    @media(max-width:720px){.cl-inner{grid-template-columns:1fr}}
+    .cl-left{}
+    .cl-cta{
+      display:flex;align-items:center;gap:16px;
+      background:#0f7a52;border-radius:14px;padding:22px 24px;
+      text-decoration:none;color:#fff;
+      transition:background .12s,transform .12s;
+      margin-top:24px;
+    }
+    .cl-cta:hover{background:#0d9c67;transform:translateY(-2px)}
+    .cl-cta-icon{font-size:40px;flex-shrink:0}
+    .cl-cta-en{font-size:10px;font-weight:700;letter-spacing:.12em;color:rgba(255,255,255,0.5);text-transform:uppercase;margin-bottom:3px}
+    .cl-cta-title{font-size:17px;font-weight:700;color:#fff;margin-bottom:3px}
+    .cl-cta-desc{font-size:12px;color:rgba(255,255,255,0.7);line-height:1.55}
+    .cl-cta-arr{margin-left:auto;font-size:22px;color:rgba(255,255,255,0.4);flex-shrink:0}
+    .cl-steps{display:flex;flex-direction:column;gap:12px}
+    .cl-step{
+      background:#fff;border:1px solid #e2e8f0;border-radius:10px;
+      padding:14px 16px;display:flex;align-items:flex-start;gap:12px;
+    }
+    .cl-step-num{
+      width:28px;height:28px;border-radius:50%;
+      background:#0f7a52;color:#fff;
+      font-size:12px;font-weight:800;
+      display:flex;align-items:center;justify-content:center;
+      flex-shrink:0;
+    }
+    .cl-step-body{}
+    .cl-step-title{font-size:13px;font-weight:700;color:#0f172a;margin-bottom:2px}
+    .cl-step-desc{font-size:12px;color:#64748b;line-height:1.5}
+
+    /* ══ SERVICES ROOM ══ */
+    .svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    @media(max-width:860px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:480px){.svc-grid{grid-template-columns:1fr}}
+    .svc-card{
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.1);
+      border-radius:12px;padding:20px;
+      text-decoration:none;color:inherit;
+      transition:background .1s,border-color .1s,transform .12s;
+      display:flex;flex-direction:column;gap:10px;
+    }
+    .svc-card:hover{background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.22);transform:translateY(-2px)}
+    .svc-card-icon{font-size:28px}
+    .svc-num{font-size:10px;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,0.35);text-transform:uppercase}
+    .svc-card-title{font-size:15px;font-weight:700;color:#fff;line-height:1.35}
+    .svc-card-desc{font-size:12px;color:rgba(255,255,255,0.6);line-height:1.6;flex:1}
+    .svc-card-link{font-size:12px;font-weight:700;color:#4ade80;margin-top:auto}
+
+    /* ══ TEXTBOOK NEW UI ══ */
+    .tb-ui{display:flex;flex-direction:column;gap:0}
+
+    /* 親カテゴリー 2枚横並び */
+    .tb-parent-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+    @media(max-width:560px){.tb-parent-row{grid-template-columns:1fr}}
+    .tb-parent{
+      position:relative;height:140px;border-radius:14px;overflow:hidden;
+      cursor:pointer;border:3px solid transparent;
+      transition:border-color .15s,transform .15s,box-shadow .15s;
+    }
+    .tb-parent:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,0.35)}
+    .tb-parent.on{border-color:#4ade80;box-shadow:0 0 0 3px rgba(74,222,128,0.3)}
+    .tb-parent-cover{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .3s}
+    .tb-parent:hover .tb-parent-cover,.tb-parent.on .tb-parent-cover{transform:scale(1.04)}
+    .tb-parent-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.75) 0%,rgba(0,0,0,0.25) 100%);transition:background .15s}
+    .tb-parent.on .tb-parent-overlay{background:linear-gradient(to top,rgba(6,78,59,0.82) 0%,rgba(6,78,59,0.35) 100%)}
+    .tb-parent-body{position:absolute;bottom:0;left:0;right:0;padding:14px 18px;display:flex;flex-direction:column;gap:2px}
+    .tb-parent-icon{font-size:24px;line-height:1}
+    .tb-parent-en{font-size:10px;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,0.5);text-transform:uppercase}
+    .tb-parent-name{font-size:20px;font-weight:700;color:#fff;line-height:1.2}
+    /* アクティブバッジ */
+    .tb-parent::after{
+      content:'選択中 ✓';
+      position:absolute;top:10px;right:10px;
+      font-size:10px;font-weight:800;color:#fff;
+      background:#0f7a52;padding:3px 9px;border-radius:20px;
+      opacity:0;transition:opacity .15s;
+    }
+    .tb-parent.on::after{opacity:1}
+
+    /* サブカテゴリー 画像ボタン行 */
+    .tb-sub-bar{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:12px;
+      margin-bottom:16px;
+    }
+    @media(max-width:640px){.tb-sub-bar{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:400px){.tb-sub-bar{grid-template-columns:repeat(2,1fr) 1fr}}
+
+    .tb-sub-btn{
+      position:relative;
+      height:130px;
+      border-radius:12px;overflow:hidden;
+      cursor:pointer;
+      border:3px solid rgba(255,255,255,0.08);
+      transition:border-color .15s,transform .15s,box-shadow .15s;
+      background:#1a2e20;
+    }
+    .tb-sub-btn:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,0.45);border-color:rgba(255,255,255,0.25)}
+    .tb-sub-btn.on{border-color:#4ade80;box-shadow:0 0 0 3px rgba(74,222,128,0.25)}
+    .tb-sub-btn.on::after{content:'✓';position:absolute;top:8px;right:8px;width:20px;height:20px;border-radius:50%;background:#0f7a52;color:#fff;font-size:11px;font-weight:800;display:block;line-height:20px;text-align:center;z-index:2}
+    .tb-sub-cover{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .35s,opacity .15s;opacity:.55}
+    .tb-sub-btn:hover .tb-sub-cover{transform:scale(1.06);opacity:.7}
+    .tb-sub-btn.on .tb-sub-cover{opacity:.65}
+    .tb-sub-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.82) 0%,rgba(0,0,0,0.15) 100%);transition:background .15s}
+    .tb-sub-btn.on .tb-sub-overlay{background:linear-gradient(to top,rgba(6,78,59,0.88) 0%,rgba(6,78,59,0.25) 100%)}
+    .tb-sub-body{position:absolute;bottom:0;left:0;right:0;padding:11px 13px;display:flex;flex-direction:column;gap:2px}
+    .tb-sub-icon{font-size:20px;line-height:1}
+    .tb-sub-name{font-size:14px;font-weight:700;color:#fff;line-height:1.2}
+    .tb-sub-en{font-size:9px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,0.45);text-transform:uppercase}
+
+    /* サブカテゴリー 画像カードグリッド */
+    .tb-art-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+    }
+    @media(max-width:860px){.tb-art-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:480px){.tb-art-grid{grid-template-columns:1fr}}
+
+    .tb-art-card{
+      background:#fff;
+      border-radius:14px;
+      overflow:hidden;
+      text-decoration:none;color:inherit;
+      display:flex;flex-direction:column;
+      transition:transform .15s,box-shadow .15s;
+      border:2px solid transparent;
+    }
+    .tb-art-card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 16px 40px rgba(0,0,0,0.28);
+      border-color:#4ade80;
+    }
+    .tb-art-card.hidden{display:none!important}
+
+    /* カード画像エリア */
+    .tb-art-img-wrap{
+      position:relative;
+      height:160px;overflow:hidden;flex-shrink:0;
+    }
+    .tb-art-img-wrap img{
+      width:100%;height:100%;object-fit:cover;
+      transition:transform .35s;
+    }
+    .tb-art-card:hover .tb-art-img-wrap img{transform:scale(1.06)}
+    .tb-art-img-overlay{
+      position:absolute;inset:0;
+      background:linear-gradient(to bottom,rgba(0,0,0,0) 40%,rgba(0,0,0,0.55) 100%);
+    }
+    /* サブカテゴリーラベル（画像上） */
+    .tb-art-sub-badge{
+      position:absolute;bottom:10px;left:12px;
+      font-size:10px;font-weight:800;
+      padding:3px 10px;border-radius:20px;
+      letter-spacing:.05em;
+    }
+    .badge-intro   {background:#fbbf24;color:#451a03}
+    .badge-fda     {background:#4ade80;color:#052e16}
+    .badge-pcqi    {background:#60a5fa;color:#1e3a8a}
+    .badge-other   {background:#e2e8f0;color:#334155}
+
+    /* カード本文エリア */
+    .tb-art-body{
+      padding:14px 16px 16px;
+      display:flex;flex-direction:column;gap:6px;
+      flex:1;background:#fff;
+    }
+    .tb-art-parent-tag{
+      font-size:10px;font-weight:800;padding:2px 8px;border-radius:4px;
+      display:inline-block;width:fit-content;
+    }
+    .tb-art-parent-tag.food {background:#fef3c7;color:#92400e}
+    .tb-art-parent-tag.cosme{background:#fce7f3;color:#9d174d}
+    .tb-art-title{
+      font-size:14px;font-weight:700;color:#0f172a;
+      line-height:1.45;flex:1;
+    }
+    .tb-art-desc{
+      font-size:12px;color:#64748b;line-height:1.6;
+    }
+    .tb-art-footer{
+      display:flex;align-items:center;justify-content:space-between;
+      margin-top:4px;
+    }
+    .tb-art-sub-label{
+      font-size:11px;font-weight:600;color:#94a3b8;
+    }
+    .tb-art-arr{
+      font-size:18px;color:#cbd5e1;
+      transition:color .1s,transform .1s;
+    }
+    .tb-art-card:hover .tb-art-arr{color:#0f7a52;transform:translateX(4px)}
+
+    /* ══ FOOTER ══ */
+    .ft{background:#fff;border-top:1px solid #e2e8f0;padding:28px 0 0;margin-top:0}
+    .ft-in{max-width:1080px;margin:0 auto;padding:0 20px;display:flex;gap:32px;flex-wrap:wrap}
+    .ft-brand{flex:1;min-width:180px}
+    .ft-logo{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+    .ft-logo img{height:22px}
+    .ft-logo-name{font-size:14px;font-weight:700;color:#0f172a}
+    .ft-about{font-size:12px;color:#64748b;line-height:1.7;max-width:220px}
+    .ft-col{min-width:110px}
+    .ft-col-t{font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+    .ft-col ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+    .ft-col a{font-size:12px;color:#64748b}
+    .ft-col a:hover{color:#0f172a;text-decoration:underline}
+    .ft-bot{max-width:1080px;margin:20px auto 0;padding:12px 20px;border-top:1px solid #f1f5f9;font-size:11px;color:#94a3b8}
+  </style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header class="hd">
+  <div class="hd-in">
+    <a href="index.html" class="hd-logo">
+      <img src="https://news.worldshift-inc.jp/img/ws-logo.png" alt="WS"/>
+      <span class="hd-logo-name">WorldShift Trade Watch</span>
+    </a>
+    <span class="hd-tag">アメリカ発・通商ニュースポータル</span>
+    <span class="hd-rate">💱 1 USD = <strong id="rv">—</strong>円</span>
+  </div>
+</header>
+
+<!-- ══ PORTAL NAV ══ -->
+<nav class="g-nav">
+  <div class="g-nav-in">
+    <a href="index.html"    class="g-nav-tab">🏠 ポータル</a>
+    <a href="news.html"     class="g-nav-tab">📰 NEWS</a>
+    <a href="fda.html"      class="g-nav-tab act">🧪 FDA特設ページ</a>
+    <a href="blog.html"     class="g-nav-tab">✏️ ブログ</a>
+    <a href="https://news.worldshift-inc.jp/glossary.html" class="g-nav-tab">📖 用語集</a>
+    <a href="https://export-lab.jp/" class="g-nav-tab" target="_blank" rel="noopener">👥 コミュニティ <span class="ext-badge">外部</span></a>
+  </div>
+</nav>
+
+<!-- ══ FDA IN-PAGE NAV ══ -->
+<nav class="fda-inav">
+  <div class="fda-inav-in">
+    <a href="#news"      class="fda-inav-tab on">📰 NEWS</a>
+    <a href="#official"  class="fda-inav-tab">📋 FDA公式発表</a>
+    <a href="#textbook"  class="fda-inav-tab">📚 教科書</a>
+    <a href="#checklist" class="fda-inav-tab">✅ チェックリスト</a>
+    <a href="#services"  class="fda-inav-tab">🏢 サービス</a>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="fda-hero">
+  <div class="fda-hero-bg"></div>
+  <div class="fda-hero-in">
+    <p class="fda-hero-en">FDA Special Page</p>
+    <h1 class="fda-hero-title">アメリカ輸出を<br><em>もっと安全に、</em><br>もっと確実に。</h1>
+    <p class="fda-hero-desc">食品・化粧品をアメリカへ輸出する事業者のために、FDA最新ニュース・教科書・公式発表・チェックリストを一カ所に集約しました。</p>
+    <div class="fda-hero-pills">
+      <a href="#news"      class="fda-hero-pill">📰 FDA最新ニュース</a>
+      <a href="#official"  class="fda-hero-pill">📋 FDA公式発表</a>
+      <a href="#textbook"  class="fda-hero-pill">📚 教科書</a>
+      <a href="#checklist" class="fda-hero-pill">✅ チェックリスト</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     ROOM 1 — FDA最新ニュース
+══════════════════════════════════ -->
+<section class="room-news" id="news">
+  <div class="room-news-in">
+    <div class="sec-hdr">
+      <div>
+        <p class="sec-eyebrow green">Room 01</p>
+        <h2 class="sec-title dark">FDA最新ニュース</h2>
+        <p class="sec-desc muted" style="margin-bottom:0">NEWSサイトのFDA規制カテゴリーから最新記事をピックアップ。</p>
+      </div>
+      <a href="fda-news.html" class="sec-more">FDA規制ニュースを全件見る →</a>
+    </div>
+
+    <div class="news-grid">
+      <!-- Featured -->
+      <a href="https://news.worldshift-inc.jp/article_106" class="ncard-feat">
+        <img src="https://news.worldshift-inc.jp/img/reddye.jpg" alt="赤色3号" class="ncard-feat-img" loading="lazy"/>
+        <div class="ncard-feat-body">
+          <span class="gcat gc-fda">FDA規制</span>
+          <h2>米国が食品の『赤色3号』を使用禁止──2027年1月までに代替へ、日本の菓子・飲料も対象</h2>
+          <p>FDAは2025年1月15日、合成着色料赤色3号（FD&C Red No.3）の食品・飲料での使用認可を失効させた。代替期限は2027年1月。</p>
+          <p class="meta">2026年6月16日</p>
+        </div>
+      </a>
+      <!-- Sub cards -->
+      <div class="news-sub">
+        <a href="https://news.worldshift-inc.jp/article_107" class="ncard-sm">
+          <img src="https://news.worldshift-inc.jp/img/healthyclaim.jpg" alt="" class="ncard-sm-img" loading="lazy"/>
+          <div class="ncard-sm-body">
+            <div style="display:flex;gap:6px;align-items:center"><span class="gcat gc-fda">FDA規制</span><span class="art-date">6/16</span></div>
+            <h3>米国の『healthy』表示が新基準に──2028年から、砂糖・塩・脂肪に上限</h3>
+          </div>
+        </a>
+        <a href="https://news.worldshift-inc.jp/article_109" class="ncard-sm">
+          <img src="https://news.worldshift-inc.jp/img/traceability204.jpg" alt="" class="ncard-sm-img" loading="lazy"/>
+          <div class="ncard-sm-body">
+            <div style="display:flex;gap:6px;align-items:center"><span class="gcat gc-fda">FDA規制</span><span class="art-date">6/16</span></div>
+            <h3>食品トレーサビリティ規則（FSMA 204）が2028年7月まで延期</h3>
+          </div>
+        </a>
+        <a href="https://news.worldshift-inc.jp/article_73" class="ncard-sm">
+          <img src="https://news.worldshift-inc.jp/img/foodcargo.jpg" alt="" class="ncard-sm-img" loading="lazy"/>
+          <div class="ncard-sm-body">
+            <div style="display:flex;gap:6px;align-items:center"><span class="gcat gc-fda">FDA規制</span><span class="art-date">6/15</span></div>
+            <h3>食品輸出はFDA『事前通知』が必須──デミニミス終了で少額サンプルも対象</h3>
+          </div>
+        </a>
+        <a href="https://news.worldshift-inc.jp/article_86" class="ncard-sm">
+          <img src="https://news.worldshift-inc.jp/img/foodfactory.jpg" alt="" class="ncard-sm-img" loading="lazy"/>
+          <div class="ncard-sm-body">
+            <div style="display:flex;gap:6px;align-items:center"><span class="gcat gc-fda">FDA規制</span><span class="art-date">6/10</span></div>
+            <h3>米国へ食品を売る第一歩『FDA施設登録』──米国代理人と2年ごとの更新が必須</h3>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     ROOM 2 — FDA公式発表
+══════════════════════════════════ -->
+<section class="room-official" id="official">
+  <div class="room-official-in">
+    <div class="sec-hdr">
+      <div>
+        <p class="sec-eyebrow navy">Room 02</p>
+        <h2 class="sec-title dark">FDA公式発表</h2>
+        <p class="sec-desc muted" style="margin-bottom:0">NEWSとは別に、FDAが公式に出した発表・規則変更だけを簡潔に掲載します。</p>
+      </div>
+      <a href="fda-official.html" class="sec-more">公式発表一覧ページへ →</a>
+    </div>
+    <div class="official-list">
+      <a href="https://news.worldshift-inc.jp/article_106" class="off-item">
+        <div class="off-dot-col"><span class="off-dot new"></span></div>
+        <div class="off-body">
+          <div class="off-meta"><span class="new-badge">NEW</span><span class="art-date">2026年6月16日</span></div>
+          <p class="off-title">赤色3号（FD&C Red No.3）の使用認可失効を最終化</p>
+          <p class="off-summary">食品・飲料・経口薬で使用不可。食品の代替期限は2027年1月15日、経口薬は2028年1月15日。</p>
+        </div>
+      </a>
+      <a href="https://news.worldshift-inc.jp/article_107" class="off-item">
+        <div class="off-dot-col"><span class="off-dot new"></span></div>
+        <div class="off-body">
+          <div class="off-meta"><span class="new-badge">NEW</span><span class="art-date">2026年6月16日</span></div>
+          <p class="off-title">「healthy」表示の新定義を最終化</p>
+          <p class="off-summary">砂糖・塩・飽和脂肪に上限値を設定。任意表示だが順守期限は2028年2月25日。</p>
+        </div>
+      </a>
+      <a href="https://news.worldshift-inc.jp/article_108" class="off-item">
+        <div class="off-dot-col"><span class="off-dot"></span></div>
+        <div class="off-body">
+          <div class="off-meta"><span class="art-date">2026年6月16日</span></div>
+          <p class="off-title">食品パッケージ前面栄養表示（FOP）規則案を公表・パブコメ受付中</p>
+          <p class="off-summary">主表示面に「Nutrition Info」ボックスを義務化する提案。現在パブリックコメント受付中。</p>
+        </div>
+      </a>
+      <a href="https://news.worldshift-inc.jp/article_109" class="off-item">
+        <div class="off-dot-col"><span class="off-dot"></span></div>
+        <div class="off-body">
+          <div class="off-meta"><span class="art-date">2026年6月16日</span></div>
+          <p class="off-title">FSMA 204（食品トレーサビリティ）の順守期限を30か月延長</p>
+          <p class="off-summary">2026年1月→2028年7月20日へ延期。対象食品リスト（FTL）の記録義務そのものは継続。</p>
+        </div>
+      </a>
+      <a href="https://news.worldshift-inc.jp/article_110" class="off-item">
+        <div class="off-dot-col"><span class="off-dot"></span></div>
+        <div class="off-body">
+          <div class="off-meta"><span class="art-date">2026年6月16日</span></div>
+          <p class="off-title">乳幼児食品の鉛「行動値」を最終化（Closer to Zero）</p>
+          <p class="off-summary">ベビーフード10〜20ppb。製品種別ごとに行動値を設定し、製造工程での低減を求める。</p>
+        </div>
+      </a>
+      <a href="https://news.worldshift-inc.jp/article_11" class="off-item">
+        <div class="off-dot-col"><span class="off-dot"></span></div>
+        <div class="off-body">
+          <div class="off-meta"><span class="art-date">2026年5月</span></div>
+          <p class="off-title">MoCRA施設登録・製品リスティングの2026年更新期限</p>
+          <p class="off-summary">化粧品製造業者は偶数年10〜12月に更新が必要。初回更新の年が2026年。</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     ROOM 3 — 教科書（dark bg）
+══════════════════════════════════ -->
+<section class="room-textbook" id="textbook">
+  <div class="room-textbook-in">
+    <div class="sec-hdr">
+      <div>
+        <p class="sec-eyebrow white">Room 03</p>
+        <h2 class="sec-title light">FDA教科書</h2>
+        <p class="sec-desc light" style="margin-bottom:0">食品・化粧品、それぞれの規制を体系的に学べる記事を分野別に整理しました。</p>
+      </div>
+      <a href="fda-textbook.html" class="sec-more light">教科書ページへ →</a>
+    </div>
+
+    <!-- ── 教科書 UI ── -->
+    <div class="tb-ui">
+
+      <!-- 親カテゴリー：食品 / 化粧品 -->
+      <div class="tb-parent-row">
+        <button class="tb-parent on" onclick="tbParent('food',this)">
+          <div class="tb-parent-cover" style="background-image:url('https://news.worldshift-inc.jp/img/greentea.jpg')"></div>
+          <div class="tb-parent-overlay"></div>
+          <div class="tb-parent-body">
+            <span class="tb-parent-icon">🍱</span>
+            <span class="tb-parent-en">Food</span>
+            <span class="tb-parent-name">食品</span>
+          </div>
+        </button>
+        <button class="tb-parent" onclick="tbParent('cosme',this)">
+          <div class="tb-parent-cover" style="background-image:url('https://news.worldshift-inc.jp/img/cosmeticlab.jpg')"></div>
+          <div class="tb-parent-overlay"></div>
+          <div class="tb-parent-body">
+            <span class="tb-parent-icon">💄</span>
+            <span class="tb-parent-en">Cosmetics</span>
+            <span class="tb-parent-name">化粧品</span>
+          </div>
+        </button>
+      </div>
+
+      <!-- サブカテゴリー 画像ボタン -->
+      <div class="tb-sub-bar">
+        <button class="tb-sub-btn on" onclick="tbSub('all',this)">
+          <div class="tb-sub-cover" style="background-image:url('https://news.worldshift-inc.jp/img/foodfactory.jpg')"></div>
+          <div class="tb-sub-overlay"></div>
+          <div class="tb-sub-body"><span class="tb-sub-icon">📚</span><span class="tb-sub-name">すべて</span><span class="tb-sub-en">All</span></div>
+        </button>
+        <button class="tb-sub-btn" onclick="tbSub('intro',this)">
+          <div class="tb-sub-cover" style="background-image:url('https://news.worldshift-inc.jp/img/foodcargo.jpg')"></div>
+          <div class="tb-sub-overlay"></div>
+          <div class="tb-sub-body"><span class="tb-sub-icon">🚪</span><span class="tb-sub-name">はじめに</span><span class="tb-sub-en">Introduction</span></div>
+        </button>
+        <button class="tb-sub-btn" onclick="tbSub('fda',this)">
+          <div class="tb-sub-cover" style="background-image:url('https://news.worldshift-inc.jp/img/foodsafety.jpg')"></div>
+          <div class="tb-sub-overlay"></div>
+          <div class="tb-sub-body"><span class="tb-sub-icon">🏛️</span><span class="tb-sub-name">FDA</span><span class="tb-sub-en">Regulations</span></div>
+        </button>
+        <button class="tb-sub-btn" onclick="tbSub('pcqi',this)">
+          <div class="tb-sub-cover" style="background-image:url('https://news.worldshift-inc.jp/img/traceability204.jpg')"></div>
+          <div class="tb-sub-overlay"></div>
+          <div class="tb-sub-body"><span class="tb-sub-icon">🔬</span><span class="tb-sub-name">PCQI</span><span class="tb-sub-en">Food Safety Plan</span></div>
+        </button>
+        <button class="tb-sub-btn" onclick="tbSub('other',this)">
+          <div class="tb-sub-cover" style="background-image:url('https://news.worldshift-inc.jp/img/supplement.jpg')"></div>
+          <div class="tb-sub-overlay"></div>
+          <div class="tb-sub-body"><span class="tb-sub-icon">📎</span><span class="tb-sub-name">その他</span><span class="tb-sub-en">Others</span></div>
+        </button>
+      </div>
+
+      <!-- 記事グリッド（画像付き大カード） -->
+      <div class="tb-art-grid" id="tb-grid">
+
+        <!-- ══ 食品 ══ -->
+        <a href="https://news.worldshift-inc.jp/article_86" class="tb-art-card" data-parent="food" data-sub="intro">
+          <div class="tb-art-img-wrap">
+            <img src="https://news.worldshift-inc.jp/img/foodfactory.jpg" alt="" loading="lazy"/>
+            <div class="tb-art-img-overlay"></div>
+            <span class="tb-art-sub-badge badge-intro">はじめに</span>
+          </div>
+          <div class="tb-art-body">
+            <span class="tb-art-parent-tag food">🍱 食品</span>
+            <p class="tb-art-title">FDA施設登録とは──食品輸出の最初の一歩</p>
+            <p class="tb-art-desc">米国代理人の指定・偶数年10〜12月の2年ごと更新。まずここから。</p>
+            <div class="tb-art-footer">
+              <span class="tb-art-sub-label">はじめに</span>
+              <span class="tb-art-arr">→</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="https://news.worldshift-inc.jp/article_73" class="tb-art-card" data-parent="food" data-sub="intro">
+          <div class="tb-art-img-wrap">
+            <img src="https://news.worldshift-inc.jp/img/foodcargo.jpg" alt="" loading="lazy"/>
+            <div class="tb-art-img-overlay"></div>
+            <span class="tb-art-sub-badge badge-intro">はじめに</span>
+          </div>
+          <div class="tb-art-body">
+            <span class="tb-art-parent-tag food">🍱 食品</span>
+            <p class="tb-art-title">FDA事前通知（Prior Notice）が必須</p>
+            <p class="tb-art-desc">海上8h・航空4h・陸路2h前に提出。未提出は港でホールドされる。</p>
+            <div class="tb-art-footer">
+              <span class="tb-art-sub-label">はじめに</span>
+              <span class="tb-art-arr">→</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="https://news.worldshift-inc.jp/article_50" class="tb-art-card" data-parent="food" data-sub="fda">
+          <div class="tb-art-img-wrap">
+            <img src="https://news.worldshift-inc.jp/img/foodsafety.jpg" alt="" loading="lazy"/>
+            <div class="tb-art-img-overlay"></div>
+            <span class="tb-art-sub-badge badge-fda">FDA</span>
+          </div>
+          <div class="tb-art-body">
+            <span class="tb-art-parent-tag food">🍱 食品</span>
+            <p class="tb-art-title">FSVPとは──外国サプライヤー検証プログラム</p>
+            <p class="tb-art-desc">米国輸入者の義務・書類提供・DUNS番号の取得が必要。</p>
+            <div class="tb-art-footer">
+              <span class="tb-art-sub-label">FDA</span>
+              <span class="tb-art-arr">→</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="https://news.worldshift-inc.jp/article_106" class="tb-art-card" data-parent="food" data-sub="fda">
+          <div class="tb-art-img-wrap">
+            <img src="https://news.worldshift-inc.jp/img/reddye.jpg" alt="" loading="lazy"/>
+            <div class="tb-art-img-overlay"></div>
+            <span class="tb-art-sub-badge badge-fda">FDA</span>
+          </div>
+          <div class="tb-art-body">
+            <span class="tb-art-parent-tag food">🍱 食品</span>
+            <p class="tb-art-title">赤色3号が使用禁止に──代替期限は2027年1月</p>
+            <p class="tb-art-desc">FD&C Red No.3の失効。菓子・飲料・経口薬の配合見直しが必要。</p>
+            <div class="tb-art-footer">
+              <span class="tb-art-sub-label">FDA</span>
+              <span class="tb-art-arr">→</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="https://news.worldshift-inc.jp/pcqi" class="tb-art-card" data-parent="food" data-sub="pcqi">
+          <div class="tb-art-img-wrap">
+            <img src="https://news.worldshift-inc.jp/img/greentea.jpg" alt="" loading="lazy"/>
+            <div class="tb-art-img-overlay"></div>
+            <span class="tb-art-sub-badge badge-pcqi">PCQI</span>
+          </div>
+          <div class="tb-art-body">
+            <span class="tb-art-parent-tag food">🍱 食品</span>
+            <p class="tb-art-title">FDA食品安全ガイド（PCQI）</p>
+            <p class="tb-art-desc">FSMAが求める食品安全計画・ハザード分析・PCQIトレーニングの基礎。</p>
+            <div class="tb-art-footer">
+              <span class="tb-art-sub-label">PCQI</span>
+              <span class="tb-art-arr">→</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="https://news.worldshift-inc.jp/article_109" class="tb-art-card" data-parent="food" data-sub="pcqi">
+          <div class="tb-art-img-wrap">
+            <img src="https://news.worldshift-inc.jp/img/traceability204.jpg" alt="" loading="lazy"/>
+            <div class="tb-art-img-overlay"></div>
+            <span class="tb-art-sub-badge badge-pcqi">PCQI</span>
+          </div>
+          <div class="tb-art-body">
+            <span class="tb-art-parent-tag food">🍱 食品</span>
+            <p class="tb-art-title">FSMA 204 食品トレーサビリティ規則</p>
+            <p class="tb-art-desc">対象食品リスト（FTL）・記録義務・順守期限2028年7月に延期。</p>
+            <div class="tb-art-footer">
+              <span class="tb-art-sub-label">PCQI</span>
+              <span class="tb-art-arr">→</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="https://news.worldshift-inc.jp/article_17" class="tb-art-card" data-parent="food" data-sub="other">
+          <div class="tb-art-img-wrap">
+            <img src="https://news.worldshift-inc.jp/img/supplement.jpg" alt="" loading="lazy"/>
+            <div class="tb-art-img-overlay"></div>
+            <span class="tb-art-sub-badge badge-other">その他</span>
+          </div>
+          <div class="tb-art-body">
+            <span class="tb-art-parent-tag food">🍱 食品</span>
+            <p class="tb-art-title">米国でサプリを売る──DSHEA必須ルール</p>
+            <p class="tb-art-desc">11兆円市場・NDI届出・治療効能の表示は未承認医薬品扱いになる。</p>
+            <div class="tb-art-footer">
+              <span class="tb-art-sub-label">その他</span>
+              <span class="tb-art-arr">→</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="https://news.worldshift-inc.jp/article_55" class="tb-art-card" data-parent="food" data-sub="other">
+          <div class="tb-art-img-wrap">
+            <img src="https://news.worldshift-inc.jp/img/vitamins.jpg" alt="" loading="lazy"/>
+            <div class="tb-art-img-overlay"></div>
+            <span class="tb-art-sub-badge badge-other">その他</span>
+          </div>
+          <div class="tb-art-body">
+            <span class="tb-art-parent-tag food">🍱 食品</span>
+            <p class="tb-art-title">サプリの表示の壁──『治療』とうたえば未承認医薬品</p>
+            <p class="tb-art-desc">クレーム規制・免責事項の必須フレーズ・NDI 75日前届出。</p>
+            <div class="tb-art-footer">
+              <span class="tb-art-sub-label">その他</span>
+              <span class="tb-art-arr">→</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- ══ 化粧品 ══ -->
+        <a href="https://news.worldshift-inc.jp/article_11" class="tb-art-card hidden" data-parent="cosme" data-sub="intro">
+          <div class="tb-art-img-wrap">
+            <img src="https://news.worldshift-inc.jp/img/cosmeticlab.jpg" alt="" loading="lazy"/>
+            <div class="tb-art-img-overlay"></div>
+            <span class="tb-art-sub-badge badge-intro">はじめに</span>
+          </div>
+          <div class="tb-art-body">
+            <span class="tb-art-parent-tag cosme">💄 化粧品</span>
+            <p class="tb-art-title">MoCRAとは──化粧品規制近代化法</p>
+            <p class="tb-art-desc">2022年成立。施設登録・製品リスティング・2026年の初回更新が義務。</p>
+            <div class="tb-art-footer">
+              <span class="tb-art-sub-label">はじめに</span>
+              <span class="tb-art-arr">→</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="https://news.worldshift-inc.jp/article_28" class="tb-art-card hidden" data-parent="cosme" data-sub="intro">
+          <div class="tb-art-img-wrap">
+            <img src="https://news.worldshift-inc.jp/img/cosmetics.jpg" alt="" loading="lazy"/>
+            <div class="tb-art-img-overlay"></div>
+            <span class="tb-art-sub-badge badge-intro">はじめに</span>
+          </div>
+          <div class="tb-art-body">
+            <span class="tb-art-parent-tag cosme">💄 化粧品</span>
+            <p class="tb-art-title">J-beauty（日本コスメ）を米国で売るには</p>
+            <p class="tb-art-desc">世界市場約370億ドル。日焼け止めはOTC医薬品扱いになる点に注意。</p>
+            <div class="tb-art-footer">
+              <span class="tb-art-sub-label">はじめに</span>
+              <span class="tb-art-arr">→</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="https://news.worldshift-inc.jp/article_56" class="tb-art-card hidden" data-parent="cosme" data-sub="fda">
+          <div class="tb-art-img-wrap">
+            <img src="https://news.worldshift-inc.jp/img/makeup.jpg" alt="" loading="lazy"/>
+            <div class="tb-art-img-overlay"></div>
+            <span class="tb-art-sub-badge badge-fda">FDA</span>
+          </div>
+          <div class="tb-art-body">
+            <span class="tb-art-parent-tag cosme">💄 化粧品</span>
+            <p class="tb-art-title">化粧品の成分・表示の壁──色素は事前承認制</p>
+            <p class="tb-art-desc">日本の赤色◯号が使えないケース。FD&C認証色素のルール。</p>
+            <div class="tb-art-footer">
+              <span class="tb-art-sub-label">FDA</span>
+              <span class="tb-art-arr">→</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="https://news.worldshift-inc.jp/article_11" class="tb-art-card hidden" data-parent="cosme" data-sub="fda">
+          <div class="tb-art-img-wrap">
+            <img src="https://news.worldshift-inc.jp/img/beautydevice.jpg" alt="" loading="lazy"/>
+            <div class="tb-art-img-overlay"></div>
+            <span class="tb-art-sub-badge badge-fda">FDA</span>
+          </div>
+          <div class="tb-art-body">
+            <span class="tb-art-parent-tag cosme">💄 化粧品</span>
+            <p class="tb-art-title">MoCRA施設登録・製品リスティングの実務</p>
+            <p class="tb-art-desc">登録方法・更新スケジュール・FEI番号の取得手順。</p>
+            <div class="tb-art-footer">
+              <span class="tb-art-sub-label">FDA</span>
+              <span class="tb-art-arr">→</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="https://news.worldshift-inc.jp/article_69" class="tb-art-card hidden" data-parent="cosme" data-sub="other">
+          <div class="tb-art-img-wrap">
+            <img src="https://news.worldshift-inc.jp/img/sunscreen.jpg" alt="" loading="lazy"/>
+            <div class="tb-art-img-overlay"></div>
+            <span class="tb-art-sub-badge badge-other">その他</span>
+          </div>
+          <div class="tb-art-body">
+            <span class="tb-art-parent-tag cosme">💄 化粧品</span>
+            <p class="tb-art-title">日本の日焼け止めはFDAでOTC医薬品</p>
+            <p class="tb-art-desc">新UVフィルター・2025年末解禁の動き。化粧品では売れない理由。</p>
+            <div class="tb-art-footer">
+              <span class="tb-art-sub-label">その他</span>
+              <span class="tb-art-arr">→</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="https://news.worldshift-inc.jp/article_35" class="tb-art-card hidden" data-parent="cosme" data-sub="other">
+          <div class="tb-art-img-wrap">
+            <img src="https://news.worldshift-inc.jp/img/beautydevice.jpg" alt="" loading="lazy"/>
+            <div class="tb-art-img-overlay"></div>
+            <span class="tb-art-sub-badge badge-other">その他</span>
+          </div>
+          <div class="tb-art-body">
+            <span class="tb-art-parent-tag cosme">💄 化粧品</span>
+            <p class="tb-art-title">米国で日本の美容家電が人気──120V対応と治療表示が鉄則</p>
+            <p class="tb-art-desc">家庭用は二桁成長・電圧変換・治療をうたわない表示が必須。</p>
+            <div class="tb-art-footer">
+              <span class="tb-art-sub-label">その他</span>
+              <span class="tb-art-arr">→</span>
+            </div>
+          </div>
+        </a>
+
+      </div><!-- /tb-art-grid -->
+    </div><!-- /tb-ui -->
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     ROOM 4 — チェックリスト
+══════════════════════════════════ -->
+<section class="room-checklist" id="checklist">
+  <div class="room-checklist-in">
+    <div class="sec-eyebrow green">Room 04</div>
+    <div class="cl-inner">
+      <div class="cl-left">
+        <h2 class="sec-title dark">チェックリスト</h2>
+        <p class="sec-desc muted">食品・化粧品のアメリカ輸出で必要な手続きを、3分で整理。現状確認から優先順位の把握まで、インタラクティブなツールでサポートします。</p>
+        <a href="https://worldshift-fda.github.io/checklist/" class="cl-cta" target="_blank" rel="noopener">
+          <span class="cl-cta-icon">✅</span>
+          <div>
+            <p class="cl-cta-en">Interactive Tool</p>
+            <p class="cl-cta-title">FDA対応チェックリストを開く</p>
+            <p class="cl-cta-desc">食品・化粧品の両方に対応。外部ツールが開きます。</p>
+          </div>
+          <span class="cl-cta-arr">↗</span>
+        </a>
+      </div>
+      <div class="cl-steps">
+        <div class="cl-step">
+          <div class="cl-step-num">1</div>
+          <div class="cl-step-body">
+            <p class="cl-step-title">🏛️ FDA登録</p>
+            <p class="cl-step-desc">事業者・施設情報の登録要否を確認。食品は施設登録、化粧品はMoCRA登録が必要。</p>
+          </div>
+        </div>
+        <div class="cl-step">
+          <div class="cl-step-num">2</div>
+          <div class="cl-step-body">
+            <p class="cl-step-title">🏷️ ラベル・英語表記</p>
+            <p class="cl-step-desc">販売表示や英語表記の不足を事前確認。色素・成分・原産国表示を中心にチェック。</p>
+          </div>
+        </div>
+        <div class="cl-step">
+          <div class="cl-step-num">3</div>
+          <div class="cl-step-body">
+            <p class="cl-step-title">👤 輸入者情報</p>
+            <p class="cl-step-desc">US ImporterやFSVP責任者の情報を整理。米国代理人の指定が必要な場合も。</p>
+          </div>
+        </div>
+        <div class="cl-step">
+          <div class="cl-step-num">4</div>
+          <div class="cl-step-body">
+            <p class="cl-step-title">📄 必要書類確認</p>
+            <p class="cl-step-desc">通関・出荷前に必要な資料をチェック。Prior Noticeや食品安全計画書など。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     ROOM 5 — サービス（dark bg）
+══════════════════════════════════ -->
+<section class="room-services" id="services">
+  <div class="room-services-in">
+    <div class="sec-hdr">
+      <div>
+        <p class="sec-eyebrow white">Room 05</p>
+        <h2 class="sec-title light">当社FDAサポート</h2>
+        <p class="sec-desc light" style="margin-bottom:0">WorldShiftが提供するFDA関連のサービスをご案内します。</p>
+      </div>
+    </div>
+    <div class="svc-grid">
+      <a href="https://worldshift-inc.jp/fda/" class="svc-card">
+        <span class="svc-card-icon">🧪</span>
+        <span class="svc-num">Service 01</span>
+        <p class="svc-card-title">FDA代行サービス</p>
+        <p class="svc-card-desc">施設登録・米国代理人指定・Prior Notice代行など、FDAへの届出を丸ごとサポート。</p>
+        <span class="svc-card-link">詳細を見る →</span>
+      </a>
+      <a href="https://news.worldshift-inc.jp/pcqi" class="svc-card">
+        <span class="svc-card-icon">📗</span>
+        <span class="svc-num">Service 02</span>
+        <p class="svc-card-title">FDA食品安全ガイド（PCQI）</p>
+        <p class="svc-card-desc">FSMAの食品安全計画・ハザード分析をわかりやすく解説。実務に直結する教科書。</p>
+        <span class="svc-card-link">読む →</span>
+      </a>
+      <a href="https://worldshift-fda.github.io/checklist/" class="svc-card" target="_blank" rel="noopener">
+        <span class="svc-card-icon">✅</span>
+        <span class="svc-num">Service 03</span>
+        <p class="svc-card-title">FDA対応チェックリスト</p>
+        <p class="svc-card-desc">輸出前の確認事項を一覧でチェック。食品・化粧品の両方に対応したインタラクティブツール。</p>
+        <span class="svc-card-link">ツールを開く ↗</span>
+      </a>
+      <a href="https://worldshift-inc.jp/contact/" class="svc-card">
+        <span class="svc-card-icon">💬</span>
+        <span class="svc-num">Service 04</span>
+        <p class="svc-card-title">個別コンサルティング</p>
+        <p class="svc-card-desc">食品・化粧品それぞれの輸出課題に合わせた個別相談。ラベル確認・規制解釈など。</p>
+        <span class="svc-card-link">問い合わせる →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer class="ft">
+  <div class="ft-in">
+    <div class="ft-brand">
+      <div class="ft-logo"><img src="https://news.worldshift-inc.jp/img/ws-logo.png" alt=""/><span class="ft-logo-name">WorldShift Trade Watch</span></div>
+      <p class="ft-about">アメリカ発の通商ニュースを、日本の輸出者へ。運営：<a href="https://worldshift-inc.jp/" style="color:#0f7a52">WORLD SHIFT</a></p>
+    </div>
+    <div class="ft-col"><p class="ft-col-t">FDA関連</p><ul>
+      <li><a href="fda.html">FDA特設ページ</a></li>
+      <li><a href="https://news.worldshift-inc.jp/pcqi">FDA食品安全ガイド</a></li>
+      <li><a href="https://worldshift-fda.github.io/checklist/" target="_blank" rel="noopener">チェックリスト ↗</a></li>
+      <li><a href="https://worldshift-inc.jp/fda/">FDA代行サービス</a></li>
+    </ul></div>
+    <div class="ft-col"><p class="ft-col-t">コンテンツ</p><ul>
+      <li><a href="news.html">NEWS</a></li>
+      <li><a href="blog.html">ブログ</a></li>
+      <li><a href="https://news.worldshift-inc.jp/glossary.html">用語集</a></li>
+      <li><a href="https://export-lab.jp/" target="_blank">コミュニティ ↗</a></li>
+    </ul></div>
+    <div class="ft-col"><p class="ft-col-t">サービス</p><ul>
+      <li><a href="https://worldshift-inc.jp/slc/">発送代行</a></li>
+      <li><a href="https://worldshift-inc.jp/fda/">FDA代行</a></li>
+      <li><a href="https://worldshift-inc.jp/company/">運営会社</a></li>
+    </ul></div>
+  </div>
+  <div class="ft-bot">※本サイトは一般的な情報提供を目的としています。正確な規制情報はFDA公式サイトおよび専門家にご確認ください。© 2026 WORLD SHIFT. All rights reserved.</div>
+</footer>
+
+<script>
+// 為替レート
+fetch('https://api.exchangerate-api.com/v4/latest/USD').then(r=>r.json()).then(d=>{if(d.rates&&d.rates.JPY)document.getElementById('rv').textContent=d.rates.JPY.toFixed(2);}).catch(()=>{});
+
+// 教科書 — 親カテゴリー切り替え
+var _tbParent='food', _tbSub='all';
+function tbParent(cat,el){
+  _tbParent=cat;
+  document.querySelectorAll('.tb-parent').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  filterTb();
+}
+filterTb();
+function tbSub(sub,el){
+  _tbSub=sub;
+  document.querySelectorAll('.tb-sub-btn').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  filterTb();
+}
+filterTb();
+function filterTb(){
+  document.querySelectorAll('.tb-art-card').forEach(function(c){
+    var matchParent = c.dataset.parent===_tbParent;
+    var matchSub    = _tbSub==='all' || c.dataset.sub===_tbSub;
+    if(matchParent && matchSub){ c.classList.remove('hidden'); }
+    else{ c.classList.add('hidden'); }
+  });
+}
+
+// FDA in-page nav アクティブ制御
+(function(){
+  var tabs=document.querySelectorAll('.fda-inav-tab');
+  var sections=['news','official','textbook','checklist','services'];
+  function setActive(){
+    var pos=window.scrollY+160;
+    var cur='news';
+    sections.forEach(function(id){
+      var el=document.getElementById(id);
+      if(el&&el.offsetTop<=pos)cur=id;
+    });
+    tabs.forEach(function(t){
+      t.classList.toggle('on',t.getAttribute('href')==='#'+cur);
+    });
+  }
+  window.addEventListener('scroll',setActive,{passive:true});
+  setActive();
+})();
+</script>
+</body>
+</html>

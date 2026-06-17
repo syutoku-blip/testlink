@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEWS｜WorldShift Trade Watch</title>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;background:#f0f4f8;color:#0f172a}
+    a{text-decoration:none;color:inherit}img{max-width:100%;display:block}button{font-family:inherit;cursor:pointer;border:none;background:none}
+    .hd{background:#0c2340;position:sticky;top:0;z-index:200}
+    .hd-in{max-width:1080px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:12px}
+    .hd-logo{display:flex;align-items:center;gap:8px;color:#fff;flex-shrink:0}
+    .hd-logo img{height:22px;filter:brightness(0) invert(1)}
+    .hd-logo span{font-size:14px;font-weight:700}
+    .hd-tag{font-size:11px;color:rgba(255,255,255,0.4);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+    .hd-rate{font-size:12px;color:rgba(255,255,255,0.6);white-space:nowrap}
+    .hd-rate strong{color:#fff}
+    .g-nav{background:#fff;border-bottom:2px solid #e2e8f0}
+    .g-nav-in{max-width:1080px;margin:0 auto;padding:0 20px;display:flex;overflow-x:auto;scrollbar-width:none}
+    .g-nav-in::-webkit-scrollbar{display:none}
+    .g-nav-tab{display:flex;align-items:center;gap:5px;padding:11px 18px;font-size:13px;font-weight:600;color:#64748b;white-space:nowrap;flex-shrink:0;border-bottom:2px solid transparent;margin-bottom:-2px;transition:color 0.1s,border-color 0.1s}
+    .g-nav-tab:hover{color:#0c2340}
+    .g-nav-tab.act{color:#0c2340;border-bottom-color:#0c2340}
+    .ext-badge{font-size:9px;background:#e8f0fc;color:#0c2340;padding:1px 4px;border-radius:3px;font-weight:700}
+
+    /* Hero */
+    .page-hero{background:#0c2340;padding:28px 20px 24px}
+    .ph-in{max-width:1080px;margin:0 auto;display:flex;align-items:center;gap:16px}
+    .ph-icon{font-size:40px;flex-shrink:0}
+    .ph-en{font-size:10px;font-weight:700;letter-spacing:0.14em;color:rgba(255,255,255,0.45);text-transform:uppercase;margin-bottom:4px}
+    .ph-title{font-size:22px;font-weight:700;color:#fff;margin-bottom:5px}
+    .ph-desc{font-size:13px;color:rgba(255,255,255,0.65);line-height:1.6}
+
+    /* Category filter bar */
+    .cat-bar{background:#fff;border-bottom:1px solid #e2e8f0}
+    .cat-bar-in{max-width:1080px;margin:0 auto;padding:0 20px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-top:10px;padding-bottom:10px}
+    .cat-bar-in::-webkit-scrollbar{display:none}
+    .cfilter{font-size:12px;font-weight:600;padding:5px 13px;border-radius:20px;background:#f1f5f9;color:#475569;cursor:pointer;white-space:nowrap;transition:all 0.1s}
+    .cfilter:hover{background:#dbeafe;color:#1e40af}
+    .cfilter.on{background:#0c2340;color:#fff}
+    .cfilter.fda.on{background:#0f7a52;color:#fff}
+    .cfilter.market.on{background:#1e40af;color:#fff}
+    .cfilter.tariff.on{background:#92400e;color:#fff}
+    .cfilter.customs.on{background:#6d28d9;color:#fff}
+    .cfilter.logistics.on{background:#5b21b6;color:#fff}
+
+    /* Main layout */
+    .page-wrap{max-width:1080px;margin:0 auto;padding:20px 20px 48px}
+    .layout{display:grid;grid-template-columns:1fr 296px;gap:20px;align-items:start}
+    @media(max-width:860px){.layout{grid-template-columns:1fr}}
+
+    /* Ticker */
+    .ticker{display:flex;align-items:center;background:#fff;border:1px solid #e2e8f0;border-radius:8px;overflow:hidden;margin-bottom:16px}
+    .ticker-lbl{background:#dc2626;color:#fff;font-size:11px;font-weight:800;padding:9px 13px;white-space:nowrap;letter-spacing:0.05em;flex-shrink:0}
+    .ticker-txt{padding:9px 14px;font-size:13px;color:#0f172a;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;flex:1}
+    .ticker-txt a{color:#dc2626;font-weight:600}
+
+    /* Article cards */
+    .art-block{background:#fff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin-bottom:16px}
+    .art-block-head{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #f1f5f9}
+    .abh-title{font-size:13px;font-weight:700;color:#0f172a;display:flex;align-items:center;gap:6px}
+    .abh-more{font-size:11px;font-weight:600;color:#0c2340}
+    .abh-more:hover{text-decoration:underline}
+
+    /* Featured */
+    .a-feat{display:block;text-decoration:none;color:inherit;transition:opacity 0.1s}
+    .a-feat:hover{opacity:0.9}
+    .a-feat img{width:100%;aspect-ratio:16/9;object-fit:cover}
+    .a-feat-body{padding:14px 16px 16px}
+    .a-feat-body h2{font-size:15px;font-weight:700;color:#0f172a;line-height:1.5;margin:6px 0 5px}
+    .a-feat-body p{font-size:12px;color:#64748b;line-height:1.65;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+    /* Row */
+    .a-rows{display:flex;flex-direction:column}
+    .a-row{display:flex;gap:12px;padding:11px 16px;border-top:1px solid #f1f5f9;text-decoration:none;color:inherit;transition:background 0.08s}
+    .a-row:hover{background:#f8fafc}
+    .a-row img{width:76px;height:57px;object-fit:cover;border-radius:6px;flex-shrink:0}
+    .a-row-body{flex:1;min-width:0}
+    .a-row-meta{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+    .a-row-body h3{font-size:12px;font-weight:600;color:#0f172a;line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+    /* Gallery grid */
+    .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:14px}
+    @media(max-width:600px){.gallery-grid{grid-template-columns:repeat(2,1fr)}}
+    .g-card{display:block;text-decoration:none;color:inherit;border-radius:8px;overflow:hidden;border:1px solid #f1f5f9;transition:box-shadow 0.1s,border-color 0.1s}
+    .g-card:hover{box-shadow:0 4px 12px rgba(0,0,0,0.08);border-color:#cbd5e1}
+    .g-card img{width:100%;aspect-ratio:4/3;object-fit:cover}
+    .g-card-body{padding:8px 9px 10px}
+    .g-card-body h3{font-size:11px;font-weight:600;color:#0f172a;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+    /* Tags/cats */
+    .cat{display:inline-block;font-size:10px;font-weight:800;padding:2px 7px;border-radius:3px;letter-spacing:0.03em}
+    .c-fda     {background:#dcfce7;color:#166534}
+    .c-market  {background:#dbeafe;color:#1e40af}
+    .c-tariff  {background:#fef3c7;color:#92400e}
+    .c-customs {background:#fce7f3;color:#9d174d}
+    .c-logistics{background:#ede9fe;color:#5b21b6}
+    .c-breaking{background:#fee2e2;color:#991b1b}
+    .art-date{font-size:11px;color:#94a3b8}
+
+    /* Sidebar */
+    .sb{display:flex;flex-direction:column;gap:16px}
+    .sb-block{background:#fff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden}
+    .sb-head{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border-bottom:1px solid #f1f5f9}
+    .sb-title{font-size:13px;font-weight:700;color:#0f172a;display:flex;align-items:center;gap:6px}
+    .sb-more{font-size:11px;font-weight:600;color:#0c2340}
+    .sb-more:hover{text-decoration:underline}
+    .rank-row{display:flex;align-items:flex-start;gap:9px;padding:9px 14px;border-bottom:1px solid #f1f5f9;text-decoration:none;color:inherit;transition:background 0.08s}
+    .rank-row:last-child{border-bottom:none}
+    .rank-row:hover{background:#f8fafc}
+    .rn{font-size:13px;font-weight:800;width:18px;text-align:center;flex-shrink:0;color:#cbd5e1;line-height:1.5}
+    .rn.top{color:#0c2340}
+    .rt{font-size:12px;color:#334155;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .ship-body{padding:12px 14px}
+    .ship-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;font-size:13px;border-bottom:1px solid #f1f5f9}
+    .ship-row:last-of-type{border-bottom:none}
+    .ship-lbl{color:#64748b}
+    .ship-price{font-weight:700}
+    .ship-saving{background:#dcfce7;color:#166534;font-size:12px;font-weight:700;padding:6px 10px;border-radius:5px;margin-top:10px;text-align:center}
+    .ship-cta{display:block;margin-top:8px;font-size:12px;color:#0c2340;font-weight:600}
+    .ship-cta:hover{text-decoration:underline}
+    .nl-body{padding:12px 14px}
+    .nl-body p{font-size:12px;color:#64748b;line-height:1.65;margin-bottom:10px}
+    .nl-inp{width:100%;padding:8px 10px;border:1px solid #e2e8f0;border-radius:6px;font-size:13px;font-family:inherit;margin-bottom:7px}
+    .nl-inp:focus{outline:2px solid #0c2340;border-color:transparent}
+    .nl-btn{width:100%;background:#0c2340;color:#fff;border-radius:6px;padding:9px;font-size:13px;font-weight:700;transition:background 0.12s}
+    .nl-btn:hover{background:#163559}
+    .nl-note{font-size:10px;color:#94a3b8;margin-top:8px;line-height:1.5}
+    .nl-note a{color:#0c2340}
+
+    /* Footer */
+    .ft{background:#fff;border-top:1px solid #e2e8f0;padding:28px 0 0;margin-top:8px}
+    .ft-in{max-width:1080px;margin:0 auto;padding:0 20px;display:flex;gap:32px;flex-wrap:wrap}
+    .ft-brand{flex:1;min-width:180px}
+    .ft-logo{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+    .ft-logo img{height:22px}
+    .ft-logo-name{font-size:14px;font-weight:700;color:#0f172a}
+    .ft-about{font-size:12px;color:#64748b;line-height:1.7;max-width:220px}
+    .ft-col{min-width:110px}
+    .ft-col-t{font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px}
+    .ft-col ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+    .ft-col a{font-size:12px;color:#64748b}
+    .ft-col a:hover{color:#0f172a;text-decoration:underline}
+    .ft-bot{max-width:1080px;margin:20px auto 0;padding:12px 20px;border-top:1px solid #f1f5f9;font-size:11px;color:#94a3b8}
+  </style>
+</head>
+<body>
+<header class="hd">
+  <div class="hd-in">
+    <a href="index.html" class="hd-logo"><img src="https://news.worldshift-inc.jp/img/ws-logo.png" alt="WS"/><span>WorldShift Trade Watch</span></a>
+    <span class="hd-tag">アメリカ発・通商ニュースポータル</span>
+    <span class="hd-rate">💱 1 USD = <strong id="rv">—</strong>円</span>
+  </div>
+</header>
+<nav class="g-nav"><div class="g-nav-in">
+  <a href="index.html" class="g-nav-tab">🏠 ポータル</a>
+  <a href="news.html"  class="g-nav-tab act">📰 NEWS</a>
+  <a href="fda.html"   class="g-nav-tab">🧪 FDA特設</a>
+  <a href="blog.html"  class="g-nav-tab">✏️ ブログ</a>
+  <a href="https://news.worldshift-inc.jp/glossary.html" class="g-nav-tab">📖 用語集</a>
+  <a href="https://export-lab.jp/" class="g-nav-tab" target="_blank" rel="noopener">👥 コミュニティ <span class="ext-badge">外部</span></a>
+</div></nav>
+
+<div class="page-hero"><div class="ph-in">
+  <div class="ph-icon">📰</div>
+  <div>
+    <p class="ph-en">Latest News</p>
+    <h1 class="ph-title">NEWS</h1>
+    <p class="ph-desc">関税・通関・FDA・市場動向など、米国発の通商ニュースを随時更新。</p>
+  </div>
+</div></div>
+
+<div class="cat-bar"><div class="cat-bar-in">
+  <button class="cfilter on" onclick="filterCat('all',this)">すべて</button>
+  <button class="cfilter fda" onclick="filterCat('fda',this)">🧪 FDA規制</button>
+  <button class="cfilter market" onclick="filterCat('market',this)">📈 市場トレンド</button>
+  <button class="cfilter tariff" onclick="filterCat('tariff',this)">💰 関税</button>
+  <button class="cfilter customs" onclick="filterCat('customs',this)">📋 通関ルール</button>
+  <button class="cfilter logistics" onclick="filterCat('logistics',this)">🚢 物流</button>
+</div></div>
+
+<div class="page-wrap">
+  <div class="ticker">
+    <span class="ticker-lbl">⚡ 速報</span>
+    <span class="ticker-txt"><a href="https://news.worldshift-inc.jp/article_100">IEEPA関税が最高裁で違法→還付へ──CBPの『CAPE』で約165億ドル返還</a></span>
+  </div>
+
+  <div class="layout">
+    <div>
+      <!-- 最新記事 -->
+      <div class="art-block" id="block-all">
+        <div class="art-block-head">
+          <span class="abh-title">🆕 最新記事</span>
+          <a href="https://news.worldshift-inc.jp/articles" class="abh-more">全110本 →</a>
+        </div>
+        <a href="https://news.worldshift-inc.jp/article_106" class="a-feat" data-cat="fda">
+          <img src="https://news.worldshift-inc.jp/img/reddye.jpg" alt="" loading="lazy"/>
+          <div class="a-feat-body">
+            <span class="cat c-fda">FDA規制</span>
+            <h2>米国が食品の『赤色3号』を使用禁止──2027年1月までに代替へ、日本の菓子・飲料も対象</h2>
+            <p>FDAは2025年1月15日、合成着色料赤色3号（FD&C Red No.3）の食品・飲料での使用認可を失効させた。</p>
+            <p class="art-date" style="margin-top:6px">2026年6月16日</p>
+          </div>
+        </a>
+        <div class="a-rows">
+          <a href="https://news.worldshift-inc.jp/article_100" class="a-row" data-cat="breaking"><img src="https://news.worldshift-inc.jp/img/ieeparefund.jpg" alt="" loading="lazy"/><div class="a-row-body"><div class="a-row-meta"><span class="cat c-breaking">⚡速報</span><span class="art-date">6/15</span></div><h3>IEEPA関税が最高裁で違法→還付へ──CBPの『CAPE』で約165億ドル返還</h3></div></a>
+          <a href="https://news.worldshift-inc.jp/article_69"  class="a-row" data-cat="market"><img src="https://news.worldshift-inc.jp/img/sunscreen.jpg" alt="" loading="lazy"/><div class="a-row-body"><div class="a-row-meta"><span class="cat c-market">市場トレンド</span><span class="art-date">6/15</span></div><h3>米国で日本の日焼け止めが熱望される──だがFDAでは『OTC医薬品』</h3></div></a>
+          <a href="https://news.worldshift-inc.jp/article_73"  class="a-row" data-cat="fda"><img src="https://news.worldshift-inc.jp/img/foodcargo.jpg" alt="" loading="lazy"/><div class="a-row-body"><div class="a-row-meta"><span class="cat c-fda">FDA規制</span><span class="art-date">6/15</span></div><h3>食品輸出はFDA『事前通知』が必須──デミニミス終了で少額の食品サンプルも対象に</h3></div></a>
+          <a href="https://news.worldshift-inc.jp/article_102" class="a-row" data-cat="logistics"><img src="https://news.worldshift-inc.jp/img/ebayexport.jpg" alt="" loading="lazy"/><div class="a-row-body"><div class="a-row-meta"><span class="cat c-logistics">物流</span><span class="art-date">6/14</span></div><h3>eBay輸出が転換点──2025年10月から日本→米国はDDP必須に</h3></div></a>
+          <a href="https://news.worldshift-inc.jp/article_10"  class="a-row" data-cat="customs"><img src="https://news.worldshift-inc.jp/img/lab.jpg" alt="" loading="lazy"/><div class="a-row-body"><div class="a-row-meta"><span class="cat c-customs">通関ルール</span><span class="art-date">6/13</span></div><h3>米国CPSCの証明書「eFiling」が2026年7月8日に義務化</h3></div></a>
+          <a href="https://news.worldshift-inc.jp/article_3"   class="a-row" data-cat="tariff"><img src="https://news.worldshift-inc.jp/img/metal.jpg" alt="" loading="lazy"/><div class="a-row-body"><div class="a-row-meta"><span class="cat c-tariff">関税</span><span class="art-date">6/12</span></div><h3>米国向けの金属製品、関税が最大50%に──6月8日の通関分から</h3></div></a>
+          <a href="https://news.worldshift-inc.jp/article_107" class="a-row" data-cat="fda"><img src="https://news.worldshift-inc.jp/img/healthyclaim.jpg" alt="" loading="lazy"/><div class="a-row-body"><div class="a-row-meta"><span class="cat c-fda">FDA規制</span><span class="art-date">6/16</span></div><h3>米国の『healthy』表示が新基準に──2028年から、砂糖・塩・脂肪に上限</h3></div></a>
+        </div>
+      </div>
+
+      <!-- ギャラリー -->
+      <div class="art-block">
+        <div class="art-block-head">
+          <span class="abh-title">🖼 記事ギャラリー</span>
+          <a href="https://news.worldshift-inc.jp/gallery" class="abh-more">全件 →</a>
+        </div>
+        <div class="gallery-grid">
+          <a href="https://news.worldshift-inc.jp/article_71" class="g-card"><img src="https://news.worldshift-inc.jp/img/gunpla.jpg" alt="" loading="lazy"/><div class="g-card-body"><span class="cat c-market" style="margin-bottom:4px;display:inline-block">市場</span><h3>米国でガンプラが爆発的人気──ガンダムIPは年商1,500億円規模へ</h3></div></a>
+          <a href="https://news.worldshift-inc.jp/article_70" class="g-card"><img src="https://news.worldshift-inc.jp/img/bonsai.jpg" alt="" loading="lazy"/><div class="g-card-body"><span class="cat c-market" style="margin-bottom:4px;display:inline-block">市場</span><h3>米国で盆栽・園芸ブーム──狙い目は盆栽鋏・常滑の鉢など"道具"</h3></div></a>
+          <a href="https://news.worldshift-inc.jp/article_75" class="g-card"><img src="https://news.worldshift-inc.jp/img/gummy.jpg" alt="" loading="lazy"/><div class="g-card-body"><span class="cat c-market" style="margin-bottom:4px;display:inline-block">市場</span><h3>米国で日本のグミ・キャンディが大ブーム──Hi-Chewが第2工場</h3></div></a>
+          <a href="https://news.worldshift-inc.jp/article_72" class="g-card"><img src="https://news.worldshift-inc.jp/img/fountainpen.jpg" alt="" loading="lazy"/><div class="g-card-body"><span class="cat c-market" style="margin-bottom:4px;display:inline-block">市場</span><h3>米国で日本の万年筆が静かなブーム──Pilot・Sailor・Platinum</h3></div></a>
+          <a href="https://news.worldshift-inc.jp/article_86" class="g-card"><img src="https://news.worldshift-inc.jp/img/foodfactory.jpg" alt="" loading="lazy"/><div class="g-card-body"><span class="cat c-fda" style="margin-bottom:4px;display:inline-block">FDA</span><h3>米国へ食品を売る第一歩『FDA施設登録』</h3></div></a>
+          <a href="https://news.worldshift-inc.jp/article_4"  class="g-card"><img src="https://news.worldshift-inc.jp/img/ecommercebox.jpg" alt="" loading="lazy"/><div class="g-card-body"><span class="cat c-customs" style="margin-bottom:4px;display:inline-block">通関</span><h3>米国の"$800まで無税"が終了──少額の小包もすべて課税に</h3></div></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="sb">
+      <div class="sb-block">
+        <div class="sb-head"><span class="sb-title">🏆 記事ランキング</span></div>
+        <a href="https://news.worldshift-inc.jp/article_106" class="rank-row"><span class="rn top">1</span><span class="rt">米国が食品の『赤色3号』を使用禁止──2027年1月までに代替</span></a>
+        <a href="https://news.worldshift-inc.jp/article_107" class="rank-row"><span class="rn top">2</span><span class="rt">米国の『healthy』表示が新基準に──2028年、砂糖・塩・脂肪に上限</span></a>
+        <a href="https://news.worldshift-inc.jp/article_69"  class="rank-row"><span class="rn top">3</span><span class="rt">米国で日本の日焼け止めが熱望される──FDAでは『OTC医薬品』</span></a>
+        <a href="https://news.worldshift-inc.jp/article_71"  class="rank-row"><span class="rn">4</span><span class="rt">米国でガンプラが爆発的人気──ガンダムIPは年商1,500億円規模へ</span></a>
+        <a href="https://news.worldshift-inc.jp/article_70"  class="rank-row"><span class="rn">5</span><span class="rt">米国で盆栽・園芸ブーム──ただし生きた木と土はAPHISの壁</span></a>
+        <a href="https://news.worldshift-inc.jp/article_75"  class="rank-row"><span class="rn">6</span><span class="rt">米国で日本のグミ・キャンディが大ブーム</span></a>
+        <a href="https://news.worldshift-inc.jp/article_73"  class="rank-row"><span class="rn">7</span><span class="rt">食品輸出はFDA『事前通知』が必須──デミニミス終了で</span></a>
+      </div>
+      <div class="sb-block">
+        <div class="sb-head"><span class="sb-title">📦 米国行き送料（20kg）</span></div>
+        <div class="ship-body">
+          <div class="ship-row"><span class="ship-lbl">当社（発送代行）</span><span class="ship-price">¥17,231</span></div>
+          <div class="ship-row"><span class="ship-lbl">EMS</span><span class="ship-price">¥23,350</span></div>
+          <p class="ship-saving">当社なら <strong>¥6,119</strong>（約26%）おトク</p>
+          <a href="https://worldshift-inc.jp/slc/" class="ship-cta">発送代行（SLC）の詳細 →</a>
+        </div>
+      </div>
+      <div class="sb-block">
+        <div class="sb-head"><span class="sb-title">📩 無料ニュースレター</span></div>
+        <div class="nl-body">
+          <p>最新の通商ニュースを届きしだいメールでお知らせします。</p>
+          <input type="email" id="nl-e" class="nl-inp" placeholder="メールアドレス"/>
+          <button id="nl-b" class="nl-btn">購読する（無料）</button>
+          <p class="nl-note">いつでも解除可。登録で<a href="https://news.worldshift-inc.jp/privacy">プライバシーポリシー</a>に同意とみなします。</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<footer class="ft"><div class="ft-in">
+  <div class="ft-brand"><div class="ft-logo"><img src="https://news.worldshift-inc.jp/img/ws-logo.png" alt=""/><span class="ft-logo-name">WorldShift Trade Watch</span></div><p class="ft-about">アメリカ発の通商ニュースを、日本の輸出者へ。</p></div>
+  <div class="ft-col"><p class="ft-col-t">コンテンツ</p><ul><li><a href="news.html">NEWS</a></li><li><a href="fda.html">FDA特設</a></li><li><a href="blog.html">ブログ</a></li><li><a href="https://news.worldshift-inc.jp/glossary.html">用語集</a></li><li><a href="https://export-lab.jp/" target="_blank">コミュニティ ↗</a></li></ul></div>
+  <div class="ft-col"><p class="ft-col-t">サービス</p><ul><li><a href="https://worldshift-inc.jp/slc/">発送代行</a></li><li><a href="https://worldshift-inc.jp/fda/">FDA代行</a></li><li><a href="https://worldshift-inc.jp/company/">運営会社</a></li></ul></div>
+</div><div class="ft-bot">© 2026 WORLD SHIFT. All rights reserved.</div></footer>
+
+<script>
+fetch('https://api.exchangerate-api.com/v4/latest/USD').then(r=>r.json()).then(d=>{if(d.rates&&d.rates.JPY){document.getElementById('rv').textContent=d.rates.JPY.toFixed(2);}}).catch(()=>{});
+var nb=document.getElementById('nl-b'),ne=document.getElementById('nl-e');
+if(nb&&ne){nb.addEventListener('click',function(){if(!ne.value.trim()||!ne.value.includes('@')){ne.focus();return;}nb.textContent='登録しました ✓';nb.disabled=ne.disabled=true;});}
+function filterCat(cat,el){
+  document.querySelectorAll('.cfilter').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  document.querySelectorAll('.a-row[data-cat],.a-feat[data-cat]').forEach(function(r){
+    if(cat==='all'||r.dataset.cat===cat||r.dataset.cat==='breaking'){r.style.display='flex';}
+    else{r.style.display='none';}
+    if(r.classList.contains('a-feat')){r.style.display=(cat==='all'||r.dataset.cat===cat)?'block':'none';}
+  });
+}
+</script>
+</body></html>
