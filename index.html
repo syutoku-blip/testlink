@@ -1,240 +1,344 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>WorldShift 越境ECコミュニティ | Amazon輸出・FBA・リサーチ・規制・物流</title>
-  <meta name="description" content="Amazon輸出、FBA物流、越境ECリサーチ、自社ブランド海外展開、FDA規制、越境物流まで。6つの研究室で実務に使える投稿・事例・ニュースを無料で受け取れるコミュニティ。" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amazon輸出 手引書の前に確認する10のこと</title>
+
   <style>
-    :root{
-      --navy:#071B3A; --blue:#1064FF; --sky:#22C6F3; --orange:#FF8A00; --gold:#F7C948;
-      --green:#1CB978; --purple:#7C4DFF; --pink:#FF4D8D; --ice:#F4F8FF; --mint:#E9FBF8;
-      --ink:#102033; --muted:#66758A; --line:#DCE6F4; --white:#fff;
-      --shadow:0 20px 60px rgba(7,27,58,.14); --soft:0 12px 32px rgba(7,27,58,.08); --radius:26px;
+    body {
+      margin: 0;
+      font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+      background: #f8fafc;
+      color: #1f2937;
     }
-    *{box-sizing:border-box} html{scroll-behavior:smooth}
-    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;color:var(--ink);background:linear-gradient(180deg,#F7FAFF 0%,#fff 38%,#F4F8FF 100%);line-height:1.75}
-    a{text-decoration:none;color:inherit}.container{width:min(1140px,calc(100% - 40px));margin:auto}.center{text-align:center}
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:999px;padding:16px 26px;font-weight:900;transition:.2s ease;border:0;cursor:pointer}
-    .btn-primary{background:linear-gradient(135deg,var(--orange),#FFB000);color:#111827;box-shadow:0 14px 34px rgba(255,138,0,.28)}
-    .btn-primary:hover,.btn-secondary:hover{transform:translateY(-2px)}.btn-secondary{background:#fff;color:var(--navy);border:1px solid var(--line);box-shadow:var(--soft)}
-    .badge{display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border-radius:999px;background:#EAF1FF;color:#0B4EDB;font-size:13px;font-weight:900}
-    .section{padding:86px 0}.section-title{font-size:clamp(28px,4vw,46px);line-height:1.22;margin:12px 0 14px;letter-spacing:-.045em;color:var(--navy)}
-    .section-lead{font-size:18px;color:var(--muted);max-width:790px;margin:0 auto 40px}.marker{background:linear-gradient(transparent 62%,rgba(247,201,72,.48) 0)}
-    header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(16px);border-bottom:1px solid rgba(220,230,244,.85)}
-    .nav{height:72px;display:flex;align-items:center;justify-content:space-between}.logo{font-weight:950;color:var(--navy);letter-spacing:-.04em}.logo span{color:var(--blue)}
-    .nav-links{display:flex;gap:20px;align-items:center;color:#40516A;font-weight:800;font-size:14px}.nav-links a:hover{color:var(--blue)}
-    .hero{position:relative;overflow:hidden;padding:88px 0 74px;background:radial-gradient(circle at 14% 10%,rgba(34,198,243,.22),transparent 34%),radial-gradient(circle at 88% 18%,rgba(255,138,0,.2),transparent 30%),linear-gradient(180deg,#F7FAFF,#fff)}
-    .hero:before{content:"";position:absolute;inset:auto -80px -120px auto;width:520px;height:520px;background:radial-gradient(circle,rgba(16,100,255,.13),transparent 65%);border-radius:50%}
-    .hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:44px;align-items:center;position:relative}.eyebrow{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
-    .hero h1{font-size:clamp(38px,6vw,70px);line-height:1.08;letter-spacing:-.07em;margin:0 0 20px;color:var(--navy)}.hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--blue),var(--sky));-webkit-background-clip:text;color:transparent}
-    .hero p{font-size:20px;color:#40516A;margin:0 0 28px}.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:18px}.microcopy{font-size:13px;color:#66758A}.trust-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:26px}.trust-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px;text-align:center;font-weight:950;color:var(--navy);box-shadow:var(--soft)}.trust-card small{display:block;color:var(--muted);font-weight:700;font-size:12px;margin-top:3px}
-    .hero-panel{position:relative;background:#fff;border:1px solid var(--line);border-radius:34px;padding:24px;box-shadow:var(--shadow)}.mock-window{border-radius:24px;overflow:hidden;border:1px solid var(--line);background:#fff}.mock-top{height:42px;background:#F1F5FB;display:flex;align-items:center;gap:8px;padding:0 14px}.dot{width:10px;height:10px;border-radius:50%;background:#CBD5E1}.mock-body{padding:20px}.topic{display:flex;gap:14px;padding:15px;border:1px solid #E6EEF8;border-radius:18px;margin-bottom:11px;background:#fff}.topic-icon{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#EAF1FF,#E9FBF8);display:grid;place-items:center;font-size:20px;flex:0 0 auto}.topic b{display:block;color:var(--navy);line-height:1.4}.topic span{display:block;font-size:13px;color:var(--muted);line-height:1.5}.floating-offer{position:absolute;right:-12px;bottom:-22px;background:var(--navy);color:#fff;border-radius:23px;padding:18px 20px;box-shadow:0 20px 42px rgba(7,27,58,.25);max-width:250px}.floating-offer b{color:var(--gold)}
-    .problem{background:#fff}.problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.problem-card{border:1px solid var(--line);border-radius:24px;padding:24px;background:linear-gradient(180deg,#fff,#F8FBFF);box-shadow:var(--soft)}.problem-card h3{margin:8px 0;color:var(--navy)}.problem-card p{margin:0;color:var(--muted);font-size:14px}
-    .labs{background:linear-gradient(180deg,#F7FAFF,#fff)}.labs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.lab-card{position:relative;overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:28px;padding:24px;box-shadow:var(--soft);transition:.2s ease}.lab-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:#B9CCFF}.lab-card:before{content:"";position:absolute;inset:0 0 auto;height:7px;background:var(--accent)}.lab-head{display:flex;gap:14px;align-items:flex-start;margin-bottom:12px}.lab-emoji{width:48px;height:48px;border-radius:16px;background:linear-gradient(135deg,#F0F6FF,#fff);display:grid;place-items:center;font-size:26px}.lab-card h3{margin:0;color:var(--navy);font-size:20px;line-height:1.35}.route{display:inline-flex;margin-top:6px;padding:4px 9px;border-radius:999px;background:#F4F8FF;color:#315075;font-size:12px;font-weight:900}.lab-card h4{margin:18px 0 8px;color:#273B55;font-size:14px}.chips{display:flex;gap:8px;flex-wrap:wrap}.chip{background:#F7FAFF;border:1px solid #E6EEF8;color:#40516A;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:800}.post-list{margin:8px 0 0;padding:0;list-style:none;display:grid;gap:8px}.post-list li{display:flex;gap:8px;font-size:14px;color:#40516A}.post-list li:before{content:"✓";color:#0EA66B;font-weight:950}
-    .benefits{background:linear-gradient(180deg,var(--navy),#0B2E60);color:#fff}.benefits .section-title{color:#fff}.benefits .section-lead{color:#C7D5EA}.benefit-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.benefit-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:24px;padding:24px}.benefit-card .num{color:var(--gold);font-weight:950;font-size:14px}.benefit-card h3{margin:8px 0 8px;font-size:20px}.benefit-card p{color:#D8E4F5;margin:0;font-size:14px}
-    .journey{background:#fff}.journey-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.step{position:relative;background:#fff;border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:var(--soft)}.step strong{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#EAF1FF;color:var(--blue);font-weight:950}.step h3{margin:14px 0 8px;color:var(--navy);font-size:18px}.step p{margin:0;color:var(--muted);font-size:14px}
-    .spot{background:linear-gradient(180deg,#FFF8EA,#fff)}.spot-box{display:grid;grid-template-columns:.9fr 1.1fr;gap:32px;align-items:center;background:#fff;border:1px solid #FADDA7;border-radius:34px;padding:36px;box-shadow:var(--shadow)}.price-card .price{font-size:42px;font-weight:950;color:var(--navy);letter-spacing:-.04em}.price small{font-size:16px;color:var(--muted);font-weight:800}.menu-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.menu-list div{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 14px;font-weight:900;color:#23364F;font-size:14px}
-    .proof{background:#fff}.operator-card{display:grid;grid-template-columns:280px 1fr;gap:34px;background:#fff;border:1px solid var(--line);border-radius:34px;padding:34px;box-shadow:var(--shadow)}.photo-placeholder{min-height:300px;border-radius:24px;background:linear-gradient(135deg,#EAF1FF,#E9FBF8);display:grid;place-items:center;text-align:center;color:#5176B5;font-weight:900}.proof-list{display:grid;gap:12px;margin-top:20px}.proof-list div{display:flex;gap:12px;align-items:flex-start;background:#F7FAFF;border:1px solid var(--line);border-radius:18px;padding:14px}.proof-list b{color:var(--navy)}
-    .final{padding:88px 0;background:radial-gradient(circle at 10% 10%,rgba(34,198,243,.18),transparent 28%),linear-gradient(180deg,#fff,#F4F8FF)}.form-box{display:grid;grid-template-columns:1fr .85fr;gap:32px;background:#fff;border:1px solid var(--line);border-radius:38px;padding:38px;box-shadow:var(--shadow)}.form{display:grid;gap:14px}.form input,.form select{width:100%;border:1px solid var(--line);border-radius:16px;padding:16px;font:inherit;background:#FBFDFF}.form button{font:inherit}.checklist{display:grid;gap:12px}.checklist div{display:flex;gap:10px;color:#40516A}.check{color:#0EA66B;font-weight:950}footer{padding:34px 0;text-align:center;color:var(--muted);font-size:13px;background:#fff;border-top:1px solid var(--line)}
-    @media(max-width:980px){.hero-grid,.spot-box,.operator-card,.form-box{grid-template-columns:1fr}.labs-grid,.benefit-grid,.journey-grid,.problem-grid{grid-template-columns:repeat(2,1fr)}.nav-links{display:none}.floating-offer{position:static;margin-top:14px;max-width:none}.hero{padding-top:56px}}
-    @media(max-width:640px){.container{width:min(100% - 24px,1140px)}.section{padding:64px 0}.labs-grid,.benefit-grid,.journey-grid,.problem-grid,.menu-list,.trust-row{grid-template-columns:1fr}.hero h1{font-size:38px}.hero-cta .btn{width:100%}.hero-panel,.spot-box,.operator-card,.form-box{padding:22px;border-radius:24px}}
+
+    .page {
+      background:
+        radial-gradient(circle at top left, rgba(255,153,0,.22), transparent 32%),
+        linear-gradient(135deg, #fff7ed 0%, #ffffff 48%, #eef6ff 100%);
+      padding: 70px 20px;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      background: #ffffff;
+      border-radius: 32px;
+      padding: 56px 48px;
+      box-shadow: 0 24px 70px rgba(15, 23, 42, .12);
+      text-align: center;
+      margin-bottom: 36px;
+      border: 1px solid rgba(255,153,0,.25);
+    }
+
+    .badge {
+      display: inline-block;
+      background: #ff9900;
+      color: #111827;
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.45;
+      margin: 0 0 24px;
+      color: #111827;
+    }
+
+    .lead {
+      max-width: 850px;
+      margin: 0 auto;
+      font-size: 17px;
+      line-height: 2.1;
+      color: #4b5563;
+      text-align: left;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 26px;
+      padding: 34px;
+      box-shadow: 0 16px 42px rgba(15, 23, 42, .07);
+      border: 1px solid #e5e7eb;
+      position: relative;
+      overflow: hidden;
+      transition: .25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 54px rgba(15, 23, 42, .11);
+      border-color: #ff9900;
+    }
+
+    .num {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #ff9900, #ffc66b);
+      color: #111827;
+      font-weight: 900;
+      font-size: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      box-shadow: 0 12px 24px rgba(255,153,0,.25);
+    }
+
+    h2 {
+      font-size: 23px;
+      line-height: 1.55;
+      margin: 0 0 16px;
+      color: #111827;
+    }
+
+    p {
+      margin: 0;
+      font-size: 15.5px;
+      line-height: 2;
+      color: #4b5563;
+    }
+
+    .point {
+      margin-top: 20px;
+      background: #fff7ed;
+      border-left: 4px solid #ff9900;
+      border-radius: 14px;
+      padding: 15px 17px;
+      font-size: 14px;
+      line-height: 1.8;
+      color: #374151;
+    }
+
+    .summary {
+      margin-top: 44px;
+      background: linear-gradient(135deg, #111827, #1f2937);
+      color: #ffffff;
+      border-radius: 32px;
+      padding: 52px 44px;
+      text-align: center;
+      box-shadow: 0 24px 70px rgba(15, 23, 42, .2);
+    }
+
+    .summary h2 {
+      color: #ffb84d;
+      font-size: clamp(26px, 3vw, 36px);
+      margin-bottom: 22px;
+    }
+
+    .summary p {
+      color: #f3f4f6;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    @media (max-width: 820px) {
+      .page {
+        padding: 42px 14px;
+      }
+
+      .hero {
+        padding: 36px 24px;
+        border-radius: 24px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 26px 22px;
+      }
+
+      .summary {
+        padding: 36px 24px;
+        border-radius: 24px;
+      }
+    }
   </style>
 </head>
+
 <body>
-  <header>
-    <div class="container nav">
-      <a class="logo" href="#">WorldShift<span> Community</span></a>
-      <nav class="nav-links" aria-label="主要ナビゲーション">
-        <a href="#labs">6つの研究室</a><a href="#benefits">登録特典</a><a href="#journey">登録後の流れ</a><a href="#spot">相談メニュー</a><a class="btn btn-primary" href="#entry">無料で参加</a>
-      </nav>
+  <main class="page">
+    <div class="container">
+
+      <section class="hero">
+        <div class="badge">📚 Amazon輸出 手引書の前に</div>
+
+        <h1>
+          手引書を読む前に<br>
+          知っておいてほしい10のこと
+        </h1>
+
+        <p class="lead">
+          Amazon輸出に興味を持ったとき、多くの方が「英語ができない」「海外発送が難しそう」
+          「大きな資金が必要なのでは？」といった疑問を感じます。
+          <br><br>
+          実際に始める前は分からないことが多くて当然です。ただ、Amazon輸出は一部の特別な人だけができるビジネスではありません。
+          必要な知識を順番に身につけながら経験を積んでいくことで、多くの方が販売できるようになっています。
+          <br><br>
+          まずは手引書に入る前に、Amazon輸出というビジネスの全体像を確認しておきましょう。
+        </p>
+      </section>
+
+      <section class="cards">
+
+        <article class="card">
+          <div class="num">1</div>
+          <h2>英語ができなくても始められる</h2>
+          <p>
+            米Amazonで販売すると聞くと、英語が話せなければ難しいと思われるかもしれません。
+            確かに商品ページや購入者対応では英語に触れる場面があります。
+            しかし実際に必要なのは英会話力ではなく、内容を理解し、必要な情報を伝える力です。
+            現在は翻訳ツールも発達しており、多くの日本人セラーが翻訳ツールを活用しながら販売しています。
+          </p>
+          <div class="point">英語力よりも、調べる力や丁寧な対応の方が重要になります。</div>
+        </article>
+
+        <article class="card">
+          <div class="num">2</div>
+          <h2>新しく商品を作る必要はない</h2>
+          <p>
+            Amazon輸出というと、自社ブランドやオリジナル商品を作るイメージを持つ方もいます。
+            しかし初心者が最初に取り組むのは、すでにAmazon上で販売されている商品へ出品する
+            「相乗り販売」が中心です。商品開発や工場とのやり取りを行う必要はありません。
+            まずは需要のある商品を見つけ、仕入れ、販売する基本を学びます。
+          </p>
+          <div class="point">最初に身につけるべきなのは、商品を作る力ではなく商品を見つける力です。</div>
+        </article>
+
+        <article class="card">
+          <div class="num">3</div>
+          <h2>在庫を持つビジネスである</h2>
+          <p>
+            Amazon輸出は商品を仕入れて販売するビジネスです。そのため在庫を持つ必要があります。
+            一方で、最初から大量の在庫を抱える必要はありません。
+            初心者のうちは少量で販売経験を積みながら、商品の動きや利益計算に慣れていくことが大切です。
+            在庫管理や資金管理も、経験とともに少しずつ身についていきます。
+          </p>
+          <div class="point">小さく試しながら学ぶことで、仕入れ判断の精度が上がっていきます。</div>
+        </article>
+
+        <article class="card">
+          <div class="num">4</div>
+          <h2>商品は海外へ発送する必要がある</h2>
+          <p>
+            販売先はアメリカのお客様です。そのため商品を海外へ発送する工程があります。
+            初めての方にとってはイメージしにくい部分ですが、配送方法や発送手順はある程度決まっています。
+            国内発送とは違う知識が必要になりますが、一度流れを経験すると理解しやすくなります。
+            海外発送も、Amazon輸出で身につく実務スキルの一つです。
+          </p>
+          <div class="point">最初は難しく見える作業でも、繰り返すことで日常業務になっていきます。</div>
+        </article>
+
+        <article class="card">
+          <div class="num">5</div>
+          <h2>最初から大きな資金は必要ない</h2>
+          <p>
+            物販ビジネスである以上、ある程度の仕入れ資金は必要です。
+            しかし最初から何十万円、何百万円もの資金を準備しなければ始められないわけではありません。
+            まずは小規模で販売を経験し、利益や販売実績を積み重ねながら徐々に規模を広げる方が現実的です。
+            大切なのは資金額よりも、仕入れ判断と利益計算の考え方です。
+          </p>
+          <div class="point">最初は大きく稼ぐより、販売の流れを理解することが重要です。</div>
+        </article>
+
+        <article class="card">
+          <div class="num">6</div>
+          <h2>商品選びが最も重要</h2>
+          <p>
+            Amazon輸出では商品選びが結果を大きく左右します。
+            同じ作業をしていても、商品によって利益は大きく変わります。
+            売れているか、利益が出るか、競合状況はどうか。
+            そうした情報を分析しながら仕入れ判断を行います。
+            この力は一朝一夕では身につきませんが、経験を積むほど判断の精度が上がります。
+          </p>
+          <div class="point">商品選びのスキルは、Amazon輸出における大きな資産になります。</div>
+        </article>
+
+        <article class="card">
+          <div class="num">7</div>
+          <h2>売れれば終わりではない</h2>
+          <p>
+            商品が売れた後には、発送や問い合わせ対応などの業務があります。
+            Amazonでは販売後の対応も評価対象になります。
+            ただし特別な接客スキルが必要なわけではありません。
+            基本的なルールに沿って対応し、購入者に必要な情報をきちんと伝えることが大切です。
+            販売経験を重ねることで、対応にも自然と慣れていきます。
+          </p>
+          <div class="point">販売後の対応は、長く安定して販売を続けるための土台になります。</div>
+        </article>
+
+        <article class="card">
+          <div class="num">8</div>
+          <h2>Amazonのルールを理解することが大切</h2>
+          <p>
+            Amazonには出品ルールや知的財産ルールなど、守るべき規定があります。
+            最初から全てを覚える必要はありませんが、運営する中で少しずつ理解していく必要があります。
+            成功しているセラーほどルールを軽視せず、正しい運営を意識しています。
+            ルールを理解することは、アカウントを守りながら長く販売を続けることにつながります。
+          </p>
+          <div class="point">利益だけでなく、継続して販売できる環境を作ることも重要です。</div>
+        </article>
+
+        <article class="card">
+          <div class="num">9</div>
+          <h2>トラブルは避けられない</h2>
+          <p>
+            配送遅延や商品の破損、返品依頼などは物販をしていれば誰にでも起こります。
+            これは初心者だから起きるわけではなく、長年販売しているセラーでも同じです。
+            重要なのはトラブルをなくすことではなく、起きた時に正しく対応することです。
+            Amazonには対応方法が整備されており、経験を積むほど判断や対応も早くなっていきます。
+          </p>
+          <div class="point">トラブル対応の経験は、そのまま運営力の向上につながります。</div>
+        </article>
+
+        <article class="card">
+          <div class="num">10</div>
+          <h2>実は利益は商品だけではない</h2>
+          <p>
+            Amazon輸出の利益というと、商品を安く仕入れて高く売る差額だけを想像する方が多いかもしれません。
+            もちろんそれが利益の中心ですが、実際にはそれ以外の要素もあります。
+            例えば為替差益、クレジットカードのポイント還元、マイル、各種キャンペーンなどです。
+            さらに輸出ビジネスでは、条件を満たした場合に消費税還付を受けられるケースもあります。
+          </p>
+          <div class="point">利益を増やす方法は販売だけではなく、運営全体の知識にもあります。</div>
+        </article>
+
+      </section>
+
+      <section class="summary">
+        <h2>Amazon輸出は「知識」と「経験」が積み上がるビジネスです</h2>
+        <p>
+          Amazon輸出には、商品選び、仕入れ、発送、購入者対応など覚えることがあります。
+          ただ、その多くは一度覚えれば何度も使い続けられる知識です。
+          <br><br>
+          最初は時間がかかる商品リサーチも、経験を積むほど判断が早くなります。
+          難しく感じていた海外発送も、何度か経験すると特別な作業ではなくなります。
+          <br><br>
+          一つひとつの経験が知識となり、その知識が次の利益につながっていく。
+          それがAmazon輸出の面白さでもあります。
+          この手引書では、そうした全体像を順番に理解できるようまとめています。
+        </p>
+      </section>
+
     </div>
-  </header>
-
-  <main>
-    <section class="hero">
-      <div class="container hero-grid">
-        <div>
-          <div class="eyebrow">
-            <span class="badge">無料コミュニティ</span>
-            <span class="badge">Amazon輸出・FBA・越境ECの実務情報</span>
-          </div>
-          <h1>海外販売の“わからない”を<br><em>研究室で解決。</em></h1>
-          <p>Amazon輸出、FBA物流、商品リサーチ、海外ブランド展開、FDA規制、国際配送まで。あなたの状況に合う研究室から、今すぐ使える投稿・事例・ニュースを受け取れます。</p>
-          <div class="hero-cta">
-            <a class="btn btn-primary" href="#entry">無料で参加して研究室を選ぶ</a>
-            <a class="btn btn-secondary" href="#labs">研究室の中身を見る</a>
-          </div>
-          <p class="microcopy">登録は1分。興味カテゴリを選ぶだけで、あなた向けスターター投稿へ案内します。</p>
-          <div class="trust-row" aria-label="信頼実績">
-            <div class="trust-card">Amazon輸出<br><small>実務ナレッジ</small></div>
-            <div class="trust-card">物流・FBA<br><small>最新動向</small></div>
-            <div class="trust-card">規制・FDA<br><small>専門導線</small></div>
-          </div>
-        </div>
-        <div class="hero-panel" aria-label="コミュニティ画面イメージ">
-          <div class="mock-window">
-            <div class="mock-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
-            <div class="mock-body">
-              <div class="topic"><div class="topic-icon">🚀</div><div><b>Amazon輸出スタート研究室</b><span>基礎知識・売れている商品の考察・成功事例</span></div></div>
-              <div class="topic"><div class="topic-icon">📦</div><div><b>Amazon物流・FBA最前線</b><span>納品ルール変更・通関・関税・物流コスト事例</span></div></div>
-              <div class="topic"><div class="topic-icon">🔍</div><div><b>越境ECリサーチ研究所</b><span>米国で伸びる商品・カテゴリ分析・市場データ</span></div></div>
-              <div class="topic"><div class="topic-icon">🧪</div><div><b>FDA・規制情報センター</b><span>食品・コスメ・サプリの成分規制と審査事例</span></div></div>
-            </div>
-          </div>
-          <div class="floating-offer"><b>登録者限定</b><br>輸出の手引き・計算シート・事例アーカイブを順次公開</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section problem">
-      <div class="container center">
-        <p class="badge">なぜ登録するのか</p>
-        <h2 class="section-title">検索だけでは見つからない、<span class="marker">実務の“次の一手”</span>があります。</h2>
-        <p class="section-lead">海外販売は、商品・物流・規制・市場データが別々に動きます。だからこのコミュニティでは、テーマ別の研究室で情報を整理し、必要なサービス導線まで迷わず進める設計にしています。</p>
-        <div class="problem-grid">
-          <div class="problem-card"><div class="lab-emoji">🧭</div><h3>始め方がわかる</h3><p>Amazon輸出の基礎、先行事例、はじめた人のストーリーで「自分にもできそう」を作ります。</p></div>
-          <div class="problem-card"><div class="lab-emoji">📈</div><h3>市場が見える</h3><p>伸びている商品、カテゴリ分析、物流コスト事例で、判断材料を増やします。</p></div>
-          <div class="problem-card"><div class="lab-emoji">🛟</div><h3>詰まりどころを相談できる</h3><p>情報収集後は、SHiFT塾・SLC・PROFiNDER・AmaNavi・FDA・Allynairへ自然に接続できます。</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="labs" class="section labs">
-      <div class="container">
-        <div class="center">
-          <p class="badge">登録後に選べる6つの研究室</p>
-          <h2 class="section-title">あなたの興味に合わせて、情報の入口を変える。</h2>
-          <p class="section-lead">初心者にはやさしく、経験者には具体的に。投稿テーマを分けることで、登録直後から「ここを見るだけでいい」がわかるLP体験にします。</p>
-        </div>
-        <div class="labs-grid">
-          <article class="lab-card" style="--accent:linear-gradient(90deg,#FF8A00,#F7C948)">
-            <div class="lab-head"><div class="lab-emoji">🚀</div><div><h3>Amazon輸出相乗り出品スタート研究室</h3><span class="route">SHiFT塾導線</span></div></div>
-            <h4>こんな人向け</h4><div class="chips"><span class="chip">Amazon輸出に興味</span><span class="chip">副業を探している</span><span class="chip">新規事業を検討</span></div>
-            <h4>投稿内容</h4><ul class="post-list"><li>Amazon輸出の基礎知識・輸出の手引き</li><li>売れている商品の考察</li><li>輸出成功事例・始めた人のストーリー</li><li>セミナー補足情報</li></ul>
-          </article>
-          <article class="lab-card" style="--accent:linear-gradient(90deg,#1064FF,#22C6F3)">
-            <div class="lab-head"><div class="lab-emoji">📦</div><div><h3>Amazon物流・FBA最前線</h3><span class="route">SLC導線</span></div></div>
-            <h4>こんな人向け</h4><div class="chips"><span class="chip">Amazon出品経験者</span><span class="chip">FBA利用者</span><span class="chip">物流コストが気になる</span></div>
-            <h4>投稿内容</h4><ul class="post-list"><li>FBA最新情報・納品ルール変更</li><li>通関ニュース・関税関連情報</li><li>物流コスト事例</li></ul>
-          </article>
-          <article class="lab-card" style="--accent:linear-gradient(90deg,#7C4DFF,#22C6F3)">
-            <div class="lab-head"><div class="lab-emoji">🔍</div><div><h3>越境ECリサーチ研究所</h3><span class="route">PROFiNDER導線</span></div></div>
-            <h4>こんな人向け</h4><div class="chips"><span class="chip">海外向け商品探し</span><span class="chip">市場調査に興味</span></div>
-            <h4>投稿内容</h4><ul class="post-list"><li>今アメリカで伸びている商品</li><li>カテゴリ分析・市場データ</li><li>リサーチノウハウ</li></ul>
-          </article>
-          <article class="lab-card" style="--accent:linear-gradient(90deg,#1CB978,#22C6F3)">
-            <div class="lab-head"><div class="lab-emoji">🌎</div><div><h3>自社ブランド海外展開ラボ</h3><span class="route">AmaNavi導線</span></div></div>
-            <h4>こんな人向け</h4><div class="chips"><span class="chip">メーカー</span><span class="chip">OEM事業者</span><span class="chip">ブランドオーナー</span></div>
-            <h4>投稿内容</h4><ul class="post-list"><li>海外進出事例・ブランド戦略</li><li>Amazon Brand Registry</li><li>越境EC成功事例・海外市場レポート</li></ul>
-          </article>
-          <article class="lab-card" style="--accent:linear-gradient(90deg,#FF4D8D,#FF8A00)">
-            <div class="lab-head"><div class="lab-emoji">🧪</div><div><h3>FDA・規制情報センター</h3><span class="route">FDA導線</span></div></div>
-            <h4>こんな人向け</h4><div class="chips"><span class="chip">食品事業者</span><span class="chip">コスメメーカー</span><span class="chip">サプリ事業者</span></div>
-            <h4>投稿内容</h4><ul class="post-list"><li>FDAニュース・アメリカ規制情報</li><li>成分規制・ラベル表示</li><li>審査事例</li></ul>
-          </article>
-          <article class="lab-card" style="--accent:linear-gradient(90deg,#071B3A,#1064FF)">
-            <div class="lab-head"><div class="lab-emoji">✈️</div><div><h3>越境物流インサイト</h3><span class="route">Allynair導線</span></div></div>
-            <h4>こんな人向け</h4><div class="chips"><span class="chip">越境発送している</span><span class="chip">海外配送コストが気になる</span></div>
-            <h4>投稿内容</h4><ul class="post-list"><li>DHL・FedEx情報・配送料動向</li><li>国別配送事情・越境物流ニュース</li><li>配送トラブル事例</li></ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="benefits" class="section benefits">
-      <div class="container center">
-        <p class="badge" style="background:rgba(255,255,255,.13);color:#fff">無料登録で得られるもの</p>
-        <h2 class="section-title">“読んで終わり”ではなく、判断と行動につながる。</h2>
-        <p class="section-lead">登録直後に価値を感じてもらうため、コミュニティ内で使えるコンテンツを見える化します。</p>
-        <div class="benefit-grid">
-          <div class="benefit-card"><span class="num">01</span><h3>輸出の手引き</h3><p>初心者が最初に読むべきAmazon輸出の基礎と手順。</p></div>
-          <div class="benefit-card"><span class="num">02</span><h3>売れ筋・市場考察</h3><p>米国市場で伸びる商品やカテゴリの観察メモ。</p></div>
-          <div class="benefit-card"><span class="num">03</span><h3>物流・規制ニュース</h3><p>FBA、通関、関税、FDA、配送トラブルまで横断的に把握。</p></div>
-          <div class="benefit-card"><span class="num">04</span><h3>相談・サービス導線</h3><p>必要に応じて専門サービスやスポット相談へ進める。</p></div>
-        </div>
-        <div style="margin-top:34px"><a class="btn btn-primary" href="#entry">無料で研究室に参加する</a></div>
-      </div>
-    </section>
-
-    <section id="journey" class="section journey">
-      <div class="container center">
-        <p class="badge">登録後の流れ</p>
-        <h2 class="section-title">1分で登録。3分で自分の入口が見つかる。</h2>
-        <div class="journey-grid">
-          <div class="step"><strong>1</strong><h3>興味カテゴリを選ぶ</h3><p>Amazon輸出、FBA、リサーチ、ブランド展開、FDA、物流から選択。</p></div>
-          <div class="step"><strong>2</strong><h3>スターター投稿へ移動</h3><p>あなた向けの基礎投稿・人気記事・最新ニュースを案内。</p></div>
-          <div class="step"><strong>3</strong><h3>事例とノウハウを読む</h3><p>商品考察、成功事例、ルール変更、コスト事例で判断材料を集める。</p></div>
-          <div class="step"><strong>4</strong><h3>必要なら専門導線へ</h3><p>塾、物流、リサーチ、ブランド、FDA、配送のサービスに自然接続。</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="spot" class="section spot">
-      <div class="container spot-box">
-        <div class="price-card">
-          <p class="badge">次の一手が必要な方へ</p>
-          <h2 class="section-title">情報収集のあと、必要な部分だけプロに相談。</h2>
-          <p>コミュニティで状況を整理したうえで、詰まったテーマだけ相談できます。LP上では「無料で学べる安心感」と「困ったら相談できる出口」を両方見せます。</p>
-          <div class="price">¥10,000〜<small> / 60分</small></div>
-          <a class="btn btn-primary" href="#entry">まずは無料登録して相談メニューを見る</a>
-        </div>
-        <div class="menu-list" aria-label="スポットサービス例">
-          <div>SHiFT塾説明会</div><div>SLC物流相談</div><div>PROFiNDERリサーチ相談</div><div>AmaNaviブランド相談</div><div>FDA規制確認</div><div>Allynair配送相談</div><div>利益計算レビュー</div><div>輸出書類確認</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section proof">
-      <div class="container operator-card">
-        <div class="photo-placeholder">代表写真・著書画像<br>認定バッジ・実績ロゴに差し替え</div>
-        <div>
-          <p class="badge">運営者の信頼証明</p>
-          <h2 class="section-title">海外販売を知るチームが、情報を整理して届けます。</h2>
-          <p>無料コミュニティは「誰が言っているか」が登録率を左右します。著書、支援実績、スポンサー、パートナー認定などをファーストビューとこのエリアで提示し、安心して登録できる状態を作ります。</p>
-          <div class="proof-list">
-            <div><span>📘</span><b>Amazon輸出に関する著書・教材実績</b></div>
-            <div><span>🏅</span><b>越境EC・海外販売支援の実務知見</b></div>
-            <div><span>🤝</span><b>SHiFT塾 / SLC / PROFiNDER / AmaNavi / FDA / Allynair へテーマ別に接続</b></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="entry" class="final">
-      <div class="container form-box">
-        <div>
-          <p class="badge">無料登録フォーム</p>
-          <h2 class="section-title">あなたに合う研究室から、海外販売を一歩進めましょう。</h2>
-          <div class="checklist">
-            <div><span class="check">✓</span>6つの研究室から興味カテゴリを選べる</div>
-            <div><span class="check">✓</span>輸出の手引き・成功事例・市場考察を受け取れる</div>
-            <div><span class="check">✓</span>FBA・物流・FDAなど最新情報を追える</div>
-            <div><span class="check">✓</span>必要に応じて専門サービスやスポット相談へ進める</div>
-          </div>
-        </div>
-        <form class="form" action="#" method="post">
-          <input type="text" name="name" placeholder="お名前" required>
-          <input type="email" name="email" placeholder="メールアドレス" required>
-          <select name="lab" required>
-            <option value="">興味のある研究室を選択</option>
-            <option>🚀 Amazon輸出相乗り出品スタート研究室</option>
-            <option>📦 Amazon物流・FBA最前線</option>
-            <option>🔍 越境ECリサーチ研究所</option>
-            <option>🌎 自社ブランド海外展開ラボ</option>
-            <option>🧪 FDA・規制情報センター</option>
-            <option>✈️ 越境物流インサイト</option>
-          </select>
-          <button class="btn btn-primary" type="submit">無料でコミュニティに参加する</button>
-          <p class="microcopy">※実装時はフォーム送信先、プライバシーポリシー、同意チェックを接続してください。</p>
-        </form>
-      </div>
-    </section>
   </main>
-
-  <footer>
-    <div class="container">© WorldShift Community LP Draft. Replace placeholder images and connect form before publishing.</div>
-  </footer>
 </body>
 </html>
-
