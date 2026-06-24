@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FDAは「取った後」が本番｜米国輸出ナビ</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy: #1a2a4a;
+    --orange: #e8632a;
+    --gold: #e8a020;
+    --teal: #3a9aa8;
+    --bg: #f0f2f7;
+    --white: #fff;
+    --border: #dde1e8;
+    --text: #222;
+    --text-sub: #666;
+  }
+
+  body {
+    font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.7;
+    padding: 40px 20px 80px;
+  }
+
+  .page-wrap {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* ===== PAGE HEADING ===== */
+  .page-heading {
+    border-left: 5px solid var(--navy);
+    padding-left: 14px;
+    margin-bottom: 6px;
+  }
+
+  .page-heading h1 {
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--navy);
+    line-height: 1.3;
+  }
+
+  .page-heading h1 em {
+    color: var(--orange);
+    font-style: normal;
+  }
+
+  .page-sub {
+    font-size: 13px;
+    color: var(--text-sub);
+    margin-bottom: 40px;
+    padding-left: 19px;
+  }
+
+  .page-sub em {
+    color: var(--orange);
+    font-style: normal;
+  }
+
+  /* ===== TIMELINE LAYOUT ===== */
+  .timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* Vertical line */
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 22px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, #c8d0dc 0%, var(--gold) 60%, var(--orange) 100%);
+    z-index: 0;
+  }
+
+  /* ===== PHASE BLOCK ===== */
+  .phase {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    margin-bottom: 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Step circle */
+  .step-circle {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 900;
+    flex-shrink: 0;
+    border: 3px solid var(--white);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    position: relative;
+    z-index: 2;
+  }
+
+  .step-circle.step-1 { background: #b0b8c8; color: #fff; }
+  .step-circle.step-2 { background: var(--gold); color: #fff; }
+  .step-circle.step-3 { background: var(--orange); color: #fff; }
+
+  .step-label {
+    margin-top: 50px;
+    font-size: 11px;
+    color: var(--text-sub);
+    text-align: center;
+    width: 46px;
+    flex-shrink: 0;
+    line-height: 1.4;
+    position: absolute;
+    left: 0;
+  }
+
+  .step-side {
+    width: 46px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .step-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-top: 4px;
+  }
+
+  .step-sub {
+    font-size: 10px;
+    color: #888;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  /* Section box */
+  .phase-box {
+    flex: 1;
+    background: var(--white);
+    border-radius: 10px;
+    padding: 20px 22px 22px;
+    border: 1.5px solid var(--border);
+  }
+
+  .phase-3 .phase-box {
+    background: #fff8f0;
+    border-color: #e8a020;
+  }
+
+  .phase-box-title {
+    display: inline-block;
+    background: var(--navy);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 18px;
+    border-radius: 6px;
+    margin-bottom: 18px;
+    letter-spacing: 0.05em;
+  }
+
+  .phase-3 .phase-box-title {
+    background: var(--orange);
+  }
+
+  /* Article cards grid */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+
+  .article-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+    transition: box-shadow 0.2s;
+    cursor: pointer;
+  }
+
+  .article-card:hover {
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+  }
+
+  .article-card.highlight {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 1.5px var(--teal);
+  }
+
+  .phase-3 .article-card {
+    background: #fff;
+    border-color: #e0c890;
+  }
+
+  /* Tag */
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    color: #fff;
+  }
+
+  .tag-junbi   { background: var(--gold); }
+  .tag-tetsuzuki { background: var(--teal); }
+  .tag-hyoji   { background: #7a9abf; }
+  .tag-2year   { background: var(--gold); }
+  .tag-mainen  { background: var(--gold); }
+  .tag-zuiji   { background: #c09040; }
+
+  .card-title {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 4px;
+    line-height: 1.4;
+  }
+
+  .card-desc {
+    font-size: 11px;
+    color: #777;
+    margin-bottom: 8px;
+    line-height: 1.45;
+  }
+
+  .card-link {
+    font-size: 12px;
+    color: var(--teal);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  /* ===== FOOTER LINE ===== */
+  .footer-line {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 10px;
+    padding-left: 70px;
+  }
+
+  .footer-circle {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .footer-text {
+    font-size: 13px;
+    color: var(--orange);
+    font-weight: 600;
+  }
+
+  /* ===== BACK LINK ===== */
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--teal);
+    font-size: 13px;
+    text-decoration: none;
+    margin-bottom: 30px;
+    font-weight: 600;
+  }
+
+  .back-link:hover { opacity: 0.7; }
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <a href="yushutsu_navi.html" class="back-link">← トップに戻る</a>
+
+  <div class="page-heading">
+    <h1>FDAは<em>「取った後」</em>が本番</h1>
+  </div>
+  <p class="page-sub">取って終わりではありません。更新・検証・法改正対応…が<em>一生つづく</em>。だから「止めない伴走」が要ります。</p>
+
+  <div class="timeline">
+
+    <!-- PHASE 1: 取る前 -->
+    <div class="phase phase-1">
+      <div class="step-side">
+        <div class="step-circle step-1">1</div>
+        <div class="step-name">取る前</div>
+        <div class="step-sub">準備</div>
+      </div>
+      <div class="phase-box">
+        <div class="phase-box-title">取る前の知識</div>
+        <div class="cards-grid">
+          <div class="article-card">
+            <span class="tag tag-junbi">準備</span>
+            <div class="card-title">そもそも輸出に何が必要？</div>
+            <div class="card-desc">必要かどうかの見極めの方を学ぶ</div>
+            <a href="#" class="card-link">読む →</a>
+          </div>
+          <div class="article-card highlight">
+            <span class="tag tag-junbi">準備</span>
+            <div class="card-title">なぜ米国内代理人が要る？</div>
+            <div class="card-desc">FDAとの連絡窓口の役割を知る</div>
+            <a href="#" class="card-link">読む →</a>
+          </div>
+          <div class="article-card">
+            <span class="tag tag-junbi">準備</span>
+            <div class="card-title">何に、いくらかかる？</div>
+            <div class="card-desc">仕組みとコストの考え方を学ぶ</div>
+            <a href="#" class="card-link">読む →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 2: 取得 -->
+    <div class="phase phase-2">
+      <div class="step-side">
+        <div class="step-circle step-2">2</div>
+        <div class="step-name">取得</div>
+        <div class="step-sub">登録・初<br>期対応</div>
+      </div>
+      <div class="phase-box">
+        <div class="phase-box-title">取得の知識</div>
+        <div class="cards-grid">
+          <div class="article-card">
+            <span class="tag tag-tetsuzuki">手続</span>
+            <div class="card-title">FDA施設登録とは？</div>
+            <div class="card-desc">売る前に必須の登録を理解する</div>
+            <a href="#" class="card-link">読む →</a>
+          </div>
+          <div class="article-card">
+            <span class="tag tag-tetsuzuki">手続</span>
+            <div class="card-title">事前通知（Prior Notice）とは？</div>
+            <div class="card-desc">貨物ごとの事前申告のしくみ</div>
+            <a href="#" class="card-link">読む →</a>
+          </div>
+          <div class="article-card">
+            <span class="tag tag-hyoji">表示</span>
+            <div class="card-title">米国式ラベルの作法とは？</div>
+            <div class="card-desc">表示の基本ルールを学ぶ</div>
+            <a href="#" class="card-link">読む →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 3: 取った後 -->
+    <div class="phase phase-3">
+      <div class="step-side">
+        <div class="step-circle step-3">3</div>
+        <div class="step-name">取った後</div>
+        <div class="step-sub">ここから<br>一生・本番</div>
+      </div>
+      <div class="phase-box">
+        <div class="phase-box-title">取った後の知識（ここが本番）</div>
+        <div class="cards-grid" style="margin-bottom:14px;">
+          <div class="article-card">
+            <span class="tag tag-2year">2年ごと</span>
+            <div class="card-title">なぜ2年ごとに更新が要る？</div>
+            <div class="card-desc">施設登録の更新を理解する</div>
+            <a href="#" class="card-link">読む →</a>
+          </div>
+          <div class="article-card">
+            <span class="tag tag-mainen">毎年</span>
+            <div class="card-title">FSVPはなぜ毎年見直す？</div>
+            <div class="card-desc">供給者検証の考え方を学ぶ</div>
+            <a href="#" class="card-link">読む →</a>
+          </div>
+          <div class="article-card">
+            <span class="tag tag-zuiji">随時</span>
+            <div class="card-title">法改正にどう追従する？</div>
+            <div class="card-desc">成分規制の変化の追い方を学ぶ</div>
+            <a href="#" class="card-link">読む →</a>
+          </div>
+        </div>
+        <div class="cards-grid">
+          <div class="article-card">
+            <span class="tag tag-zuiji">随時</span>
+            <div class="card-title">査察・指摘（483）とは？</div>
+            <div class="card-desc">何を見られるかを知る</div>
+            <a href="#" class="card-link">読む →</a>
+          </div>
+          <div class="article-card">
+            <span class="tag tag-zuiji">随時</span>
+            <div class="card-title">表示改定・新製品の追加とは？</div>
+            <div class="card-desc">追加時に必要な対応を学ぶ</div>
+            <a href="#" class="card-link">読む →</a>
+          </div>
+          <div class="article-card">
+            <span class="tag tag-zuiji">随時</span>
+            <div class="card-title">リコール・自主回収はどう動く？</div>
+            <div class="card-desc">問題発生時の流れを知る</div>
+            <a href="#" class="card-link">読む →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /timeline -->
+
+  <!-- Footer line -->
+  <div class="footer-line">
+    <div class="footer-circle">∞</div>
+    <div class="footer-text">ずっと続く ── だから「止めない伴走」を。</div>
+  </div>
+
+</div><!-- /page-wrap -->
+
+</body>
+</html>
