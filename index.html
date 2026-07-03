@@ -377,9 +377,24 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding
 .tm-foot-center{text-align:center;}
 .tm-foot-pos{font-size:10px;color:var(--muted);font-weight:600;display:block;}
 .tm-foot-name{font-size:12px;font-weight:800;color:var(--navy);margin-top:2px;display:block;}
+
+/* ===== GLOBAL MODE SWITCH (食品⇄化粧品) ===== */
+.mode-bar{background:#fff;border-bottom:1px solid var(--border);padding:14px 28px;}
+.mode-bar-in{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;}
+.mode-bar-label{font-size:12px;color:var(--sub);font-weight:700;letter-spacing:.02em;}
+.mode-tabs{display:inline-flex;background:#eef1f7;border-radius:999px;padding:4px;gap:2px;}
+.mode-tab{appearance:none;border:none;background:transparent;padding:11px 28px;border-radius:999px;font-size:13.5px;font-weight:800;font-family:inherit;color:var(--sub);cursor:pointer;transition:all .2s;white-space:nowrap;letter-spacing:.02em;}
+.mode-tab.on[data-mode="food"]{background:var(--teal);color:#fff;box-shadow:0 3px 12px rgba(46,150,165,.35);}
+.mode-tab.on[data-mode="cosme"]{background:#a84878;color:#fff;box-shadow:0 3px 12px rgba(168,72,120,.35);}
+.mode-tab:not(.on):hover{color:var(--navy);}
+
+/* 食品モード／化粧品モードでの一括出し分け */
+body.mode-food .cosme-only{display:none !important;}
+body.mode-cosme .food-only{display:none !important;}
+body.mode-cosme #ctabsBar{display:none;}
 </style>
 </head>
-<body>
+<body class="mode-food">
 
 <header class="hdr">
   <div class="hdr-in">
@@ -390,10 +405,23 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding
   </div>
 </header>
 
+<div class="mode-bar" id="modeBar">
+  <div class="mode-bar-in">
+    <span class="mode-bar-label">このサイトの見方を選択：</span>
+    <div class="mode-tabs">
+      <button type="button" class="mode-tab on" data-mode="food" onclick="setMode('food')">🍱 食品を輸出する</button>
+      <button type="button" class="mode-tab" data-mode="cosme" onclick="setMode('cosme')">✨ 化粧品を輸出する</button>
+    </div>
+  </div>
+</div>
+
 <section class="hero">
-  <div class="hero-eyebrow">🇺🇸 FOOD &amp; COSMETICS — US EXPORT GUIDE</div>
-  <h1>食品・化粧品を<br><em>アメリカに輸出する</em>専門サイト</h1>
-  <p class="hero-lead">FDA登録から販路開拓・物流・「取得後」の継続管理まで。<br><strong>迷わず動ける、一次情報で学べる。</strong>それがこのサイトです。</p>
+  <div class="hero-eyebrow food-only">🇺🇸 FOOD — US EXPORT GUIDE</div>
+  <div class="hero-eyebrow cosme-only">🇺🇸 COSMETICS — US EXPORT GUIDE</div>
+  <h1 class="food-only">食品を<br><em>アメリカに輸出する</em>専門サイト</h1>
+  <h1 class="cosme-only">化粧品を<br><em>アメリカに輸出する</em>専門サイト</h1>
+  <p class="hero-lead food-only">FDA食品施設登録から販路開拓・物流・「取得後」の継続管理まで。<br><strong>迷わず動ける、一次情報で学べる。</strong>それがこのサイトです。</p>
+  <p class="hero-lead cosme-only">MoCRA対応（施設登録・製品リスティング）から販路開拓・物流・「取得後」の継続管理まで。<br><strong>迷わず動ける、一次情報で学べる。</strong>それがこのサイトです。</p>
   <div class="hero-actions">
     <a href="#sp" class="btn-main">自社商品の対応を調べる →</a>
     <a href="#sf" class="btn-sub">輸出フローを確認する</a>
@@ -438,7 +466,8 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding
       <a href="fda_flow.html" class="flow-step fs2">
         <div class="flow-num">2</div>
         <div class="flow-lbl">取得</div>
-        <div class="flow-sub">施設登録・ラベル・<br>Prior Notice</div>
+        <div class="flow-sub food-only">施設登録・ラベル・<br>Prior Notice</div>
+        <div class="flow-sub cosme-only">施設登録・ラベル・<br>製品リスティング</div>
       </a>
       <div class="flow-arr">▶</div>
       <a href="fda_flow.html" class="flow-step fs3">
@@ -466,15 +495,15 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding
     </div>
     <div class="sres" id="sres"></div>
     <div id="cat">
-      <div class="ctabs">
-        <button class="ctab on" data-g="f">🍱 食品</button>
-        <button class="ctab" data-g="s">🍬 お菓子・スイーツ</button>
-        <button class="ctab" data-g="d">🍵 茶・飲料</button>
-        <button class="ctab" data-g="a">🍶 酒類</button>
-        <button class="ctab" data-g="h">💊 健康食品・サプリ</button>
-        <button class="ctab" data-g="c">✨ 化粧品・コスメ</button>
+      <div class="ctabs" id="ctabsBar">
+        <button class="ctab on food-only" data-g="f">🍱 食品</button>
+        <button class="ctab food-only" data-g="s">🍬 お菓子・スイーツ</button>
+        <button class="ctab food-only" data-g="d">🍵 茶・飲料</button>
+        <button class="ctab food-only" data-g="a">🍶 酒類</button>
+        <button class="ctab food-only" data-g="h">💊 健康食品・サプリ</button>
+        <button class="ctab cosme-only" data-g="c">✨ 化粧品・コスメ</button>
       </div>
-      <div class="cgroup on" data-g="f">
+      <div class="cgroup on food-only" data-g="f">
         <div class="pgrid">
           <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#c0a060,#a88040);"></div><div class="pbody"><span class="ptag tf">食品</span><div class="pname">調味料・ソース</div><div class="pdesc">醤油・味噌・たれ等。成分・栄養・アレルゲン表示の基本。</div><a href="#" class="plink">対応を調べる →</a></div></div>
           <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#8aaa88,#6a9068);"></div><div class="pbody"><span class="ptag tf">食品</span><div class="pname">だし・スープ類</div><div class="pdesc">原材料・アレルゲン表示と成分管理。</div><a href="#" class="plink">対応を調べる →</a></div></div>
@@ -486,7 +515,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding
           <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#b09068,#907048);"></div><div class="pbody"><span class="ptag tf">食品</span><div class="pname">麺類・ラーメン</div><div class="pdesc">原材料・添加物表示とスープの成分管理。</div><a href="#" class="plink">対応を調べる →</a></div></div>
         </div>
       </div>
-      <div class="cgroup" data-g="s">
+      <div class="cgroup food-only" data-g="s">
         <div class="pgrid">
           <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#c09860,#a07840);"></div><div class="pbody"><span class="ptag ts">菓子</span><div class="pname">スナック・せんべい</div><div class="pdesc">着色料・アレルゲン・栄養表示の対応。</div><a href="#" class="plink">対応を調べる →</a></div></div>
           <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#d08090,#b06070);"></div><div class="pbody"><span class="ptag ts">菓子</span><div class="pname">グミ・キャンディ</div><div class="pdesc">着色料・アレルゲン表示と成分基準が要。</div><a href="#" class="plink">対応を調べる →</a></div></div>
@@ -494,7 +523,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding
           <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#b0a890,#908870);"></div><div class="pbody"><span class="ptag ts">菓子</span><div class="pname">和菓子（餅・羊羹）</div><div class="pdesc">原材料・保存と表示。水分活性に注意。</div><a href="#" class="plink">対応を調べる →</a></div></div>
         </div>
       </div>
-      <div class="cgroup" data-g="d">
+      <div class="cgroup food-only" data-g="d">
         <div class="pgrid">
           <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#607848,#405830);"></div><div class="pbody"><span class="ptag td">飲料</span><div class="pname">お茶・抹茶</div><div class="pdesc">残留農薬基準と効能表現の線引きに注意。</div><a href="#" class="plink">対応を調べる →</a></div></div>
           <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#508040,#306020);"></div><div class="pbody"><span class="ptag td">飲料</span><div class="pname">日本茶・緑茶</div><div class="pdesc">茶葉の残留農薬・表示ルールを押さえる。</div><a href="#" class="plink">対応を調べる →</a></div></div>
@@ -504,7 +533,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding
           <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#90b8d0,#70a0c0);"></div><div class="pbody"><span class="ptag td">飲料</span><div class="pname">水・ミネラルウォーター</div><div class="pdesc">ボトル水のFDA基準・表示要件。</div><a href="#" class="plink">対応を調べる →</a></div></div>
         </div>
       </div>
-      <div class="cgroup" data-g="a">
+      <div class="cgroup food-only" data-g="a">
         <div class="pgrid">
           <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#c0b890,#a09870);"></div><div class="pbody"><span class="ptag ta">酒類</span><div class="pname">日本酒</div><div class="pdesc">TTB＋FDAの二重対応。ラベル承認も必須。</div><a href="#" class="plink">対応を調べる →</a></div></div>
           <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#d0c0a0,#b0a080);"></div><div class="pbody"><span class="ptag ta">酒類</span><div class="pname">焼酎・本格焼酎</div><div class="pdesc">蒸留酒の輸入許可とラベル承認（TTB）。</div><a href="#" class="plink">対応を調べる →</a></div></div>
@@ -514,13 +543,13 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding
           <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#904858,#703040);"></div><div class="pbody"><span class="ptag ta">酒類</span><div class="pname">ワイン</div><div class="pdesc">輸入許可・産地表示・ラベル（TTB）。</div><a href="#" class="plink">対応を調べる →</a></div></div>
         </div>
       </div>
-      <div class="cgroup" data-g="h">
+      <div class="cgroup food-only" data-g="h">
         <div class="pgrid">
           <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#88a870,#688050);"></div><div class="pbody"><span class="ptag th">健康食品</span><div class="pname">サプリ・健康食品</div><div class="pdesc">ダイエタリーサプリの表示・成分規制（DSHEA）。</div><a href="#" class="plink">対応を調べる →</a></div></div>
           <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#a0b890,#809870);"></div><div class="pbody"><span class="ptag th">健康食品</span><div class="pname">プロテイン・栄養補助食品</div><div class="pdesc">成分・含有量表示と健康クレームの規制。</div><a href="#" class="plink">対応を調べる →</a></div></div>
         </div>
       </div>
-      <div class="cgroup" data-g="c">
+      <div class="cgroup cosme-only" data-g="c">
         <div class="pgrid">
           <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#d0a0b0,#b08090);"></div><div class="pbody"><span class="ptag tc">化粧品</span><div class="pname">化粧品・コスメ全般</div><div class="pdesc">MoCRAの施設登録・成分開示・責任者の新ルール。</div><a href="#" class="plink">対応を調べる →</a></div></div>
           <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#e0b8b8,#c09898);"></div><div class="pbody"><span class="ptag tc">化粧品</span><div class="pname">スキンケア</div><div class="pdesc">成分規制と効能表現（化粧品vs医薬品）の境界線。</div><a href="#" class="plink">対応を調べる →</a></div></div>
@@ -540,12 +569,12 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding
       <a href="#" class="sec-more">すべて見る →</a>
     </div>
     <div class="topic-tabs">
-      <button class="topic-tab on" data-tg="food">🍱 食品 <span class="tab-count">9</span></button>
-      <button class="topic-tab" data-tg="cosme">✨ 化粧品 <span class="tab-count">8</span></button>
+      <button class="topic-tab on food-only" data-tg="food">🍱 食品 <span class="tab-count">9</span></button>
+      <button class="topic-tab cosme-only" data-tg="cosme">✨ 化粧品 <span class="tab-count">8</span></button>
       <button class="topic-tab" data-tg="general">⚖️ その他 <span class="tab-count">4</span></button>
     </div>
 
-    <div class="topic-cat on c-food" data-tg="food">
+    <div class="topic-cat on c-food food-only" data-tg="food">
       <div class="topic-grid">
         <a href="#" class="tcard">
           <div class="tcard-head"><div class="ticon">🏭</div><div><div class="tname">FDA食品施設登録</div><div class="tcount">5記事</div></div></div>
@@ -577,7 +606,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding
       </div>
     </div>
 
-    <div class="topic-cat c-cosme" data-tg="cosme">
+    <div class="topic-cat c-cosme cosme-only" data-tg="cosme">
       <div class="topic-grid">
         <a href="#" class="tcard">
           <div class="tcard-head"><div class="ticon">🏭</div><div><div class="tname">MoCRA施設登録</div><div class="tcount">6記事</div></div></div>
@@ -634,26 +663,28 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding
       <button class="wf on" data-wl="all">すべて</button>
       <button class="wf" data-wl="label">表示・ラベル</button>
       <button class="wf" data-wl="facility">施設登録</button>
-      <button class="wf" data-wl="haccp">HACCP/製造</button>
-      <button class="wf" data-wl="import">輸入拒否</button>
-      <button class="wf" data-wl="cosmetic">化粧品</button>
+      <button class="wf food-only" data-wl="haccp">HACCP/製造</button>
+      <button class="wf food-only" data-wl="import">輸入拒否</button>
+      <button class="wf cosme-only" data-wl="cosmetic">化粧品</button>
     </div>
     <div class="wl-list" id="wll">
-      <div class="wcard" data-wl="label"><div class="wmeta"><span class="wbadge bl">表示・ラベル</span><span class="wdate">2026.05</span></div><div class="wttl">栄養成分の単位誤記でWarning Letter——醤油メーカーが陥った落とし穴</div><div class="wdesc">ナトリウム含有量の単位（mg→g）を誤記。小さなミスが輸入停止につながった事例と再発防止策を解説。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-      <div class="wcard" data-wl="label"><div class="wmeta"><span class="wbadge bl">表示・ラベル</span><span class="wdate">2026.04</span></div><div class="wttl">「体に良い」の一言が薬効クレームと判定——緑茶飲料の警告事例</div><div class="wdesc">食品に医薬品的効能を示す文言を記載したとして指摘。食品と医薬品、どこで線が引かれるのかを整理。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-      <div class="wcard" data-wl="label"><div class="wmeta"><span class="wbadge bl">表示・ラベル</span><span class="wdate">2026.03</span></div><div class="wttl">アレルゲン（大豆）の表示漏れ——だし製品が輸入差し止めになった事例</div><div class="wdesc">FALCPAに基づく9大アレルゲン表示義務を見落とした典型例。チェックリストで確認を。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-      <div class="wcard" data-wl="facility"><div class="wmeta"><span class="wbadge bf">施設登録</span><span class="wdate">2026.04</span></div><div class="wttl">2年更新を忘れて全製品が輸入停止——施設登録期限を見落とした事例</div><div class="wdesc">偶数年10〜12月の更新期限を見落とし、全商品の輸入が止まった実例。管理体制の作り方も紹介。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
+      <div class="wcard food-only" data-wl="label"><div class="wmeta"><span class="wbadge bl">表示・ラベル</span><span class="wdate">2026.05</span></div><div class="wttl">栄養成分の単位誤記でWarning Letter——醤油メーカーが陥った落とし穴</div><div class="wdesc">ナトリウム含有量の単位（mg→g）を誤記。小さなミスが輸入停止につながった事例と再発防止策を解説。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
+      <div class="wcard food-only" data-wl="label"><div class="wmeta"><span class="wbadge bl">表示・ラベル</span><span class="wdate">2026.04</span></div><div class="wttl">「体に良い」の一言が薬効クレームと判定——緑茶飲料の警告事例</div><div class="wdesc">食品に医薬品的効能を示す文言を記載したとして指摘。食品と医薬品、どこで線が引かれるのかを整理。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
+      <div class="wcard food-only" data-wl="label"><div class="wmeta"><span class="wbadge bl">表示・ラベル</span><span class="wdate">2026.03</span></div><div class="wttl">アレルゲン（大豆）の表示漏れ——だし製品が輸入差し止めになった事例</div><div class="wdesc">FALCPAに基づく9大アレルゲン表示義務を見落とした典型例。チェックリストで確認を。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
+      <div class="wcard food-only" data-wl="facility"><div class="wmeta"><span class="wbadge bf">施設登録</span><span class="wdate">2026.04</span></div><div class="wttl">2年更新を忘れて全製品が輸入停止——施設登録期限を見落とした事例</div><div class="wdesc">偶数年10〜12月の更新期限を見落とし、全商品の輸入が止まった実例。管理体制の作り方も紹介。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
       <div class="wcard" data-wl="facility"><div class="wmeta"><span class="wbadge bf">施設登録</span><span class="wdate">2026.02</span></div><div class="wttl">US Agentが廃業、連絡不通でFDAから指摘——代理人管理の盲点</div><div class="wdesc">US Agentが廃業し連絡が取れない状態のまま輸入を続けた事例。代理人の選び方と管理方法を解説。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-      <div class="wcard" data-wl="haccp"><div class="wmeta"><span class="wbadge bh">HACCP/製造</span><span class="wdate">2026.03</span></div><div class="wttl">HACCP記録の不備でWarning Letter——「あるだけ」では不十分だった事例</div><div class="wdesc">ハザード分析と重要管理点（CCP）の記録が不完全として指摘。FSMA規則が要求する記録水準とは。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-      <div class="wcard" data-wl="haccp"><div class="wmeta"><span class="wbadge bh">HACCP/製造</span><span class="wdate">2025.12</span></div><div class="wttl">レトルト食品の殺菌記録なし——LACF規制違反の実例</div><div class="wdesc">FCE/SID登録と殺菌記録（プロセスファイリング）が未整備だった事例。低酸性食品の注意点を解説。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-      <div class="wcard" data-wl="haccp"><div class="wmeta"><span class="wbadge bh">HACCP/製造</span><span class="wdate">2025.11</span></div><div class="wttl">PCQI（予防的管理適格者）が不在のまま製造を継続——FSMAの人的要件</div><div class="wdesc">PCQIの指定と訓練記録がなかったことで指摘。誰がPCQIになれるのか、資格要件と実務対応を解説。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-      <div class="wcard" data-wl="import"><div class="wmeta"><span class="wbadge bi">輸入拒否</span><span class="wdate">2026.05</span></div><div class="wttl">Prior Notice未提出で全量廃棄——出港後に気づいても取り返しがつかない</div><div class="wdesc">出港前のPrior Notice提出を怠り、米国到着後に廃棄命令。提出タイミングと手順を再確認。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-      <div class="wcard" data-wl="import"><div class="wmeta"><span class="wbadge bi">輸入拒否</span><span class="wdate">2026.01</span></div><div class="wttl">FSVP記録が整備されず輸入者に警告——輸出側は「知らなかった」では済まない</div><div class="wdesc">米国輸入者がFSVP計画を未整備のまま輸入を続けたケース。輸入者の義務と日本側ができる支援策。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-      <div class="wcard" data-wl="import"><div class="wmeta"><span class="wbadge bi">輸入拒否</span><span class="wdate">2025.10</span></div><div class="wttl">残留農薬がEPA基準を超え緑茶が全ロット差し止め——事前検査の重要性</div><div class="wdesc">米国EPA基準を超えた農薬が検出されロット全量が差し止め。輸出前の残留農薬検査で防げた事例。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-      <div class="wcard" data-wl="cosmetic"><div class="wmeta"><span class="wbadge bc">化粧品</span><span class="wdate">2026.04</span></div><div class="wttl">MoCRA施設登録なしで化粧品輸入——新法対応漏れが招いた警告</div><div class="wdesc">2024年施行のMoCRA（化粧品規制近代化法）に基づく施設登録を行わず輸出を続けた事例。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-      <div class="wcard" data-wl="cosmetic"><div class="wmeta"><span class="wbadge bc">化粧品</span><span class="wdate">2026.02</span></div><div class="wttl">「シワを消す」がOTC医薬品クレームと判定——スキンケアの表現は慎重に</div><div class="wdesc">肌の再生・修復を謳う表現が医薬品クレームとされた事例。化粧品で使える表現・使えない表現を整理。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-      <div class="wcard" data-wl="cosmetic"><div class="wmeta"><span class="wbadge bc">化粧品</span><span class="wdate">2025.11</span></div><div class="wttl">未承認の色素添加物を使用——メイクアップ製品への警告</div><div class="wdesc">FDAの認可リストにない着色料を配合し指摘を受けた事例。化粧品向け色素添加物の許可制度を解説。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-      <div class="wcard" data-wl="label"><div class="wmeta"><span class="wbadge bl">表示・ラベル</span><span class="wdate">2025.09</span></div><div class="wttl">英語表示なしで差し止め——日本語ラベルのまま輸出した事例</div><div class="wdesc">米国向け製品に英語の成分・栄養表示がなく差し止め。最低限必要な英語表示の要件を整理。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
+      <div class="wcard food-only" data-wl="haccp"><div class="wmeta"><span class="wbadge bh">HACCP/製造</span><span class="wdate">2026.03</span></div><div class="wttl">HACCP記録の不備でWarning Letter——「あるだけ」では不十分だった事例</div><div class="wdesc">ハザード分析と重要管理点（CCP）の記録が不完全として指摘。FSMA規則が要求する記録水準とは。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
+      <div class="wcard food-only" data-wl="haccp"><div class="wmeta"><span class="wbadge bh">HACCP/製造</span><span class="wdate">2025.12</span></div><div class="wttl">レトルト食品の殺菌記録なし——LACF規制違反の実例</div><div class="wdesc">FCE/SID登録と殺菌記録（プロセスファイリング）が未整備だった事例。低酸性食品の注意点を解説。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
+      <div class="wcard food-only" data-wl="haccp"><div class="wmeta"><span class="wbadge bh">HACCP/製造</span><span class="wdate">2025.11</span></div><div class="wttl">PCQI（予防的管理適格者）が不在のまま製造を継続——FSMAの人的要件</div><div class="wdesc">PCQIの指定と訓練記録がなかったことで指摘。誰がPCQIになれるのか、資格要件と実務対応を解説。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
+      <div class="wcard food-only" data-wl="import"><div class="wmeta"><span class="wbadge bi">輸入拒否</span><span class="wdate">2026.05</span></div><div class="wttl">Prior Notice未提出で全量廃棄——出港後に気づいても取り返しがつかない</div><div class="wdesc">出港前のPrior Notice提出を怠り、米国到着後に廃棄命令。提出タイミングと手順を再確認。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
+      <div class="wcard food-only" data-wl="import"><div class="wmeta"><span class="wbadge bi">輸入拒否</span><span class="wdate">2026.01</span></div><div class="wttl">FSVP記録が整備されず輸入者に警告——輸出側は「知らなかった」では済まない</div><div class="wdesc">米国輸入者がFSVP計画を未整備のまま輸入を続けたケース。輸入者の義務と日本側ができる支援策。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
+      <div class="wcard food-only" data-wl="import"><div class="wmeta"><span class="wbadge bi">輸入拒否</span><span class="wdate">2025.10</span></div><div class="wttl">残留農薬がEPA基準を超え緑茶が全ロット差し止め——事前検査の重要性</div><div class="wdesc">米国EPA基準を超えた農薬が検出されロット全量が差し止め。輸出前の残留農薬検査で防げた事例。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
+      <div class="wcard cosme-only" data-wl="cosmetic"><div class="wmeta"><span class="wbadge bc">化粧品</span><span class="wdate">2026.04</span></div><div class="wttl">MoCRA施設登録なしで化粧品輸入——新法対応漏れが招いた警告</div><div class="wdesc">2024年施行のMoCRA（化粧品規制近代化法）に基づく施設登録を行わず輸出を続けた事例。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
+      <div class="wcard cosme-only" data-wl="cosmetic"><div class="wmeta"><span class="wbadge bc">化粧品</span><span class="wdate">2026.02</span></div><div class="wttl">「シワを消す」がOTC医薬品クレームと判定——スキンケアの表現は慎重に</div><div class="wdesc">肌の再生・修復を謳う表現が医薬品クレームとされた事例。化粧品で使える表現・使えない表現を整理。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
+      <div class="wcard cosme-only" data-wl="cosmetic"><div class="wmeta"><span class="wbadge bc">化粧品</span><span class="wdate">2025.11</span></div><div class="wttl">未承認の色素添加物を使用——メイクアップ製品への警告</div><div class="wdesc">FDAの認可リストにない着色料を配合し指摘を受けた事例。化粧品向け色素添加物の許可制度を解説。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
+      <div class="wcard cosme-only" data-wl="cosmetic"><div class="wmeta"><span class="wbadge bc">化粧品</span><span class="wdate">2026.03</span></div><div class="wttl">重篤な有害事象の報告が15営業日を超過——SAE報告義務違反の事例</div><div class="wdesc">MoCRAが定める重篤な有害事象（SAE）の15営業日以内報告義務に違反したとして指摘された事例。Responsible Personの報告体制の作り方を解説。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
+      <div class="wcard cosme-only" data-wl="cosmetic"><div class="wmeta"><span class="wbadge bc">化粧品</span><span class="wdate">2026.01</span></div><div class="wttl">安全性根拠（Safety Substantiation）記録が未整備——査察時に提出できず指摘</div><div class="wdesc">製品の安全性を裏付ける記録を求められた際に提出できなかった事例。日頃から保管すべき記録の範囲を整理。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
+      <div class="wcard food-only" data-wl="label"><div class="wmeta"><span class="wbadge bl">表示・ラベル</span><span class="wdate">2025.09</span></div><div class="wttl">英語表示なしで差し止め——日本語ラベルのまま輸出した事例</div><div class="wdesc">米国向け製品に英語の成分・栄養表示がなく差し止め。最低限必要な英語表示の要件を整理。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
       <div class="wcard" data-wl="facility"><div class="wmeta"><span class="wbadge bf">施設登録</span><span class="wdate">2025.08</span></div><div class="wttl">OEM工場が未登録のまま輸出——ブランド側の登録だけでは足りない</div><div class="wdesc">ブランド企業のみが登録し、製造委託先が未登録だった事例。OEM委託時に確認すべきチェックリスト付き。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
     </div>
     <button class="morebtn" id="wlbtn" onclick="tgWl()">もっと見る ↓</button>
@@ -667,16 +698,19 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding
     <div class="ai-av">🤖</div>
     <p class="ai-tx">FDA登録・MoCRA・輸出ラベル・表示規制について、専門特化したAIが24時間即答します。</p>
     <button class="ai-btn">無料で質問してみる</button>
-    <p class="ai-note">食品・化粧品の米国輸出に特化</p>
+    <p class="ai-note food-only">食品の米国輸出に特化</p>
+    <p class="ai-note cosme-only">化粧品の米国輸出に特化</p>
   </div>
   <div class="scard">
     <div class="news-hd">最新の規制情報<a href="#">すべて →</a></div>
     <a href="#" class="nitem"><div class="nthumb" style="background:linear-gradient(135deg,#7888b0,#5868a0);"></div><div><div class="ndate">2026.06.18</div><div class="nttl">FDA、合成着色料の段階的廃止を計画</div></div></a>
-    <a href="#" class="nitem"><div class="nthumb" style="background:linear-gradient(135deg,#a0b898,#809878);"></div><div><div class="ndate">2026.06.16</div><div class="nttl">乳幼児用食品の鉛、新たな指導値を公表</div></div></a>
-    <a href="#" class="nitem"><div class="nthumb" style="background:linear-gradient(135deg,#c0a860,#a08840);"></div><div><div class="ndate">2026.06.12</div><div class="nttl">食品トレーサビリティ規則（FSMA 204）の要点</div></div></a>
-    <a href="#" class="nitem"><div class="nthumb" style="background:linear-gradient(135deg,#9888a0,#786880);"></div><div><div class="ndate">2026.06.09</div><div class="nttl">「healthy」表示の新定義が発効へ</div></div></a>
-    <a href="#" class="nitem"><div class="nthumb" style="background:linear-gradient(135deg,#88a0b0,#688090);"></div><div><div class="ndate">2026.06.05</div><div class="nttl">前面表示（FOP）ラベル義務化の動向</div></div></a>
-    <a href="#" class="nitem"><div class="nthumb" style="background:linear-gradient(135deg,#b09878,#907858);"></div><div><div class="ndate">2026.06.02</div><div class="nttl">MoCRA：化粧品施設登録の経過措置が終了</div></div></a>
+    <a href="#" class="nitem food-only"><div class="nthumb" style="background:linear-gradient(135deg,#a0b898,#809878);"></div><div><div class="ndate">2026.06.16</div><div class="nttl">乳幼児用食品の鉛、新たな指導値を公表</div></div></a>
+    <a href="#" class="nitem food-only"><div class="nthumb" style="background:linear-gradient(135deg,#c0a860,#a08840);"></div><div><div class="ndate">2026.06.12</div><div class="nttl">食品トレーサビリティ規則（FSMA 204）の要点</div></div></a>
+    <a href="#" class="nitem food-only"><div class="nthumb" style="background:linear-gradient(135deg,#9888a0,#786880);"></div><div><div class="ndate">2026.06.09</div><div class="nttl">「healthy」表示の新定義が発効へ</div></div></a>
+    <a href="#" class="nitem food-only"><div class="nthumb" style="background:linear-gradient(135deg,#88a0b0,#688090);"></div><div><div class="ndate">2026.06.05</div><div class="nttl">前面表示（FOP）ラベル義務化の動向</div></div></a>
+    <a href="#" class="nitem cosme-only"><div class="nthumb" style="background:linear-gradient(135deg,#b09878,#907858);"></div><div><div class="ndate">2026.06.02</div><div class="nttl">MoCRA：化粧品施設登録の経過措置が終了</div></div></a>
+    <a href="#" class="nitem cosme-only"><div class="nthumb" style="background:linear-gradient(135deg,#c898b0,#a87890);"></div><div><div class="ndate">2026.02.11</div><div class="nttl">Cosmetics Direct更新、施設登録の隔年更新に対応</div></div></a>
+    <a href="#" class="nitem cosme-only"><div class="nthumb" style="background:linear-gradient(135deg,#d0a898,#b08878);"></div><div><div class="ndate">2026.05.04</div><div class="nttl">MoCRA記録開示ガイダンス案、査察対応の実務ポイント</div></div></a>
   </div>
   <div class="cta-box">
     <div class="cta-ttl">FDA対応を<br>プロに任せたい方へ</div>
@@ -783,7 +817,11 @@ qi.addEventListener('input',()=>{
   const q=qi.value.trim();
   if(!q){clrS();return;}
   cl.classList.add('on');ca.style.display='none';sr.classList.add('on');
-  const h=AP.filter(p=>p.n.includes(q)||p.d.includes(q)||p.l.includes(q));
+  const modeFood=document.body.classList.contains('mode-food');
+  const h=AP.filter(p=>{
+    const catOk=modeFood?p.t!=='tc':p.t==='tc';
+    return catOk&&(p.n.includes(q)||p.d.includes(q)||p.l.includes(q));
+  });
   sr.innerHTML=h.length
     ?h.map(p=>`<div class="pcard"><div class="pthumb" style="background:${p.bg};"></div><div class="pbody"><span class="ptag ${p.t}">${p.l}</span><div class="pname">${p.n}</div><div class="pdesc">${p.d}</div><a href="#" class="plink">対応を調べる →</a></div></div>`).join('')
     :`<div class="sempty">「${q}」に一致する商品が見つかりませんでした。</div>`;
@@ -802,17 +840,72 @@ document.querySelectorAll('.ctab').forEach(t=>{
 
 // WL
 const WL=6;let wo=false;
-function applyWl(tag){document.querySelectorAll('.wcard').forEach(c=>{c.classList.toggle('hide',tag!=='all'&&c.dataset.wl!==tag);});wo=false;collapseWl();upBtn();}
+function modeOK(el){
+  if(document.body.classList.contains('mode-food')&&el.classList.contains('cosme-only'))return false;
+  if(document.body.classList.contains('mode-cosme')&&el.classList.contains('food-only'))return false;
+  return true;
+}
+function applyWl(tag){
+  document.querySelectorAll('.wcard').forEach(c=>{
+    const match=(tag==='all'||c.dataset.wl===tag)&&modeOK(c);
+    c.classList.toggle('hide',!match);
+  });
+  wo=false;collapseWl();upBtn();
+}
 function collapseWl(){let n=0;document.querySelectorAll('.wcard:not(.hide)').forEach(c=>{n++;if(n>WL)c.classList.add('hide');});}
-function upBtn(){document.getElementById('wlbtn').textContent=wo?'折りたたむ ↑':'もっと見る ↓';}
+function upBtn(){
+  const tag=document.querySelector('.wf.on').dataset.wl;
+  const total=[...document.querySelectorAll('.wcard')].filter(c=>(tag==='all'||c.dataset.wl===tag)&&modeOK(c)).length;
+  const btn=document.getElementById('wlbtn');
+  if(total<=WL){btn.style.display='none';}
+  else{btn.style.display='';btn.textContent=wo?'折りたたむ ↑':'もっと見る ↓';}
+}
 function tgWl(){
   wo=!wo;
   const tag=document.querySelector('.wf.on').dataset.wl;
-  document.querySelectorAll('.wcard').forEach(c=>{const m=tag==='all'||c.dataset.wl===tag;if(m)c.classList.remove('hide');});
+  document.querySelectorAll('.wcard').forEach(c=>{const m=(tag==='all'||c.dataset.wl===tag)&&modeOK(c);if(m)c.classList.remove('hide');});
   if(!wo)collapseWl();upBtn();
 }
 document.querySelectorAll('.wf').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.wf').forEach(x=>x.classList.remove('on'));b.classList.add('on');applyWl(b.dataset.wl);});});
 applyWl('all');
+
+// ===== GLOBAL MODE SWITCH =====
+function setMode(mode){
+  if(document.body.classList.contains('mode-'+mode))return;
+  document.body.classList.remove('mode-food','mode-cosme');
+  document.body.classList.add('mode-'+mode);
+  document.querySelectorAll('.mode-tab').forEach(b=>b.classList.toggle('on',b.dataset.mode===mode));
+
+  // 商品検索：無関係なカテゴリタブがONのままなら既定タブへ
+  const ctabOn=document.querySelector('.ctab.on');
+  if(ctabOn){
+    const validNow=(mode==='cosme')?ctabOn.dataset.g==='c':ctabOn.dataset.g!=='c';
+    if(!validNow){
+      const fallback=document.querySelector(`.ctab[data-g="${mode==='cosme'?'c':'f'}"]`);
+      if(fallback)fallback.click();
+    }
+  }
+  if(qi.value.trim())qi.dispatchEvent(new Event('input'));else clrS();
+
+  // テーマ別に学ぶ：無関係なタブがONのままなら既定タブへ
+  const topicOn=document.querySelector('.topic-tab.on');
+  if(topicOn&&(topicOn.dataset.tg==='food'||topicOn.dataset.tg==='cosme')){
+    const validNow=topicOn.dataset.tg===mode;
+    if(!validNow){
+      const fallback=document.querySelector(`.topic-tab[data-tg="${mode}"]`);
+      if(fallback)fallback.click();
+    }
+  }
+
+  // Warning Letter：無関係なフィルターがONのままなら「すべて」へ
+  const wfOn=document.querySelector('.wf.on');
+  const hiddenTags=mode==='cosme'?['haccp','import']:['cosmetic'];
+  if(wfOn&&hiddenTags.includes(wfOn.dataset.wl)){
+    document.querySelector('.wf[data-wl="all"]').click();
+  }else{
+    applyWl(wfOn.dataset.wl);
+  }
+}
 
 // QA SCROLL
 const SECS=['sf','sp','st','sw'];
