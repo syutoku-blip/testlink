@@ -1,1144 +1,553 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>米国輸出ナビ｜食品・化粧品 FDA対応から米国販売まで</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
-:root{
-  --navy:#1a2a4a;
-  --navy-mid:#243660;
-  --orange:#e8632a;
-  --orange-lt:#fff3ee;
-  --teal:#2e96a5;
-  --teal-lt:#e8f6f8;
-  --gold:#c9962a;
-  --gold-lt:#fdf6e8;
-  --text:#18202e;
-  --sub:#4e5a6e;
-  --muted:#8a95a8;
-  --bg:#f0f3f8;
-  --card:#fff;
-  --border:#d8dfec;
-  --border-lt:#ecf0f7;
-  --sh:0 2px 16px rgba(26,42,74,.09);
-  --sh-hv:0 6px 24px rgba(26,42,74,.14);
-}
-body{font-family:"Noto Sans JP","Hiragino Sans","Yu Gothic",sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.8;transition:background-color 0.5s ease;}
-body.sec-flow   {background-color:#eef3fa;}
-body.sec-product{background-color:#edf5f0;}
-body.sec-topic-food   {background-color:#fdf8e8;}
-body.sec-topic-cosme  {background-color:#f5eaf4;}
-body.sec-topic-general{background-color:#eeeef8;}
-body.sec-warning{background-color:#fdf2ee;}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WorldShift Trade Watch - 編集可能プロトタイプ</title>
+  <style>
+    :root{
+      --navy:#0b326d;
+      --blue:#1454a0;
+      --light:#f5f8fc;
+      --line:#dce5f0;
+      --text:#15243b;
+      --muted:#65748b;
+      --white:#fff;
+      --radius:16px;
+      --shadow:0 10px 30px rgba(8,44,95,.08);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;
+      color:var(--text);
+      background:#eef3f9;
+    }
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+    button,input{font:inherit}
 
-/* ===== HEADER ===== */
-.hdr{background:linear-gradient(90deg,#111e38 0%,#1a2a4a 100%);position:sticky;top:0;z-index:300;border-bottom:1px solid rgba(255,255,255,.07);box-shadow:0 2px 16px rgba(0,0,0,.35);}
-.hdr-in{max-width:1100px;margin:0 auto;padding:0 28px;display:flex;align-items:center;height:52px;gap:0;}
-.hdr-logo{color:#fff;font-size:15px;font-weight:900;letter-spacing:.02em;text-decoration:none;flex-shrink:0;display:flex;align-items:center;gap:8px;}
-.hdr-logo-mark{background:var(--gold);color:var(--navy);font-size:10px;font-weight:900;padding:3px 9px;border-radius:5px;letter-spacing:.06em;}
-.hdr-right{margin-left:auto;flex-shrink:0;}
-.hdr-cta{background:var(--orange);color:#fff;font-size:11px;font-weight:800;padding:8px 20px;border-radius:7px;text-decoration:none;letter-spacing:.03em;transition:all .18s;box-shadow:0 2px 10px rgba(232,99,42,.4);}
-.hdr-cta:hover{background:#d45520;box-shadow:0 4px 16px rgba(232,99,42,.5);}
+    .editorbar{
+      position:sticky;top:0;z-index:9999;
+      display:flex;flex-wrap:wrap;gap:8px;align-items:center;
+      padding:10px 16px;background:#061c40;color:#fff;
+      box-shadow:0 6px 20px rgba(0,0,0,.18);
+    }
+    .editorbar strong{margin-right:8px}
+    .editorbar button,.editorbar label{
+      border:1px solid rgba(255,255,255,.2);
+      background:#fff;color:#0b326d;padding:8px 12px;border-radius:9px;
+      cursor:pointer;font-weight:700;
+    }
+    .editorbar button:hover,.editorbar label:hover{background:#dfeaff}
+    .editorbar .danger{background:#ffeded;color:#a11}
+    .editorbar .hint{font-size:12px;opacity:.78;margin-left:auto}
 
-/* ===== STICKY QA CARDS ===== */
-.qa-sticky{position:sticky;top:52px;z-index:200;background:var(--bg);border-bottom:1px solid var(--border);padding:12px 28px;box-shadow:0 3px 12px rgba(26,42,74,.08);}
-.qa-sticky-in{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
-.qa-card{background:var(--card);border-radius:10px;border:1.5px solid var(--border);padding:12px 14px;display:flex;align-items:center;gap:10px;text-decoration:none;transition:all .2s;position:relative;overflow:hidden;}
-.qa-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2.5px;opacity:0;transition:opacity .2s;}
-.qa-card:nth-child(1)::before{background:linear-gradient(90deg,#5a8fc8,#78aae0);}
-.qa-card:nth-child(2)::before{background:linear-gradient(90deg,#3a9870,#58b888);}
-.qa-card:nth-child(3)::before{background:linear-gradient(90deg,#c8a020,#e8c040);}
-.qa-card:nth-child(4)::before{background:linear-gradient(90deg,#c05828,#e07848);}
-.qa-card:hover{box-shadow:var(--sh-hv);transform:translateY(-2px);border-color:transparent;}
-.qa-card:hover::before{opacity:1;}
-.qa-card.active{border-color:transparent;box-shadow:var(--sh);}
-.qa-card:nth-child(1).active{border-color:rgba(90,143,200,.35);background:#deeaf8;}
-.qa-card:nth-child(2).active{border-color:rgba(58,152,112,.3);background:#daf0e6;}
-.qa-card:nth-child(3).active{border-color:rgba(200,160,32,.35);background:#fdf4cc;}
-.qa-card:nth-child(4).active{border-color:rgba(192,88,40,.3);background:#fde8e0;}
-.qa-card:nth-child(1).active::before,.qa-card:nth-child(2).active::before,.qa-card:nth-child(3).active::before,.qa-card:nth-child(4).active::before{opacity:1;}
-.qa-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
-.qa-card:nth-child(1) .qa-icon{background:#e0ecf8;}
-.qa-card:nth-child(2) .qa-icon{background:#ddf0e8;}
-.qa-card:nth-child(3) .qa-icon{background:#fdf0b0;}
-.qa-card:nth-child(4) .qa-icon{background:#fde8e0;}
-.qa-card.active:nth-child(1) .qa-icon{background:rgba(90,143,200,.15);}
-.qa-card.active:nth-child(2) .qa-icon{background:rgba(58,152,112,.12);}
-.qa-card.active:nth-child(3) .qa-icon{background:rgba(200,160,32,.15);}
-.qa-card.active:nth-child(4) .qa-icon{background:rgba(192,88,40,.12);}
-.qa-body{flex:1;min-width:0;}
-.qa-ttl{font-size:12px;font-weight:800;color:var(--navy);margin-bottom:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.qa-arr{font-size:10px;font-weight:700;}
-.qa-card:nth-child(1) .qa-arr{color:#5a8fc8;}
-.qa-card:nth-child(2) .qa-arr{color:#3a9870;}
-.qa-card:nth-child(3) .qa-arr{color:#b08000;}
-.qa-card:nth-child(4) .qa-arr{color:#c05828;}
+    .site{
+      width:min(1440px,100%);
+      margin:0 auto;
+      background:#fff;
+      min-height:100vh;
+    }
+    .topline{
+      padding:8px 28px;
+      font-size:13px;color:#41516b;
+      border-bottom:1px solid var(--line);
+    }
+    header{
+      display:grid;grid-template-columns:260px 1fr 390px;
+      align-items:center;gap:18px;padding:18px 28px;
+      border-bottom:1px solid var(--line);
+      background:#fff;
+    }
+    .brand{
+      display:flex;align-items:center;gap:12px;font-weight:800;color:var(--navy);
+      font-size:24px;line-height:1;
+    }
+    .brand-mark{
+      width:44px;height:44px;border-radius:10px;
+      background:linear-gradient(135deg,#0a2f6c,#2f70c8);
+      display:grid;place-items:center;color:#fff;font-weight:900;
+    }
+    .search{
+      border:1px solid var(--line);border-radius:10px;padding:12px 14px;color:#7c8799;
+    }
+    .header-actions{display:flex;gap:10px;justify-content:flex-end}
+    .btn{
+      padding:11px 16px;border-radius:9px;border:1px solid var(--line);
+      background:#fff;font-weight:700;cursor:pointer;
+    }
+    .btn.primary{background:var(--navy);color:#fff;border-color:var(--navy)}
 
-/* ===== HERO ===== */
-.hero{background:linear-gradient(150deg,#0a1628 0%,#152038 40%,#1c2e50 70%,#1e3358 100%);padding:72px 28px 64px;text-align:center;position:relative;overflow:hidden;}
-.hero::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 30% 50%,rgba(46,150,165,.08) 0%,transparent 60%),radial-gradient(ellipse at 80% 30%,rgba(201,150,42,.06) 0%,transparent 50%);}
-.hero::after{content:"";position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);width:150%;height:120px;background:var(--bg);border-radius:50%;}
-.hero-eyebrow{position:relative;z-index:1;display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.85);font-size:11px;font-weight:700;letter-spacing:.14em;padding:6px 16px;border-radius:30px;margin-bottom:24px;}
-.hero h1{position:relative;z-index:1;color:#fff;font-size:38px;font-weight:900;line-height:1.22;margin-bottom:16px;letter-spacing:-.02em;}
-.hero h1 em{color:var(--gold);font-style:normal;position:relative;}
-.hero-lead{position:relative;z-index:1;color:rgba(255,255,255,.62);font-size:14px;margin-bottom:36px;line-height:1.8;}
-.hero-lead strong{color:rgba(255,255,255,.9);font-weight:700;}
-.hero-actions{position:relative;z-index:1;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
-.btn-main{background:var(--orange);color:#fff;font-size:14px;font-weight:800;padding:14px 32px;border-radius:9px;text-decoration:none;box-shadow:0 4px 20px rgba(232,99,42,.4);transition:all .18s;letter-spacing:.02em;}
-.btn-main:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(232,99,42,.5);}
-.btn-sub{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.3);color:#fff;font-size:14px;font-weight:600;padding:14px 28px;border-radius:9px;text-decoration:none;transition:all .18s;}
-.btn-sub:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5);}
+    nav{
+      display:flex;gap:26px;align-items:center;
+      padding:0 28px;height:56px;border-bottom:1px solid var(--line);
+      overflow:auto;white-space:nowrap;font-weight:700;font-size:14px;
+    }
 
-/* ===== PAGE LAYOUT ===== */
-.page-body{max-width:1100px;margin:0 auto;padding:40px 28px 100px;display:grid;grid-template-columns:1fr 210px;gap:32px;align-items:start;}
-.side-col{display:flex;flex-direction:column;gap:18px;position:sticky;top:120px;}
+    .section{padding:28px}
+    .section-title-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+    .section-title{font-size:24px;margin:0;color:#0d2a59}
+    .more{font-size:13px;color:#3568aa;font-weight:700}
 
-/* ===== SECTION ===== */
-.sec{margin-bottom:52px;}
-.sec-head{display:flex;align-items:center;gap:12px;margin-bottom:8px;}
-.sec-ttl{font-size:18px;font-weight:900;color:var(--navy);display:flex;align-items:center;gap:10px;}
-.sec-ttl::before{content:"";display:block;width:5px;height:22px;background:linear-gradient(to bottom,var(--orange),#f07840);border-radius:3px;flex-shrink:0;}
-.sec-more{font-size:11px;color:var(--teal);text-decoration:none;margin-left:auto;font-weight:700;padding:4px 10px;border-radius:5px;border:1px solid var(--teal);transition:all .15s;}
-.sec-more:hover{background:var(--teal);color:#fff;}
-.sec-desc{font-size:13px;color:var(--sub);margin:0 0 20px 15px;line-height:1.75;}
+    .hero{
+      display:grid;grid-template-columns:2fr 1fr;min-height:430px;
+      background:#082b63;color:#fff;
+    }
+    .hero-main{
+      position:relative;overflow:hidden;padding:64px 48px;
+      background:
+        linear-gradient(90deg,rgba(5,28,68,.92),rgba(5,28,68,.28)),
+        url("https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=1800&q=85") center/cover;
+    }
+    .hero-main h1{font-size:42px;line-height:1.35;margin:0 0 18px;max-width:720px}
+    .hero-main p{font-size:18px;line-height:1.8;max-width:620px}
+    .hero-main .btn{margin-top:22px;background:#fff;color:var(--navy)}
+    .hero-side{padding:30px 26px;background:linear-gradient(180deg,#062455,#0a346f)}
+    .hero-side h2{font-size:20px;margin-top:0}
+    .news-mini{padding:17px 0;border-top:1px solid rgba(255,255,255,.2)}
+    .news-mini .date{font-size:12px;opacity:.7}
+    .tag{display:inline-block;padding:3px 8px;border-radius:99px;background:#3972ba;color:#fff;font-size:11px;margin-left:7px}
+    .news-mini h3{font-size:15px;line-height:1.55;margin:7px 0 0}
 
-/* ===== FLOW ===== */
-.flow-wrap{background:linear-gradient(135deg,#edf2fa 0%,#f8f2e8 100%);border:1.5px solid var(--border);border-radius:14px;padding:24px 22px;display:flex;align-items:stretch;gap:10px;}
-.flow-step{flex:1;background:var(--card);border-radius:11px;border:2px solid transparent;padding:20px 14px;text-align:center;text-decoration:none;transition:all .2s;position:relative;}
-.flow-step:hover{transform:translateY(-3px);box-shadow:var(--sh-hv);}
-.fs1{border-color:#b8c6d8;}.fs2{border-color:var(--gold);}.fs3{border-color:var(--orange);background:linear-gradient(to bottom,#fffaf7,#fff);}
-.flow-num{width:34px;height:34px;border-radius:50%;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff;}
-.fs1 .flow-num{background:linear-gradient(135deg,#8899b4,#7080a0);}
-.fs2 .flow-num{background:linear-gradient(135deg,#d4a44c,#c08828);}
-.fs3 .flow-num{background:linear-gradient(135deg,var(--orange),#d45520);}
-.flow-lbl{font-size:14px;font-weight:800;color:var(--navy);margin-bottom:4px;}
-.flow-sub{font-size:10px;color:var(--muted);line-height:1.5;}
-.flow-badge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);font-size:9px;font-weight:700;white-space:nowrap;padding:2px 8px;border-radius:0 0 6px 6px;color:#fff;}
-.fs3 .flow-badge{background:var(--orange);}
-.flow-arr{display:flex;align-items:center;font-size:20px;color:#c8d2e0;flex-shrink:0;padding:0 2px;}
-.flow-footer{display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:1px solid var(--border-lt);}
-.flow-hint{font-size:11px;color:var(--muted);}
-.flow-link a{font-size:12px;color:var(--teal);text-decoration:none;font-weight:700;padding:5px 12px;border:1px solid var(--teal);border-radius:6px;transition:all .15s;}
-.flow-link a:hover{background:var(--teal);color:#fff;}
+    .quicknav{
+      display:grid;grid-template-columns:repeat(6,1fr);gap:10px;padding:16px 20px;border-bottom:1px solid var(--line);
+    }
+    .quicknav .item{
+      text-align:center;padding:14px 10px;border:1px solid var(--line);border-radius:10px;
+      font-weight:700;color:#285796;background:#fff;
+    }
 
-/* ===== PRODUCT ===== */
-.psearch-wrap{position:relative;margin-bottom:16px;}
-.psearch{display:flex;align-items:center;gap:10px;background:var(--card);border:2px solid var(--border);border-radius:10px;padding:11px 16px;transition:border-color .18s;box-shadow:var(--sh);}
-.psearch:focus-within{border-color:var(--teal);box-shadow:0 0 0 3px rgba(46,150,165,.12);}
-.psearch-icon{font-size:15px;color:var(--muted);}
-.psearch input{flex:1;border:none;outline:none;font-size:13px;font-family:inherit;color:var(--text);background:transparent;}
-.psearch input::placeholder{color:#b4bcc8;}
-.pclr{background:none;border:none;color:#b4bcc8;font-size:14px;cursor:pointer;padding:2px;display:none;transition:color .15s;}
-.pclr:hover{color:var(--sub);}
-.pclr.on{display:block;}
-.sres{display:none;margin-bottom:16px;}
-.sres.on{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
-.sempty{grid-column:1/-1;text-align:center;color:var(--muted);font-size:13px;padding:32px 0;}
-.ctabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
-.ctab{padding:7px 15px;border-radius:30px;border:1.5px solid var(--border);background:var(--card);font-size:12px;font-weight:700;color:var(--sub);cursor:pointer;font-family:inherit;transition:all .18s;white-space:nowrap;letter-spacing:.02em;}
-.ctab:hover{border-color:var(--teal);color:var(--teal);background:var(--teal-lt);}
-.ctab.on{background:var(--navy);border-color:var(--navy);color:#fff;box-shadow:0 2px 8px rgba(26,42,74,.2);}
-.cgroup{display:none;}.cgroup.on{display:block;}
-.cnote-wrap{display:flex;align-items:center;gap:8px;margin-bottom:16px;padding:10px 14px;background:var(--teal-lt);border-radius:8px;border-left:3px solid var(--teal);}
-.cnote{font-size:11px;color:var(--teal);font-weight:700;}
-.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
-.pcard{background:var(--card);border-radius:10px;border:1.5px solid var(--border);overflow:hidden;transition:all .2s;cursor:pointer;}
-.pcard:hover{box-shadow:var(--sh-hv);transform:translateY(-2px);border-color:var(--border-lt);}
-.pthumb{width:100%;height:80px;display:block;}
-.pbody{padding:12px 13px 14px;}
-.ptag{display:inline-block;color:#fff;font-size:9px;font-weight:800;padding:2px 7px;border-radius:4px;margin-bottom:6px;letter-spacing:.04em;}
-.tf{background:var(--teal);}.ts{background:#c07030;}.td{background:#2a8870;}
-.ta{background:#6858a8;}.th{background:#488830;}.tc{background:#a84878;}
-.pname{font-size:12px;font-weight:800;color:var(--navy);margin-bottom:4px;line-height:1.4;}
-.pdesc{font-size:10px;color:var(--sub);line-height:1.55;margin-bottom:8px;}
-.plink{font-size:11px;color:var(--teal);font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:3px;}
+    .category-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+    .category{
+      border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;
+      min-height:310px;box-shadow:0 4px 16px rgba(0,0,0,.03);
+    }
+    .category-head{padding:18px;color:#fff;font-weight:800;font-size:17px}
+    .c1{background:#1495a6}.c2{background:#ec8f27}.c3{background:#8d5aa9}
+    .c4{background:#d55a67}.c5{background:#d99d2d}.c6{background:#5d79a8}
+    .category ul{margin:16px 20px 10px;padding-left:18px;line-height:1.9;font-size:14px}
+    .category .btn{margin:12px 18px 18px;width:calc(100% - 36px)}
 
-/* ===== TOPICS ===== */
-.topic-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;}
-.topic-tab{display:flex;align-items:center;gap:6px;padding:8px 16px;border-radius:30px;border:1.5px solid var(--border);background:var(--card);font-size:12px;font-weight:700;color:var(--sub);cursor:pointer;font-family:inherit;transition:all .18s;white-space:nowrap;}
-.topic-tab:hover{border-color:var(--teal);color:var(--teal);background:var(--teal-lt);}
-.topic-tab.on{background:var(--navy);border-color:var(--navy);color:#fff;box-shadow:0 2px 8px rgba(26,42,74,.2);}
-.topic-tab .tab-count{background:rgba(255,255,255,.22);color:inherit;font-size:9px;font-weight:800;padding:1px 6px;border-radius:10px;}
-.topic-tab:not(.on) .tab-count{background:var(--border);color:var(--muted);}
-.topic-cat{display:none;}.topic-cat.on{display:block;}
-.topic-cat-hd{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:10px;margin-bottom:16px;}
-.topic-cat-hd.c-food{background:linear-gradient(135deg,#e8f6f8,#d8eef2);border-left:4px solid var(--teal);}
-.topic-cat-hd.c-cosme{background:linear-gradient(135deg,#fce8f4,#f4d8ec);border-left:4px solid #a84878;}
-.topic-cat-hd.c-general{background:linear-gradient(135deg,#f0edf8,#e4dff4);border-left:4px solid #6858a8;}
-.topic-cat-icon{font-size:22px;}
-.topic-cat-ttl{font-size:14px;font-weight:900;color:var(--navy);}
-.topic-cat-desc{font-size:11px;color:var(--sub);margin-top:2px;}
-.topic-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
-.tcard{background:var(--card);border:1.5px solid var(--border);border-radius:12px;overflow:hidden;text-decoration:none;transition:all .2s;display:flex;flex-direction:column;cursor:pointer;}
-.tcard:hover{box-shadow:var(--sh-hv);transform:translateY(-3px);border-color:transparent;}
-.tcard-head{padding:16px 16px 12px;border-bottom:1px solid var(--border-lt);display:flex;align-items:flex-start;gap:10px;}
-.ticon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;}
-.c-food .ticon{background:var(--teal-lt);}.c-cosme .ticon{background:#fce8f4;}.c-general .ticon{background:#f0edf8;}
-.tname{font-size:13px;font-weight:900;color:var(--navy);margin-bottom:3px;line-height:1.35;}
-.tcount{font-size:10px;color:var(--muted);font-weight:600;}
-.tcard-subs{padding:12px 16px 14px;flex:1;}
-.tsub-list{display:flex;flex-wrap:wrap;gap:5px;}
-.tsub{font-size:10px;color:var(--sub);background:var(--bg);border:1px solid var(--border-lt);padding:3px 8px;border-radius:4px;line-height:1.4;transition:all .15s;cursor:pointer;}
-.tsub:hover{background:var(--teal-lt);border-color:var(--teal);color:var(--teal);}
-.c-cosme .tsub:hover{background:#fce8f4;border-color:#a84878;color:#a84878;}
-.c-general .tsub:hover{background:#f0edf8;border-color:#6858a8;color:#6858a8;}
-.tcard:hover .tsub{background:#f5f7fc;}
-.tcard-foot{display:none;}
-.tcard-link{font-size:11px;font-weight:700;display:inline-flex;align-items:center;gap:4px;}
-.c-food .tcard-link{color:var(--teal);}.c-cosme .tcard-link{color:#a84878;}.c-general .tcard-link{color:#6858a8;}
+    .content-grid{display:grid;grid-template-columns:280px 1fr 300px;gap:24px}
+    .panel{
+      border:1px solid var(--line);border-radius:14px;background:#fff;padding:18px;box-shadow:var(--shadow);
+      margin-bottom:18px;
+    }
+    .panel h3{margin:0 0 14px;color:#0d2a59}
+    .keywords{display:flex;flex-wrap:wrap;gap:8px}
+    .keyword{padding:6px 9px;border:1px solid var(--line);border-radius:99px;font-size:12px;background:#f8fbff}
+    .consult{
+      color:#fff;
+      background:
+        linear-gradient(rgba(7,42,96,.82),rgba(7,42,96,.82)),
+        url("https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=80") center/cover;
+      min-height:270px;display:flex;flex-direction:column;justify-content:flex-end;
+    }
+    .consult h3{color:#fff}
+    .consult .btn{width:max-content;background:#fff;color:var(--navy)}
 
-/* ===== WARNING LETTER ===== */
-.wl-bar{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px;}
-.wf{padding:6px 14px;border-radius:30px;border:1.5px solid var(--border);background:var(--card);font-size:11px;font-weight:700;color:var(--sub);cursor:pointer;font-family:inherit;transition:all .18s;letter-spacing:.02em;}
-.wf:hover{border-color:var(--navy);color:var(--navy);background:#f0f3f8;}
-.wf.on{background:var(--navy);border-color:var(--navy);color:#fff;box-shadow:0 2px 8px rgba(26,42,74,.2);}
-.wl-list{display:flex;flex-direction:column;gap:10px;}
-.wcard{background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:18px 20px 16px;border-left:4px solid transparent;transition:all .2s;}
-.wcard:hover{box-shadow:var(--sh-hv);transform:translateX(2px);}
-.wcard[data-wl=label]{border-left-color:var(--teal);}
-.wcard[data-wl=facility]{border-left-color:#6858a8;}
-.wcard[data-wl=haccp]{border-left-color:#c07030;}
-.wcard[data-wl=import]{border-left-color:#b03838;}
-.wcard[data-wl=cosmetic]{border-left-color:#a84878;}
-.wcard.hide{display:none;}
-.wmeta{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
-.wbadge{font-size:9px;font-weight:800;color:#fff;padding:3px 8px;border-radius:4px;letter-spacing:.04em;}
-.bl{background:var(--teal);}.bf{background:#6858a8;}.bh{background:#c07030;}.bi{background:#b03838;}.bc{background:#a84878;}
-.wdate{font-size:10px;color:var(--muted);font-weight:600;}
-.wttl{font-size:13px;font-weight:800;color:var(--navy);margin-bottom:6px;line-height:1.55;}
-.wdesc{font-size:11px;color:var(--sub);line-height:1.65;margin-bottom:10px;}
-.wlink{font-size:11px;color:var(--teal);font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border:1px solid rgba(46,150,165,.35);border-radius:5px;transition:all .15s;}
-.wlink:hover{background:var(--teal);color:#fff;border-color:var(--teal);}
-.morebtn{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;padding:12px;background:var(--card);border:1.5px solid var(--border);border-radius:10px;font-size:12px;font-weight:700;color:var(--navy);cursor:pointer;font-family:inherit;width:100%;transition:all .18s;letter-spacing:.02em;}
-.morebtn:hover{background:var(--navy);color:#fff;border-color:var(--navy);}
+    .article{
+      display:grid;grid-template-columns:150px 1fr;gap:18px;padding:18px 0;border-top:1px solid var(--line);
+    }
+    .article:first-of-type{border-top:0}
+    .article img{width:150px;height:95px;object-fit:cover;border-radius:10px}
+    .article .meta{font-size:12px;color:var(--muted)}
+    .article h3{font-size:17px;line-height:1.5;margin:6px 0}
+    .article p{font-size:13px;line-height:1.65;color:#5a687d;margin:0}
 
-/* ===== SIDEBAR ===== */
-.scard{background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:20px;overflow:hidden;}
-.ai-card{border-top:none;position:relative;background:linear-gradient(160deg,#eaf7f9 0%,#f0fafb 60%,#fff 100%);border:1.5px solid rgba(46,150,165,.25);}
-.ai-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--teal),#4ab8c8);}
-.ai-hd{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
-.ai-chip{background:var(--navy);color:#fff;font-size:9px;font-weight:800;padding:3px 8px;border-radius:5px;letter-spacing:.06em;}
-.ai-nm{font-size:13px;font-weight:900;color:var(--navy);}
-.ai-av{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#4ab8c8,var(--teal));display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 10px;box-shadow:0 4px 12px rgba(46,150,165,.3);}
-.ai-tx{font-size:11px;color:var(--sub);margin-bottom:14px;line-height:1.7;text-align:center;}
-.ai-btn{width:100%;background:linear-gradient(135deg,var(--teal),#2880a0);color:#fff;font-size:12px;font-weight:800;padding:11px;border-radius:8px;border:none;cursor:pointer;font-family:inherit;transition:all .18s;letter-spacing:.02em;box-shadow:0 3px 12px rgba(46,150,165,.3);}
-.ai-btn:hover{transform:translateY(-1px);box-shadow:0 5px 16px rgba(46,150,165,.4);}
-.ai-note{font-size:10px;color:var(--muted);text-align:center;margin-top:7px;}
-.news-hd{font-size:12px;font-weight:800;color:var(--navy);margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;padding-bottom:10px;border-bottom:1px solid var(--border-lt);}
-.news-hd a{font-weight:600;color:var(--teal);font-size:10px;text-decoration:none;padding:3px 8px;border:1px solid rgba(46,150,165,.3);border-radius:4px;transition:all .15s;}
-.news-hd a:hover{background:var(--teal);color:#fff;}
-.nitem{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--border-lt);text-decoration:none;}
-.nitem:last-child{border-bottom:none;padding-bottom:0;}
-.nthumb{width:48px;height:38px;border-radius:5px;flex-shrink:0;object-fit:cover;}
-.ndate{font-size:9px;color:var(--muted);font-weight:600;margin-bottom:2px;}
-.nttl{font-size:11px;color:var(--navy);line-height:1.45;font-weight:600;}
-.cta-box{background:linear-gradient(150deg,#1a2a4a 0%,#243660 60%,#1a3060 100%);border-radius:12px;padding:20px;border:none;position:relative;overflow:hidden;}
-.cta-box::before{content:"";position:absolute;top:-20px;right:-20px;width:100px;height:100px;background:rgba(201,150,42,.1);border-radius:50%;}
-.cta-ttl{font-size:13px;font-weight:900;color:#fff;margin-bottom:6px;line-height:1.45;position:relative;}
-.cta-desc{font-size:10px;color:rgba(255,255,255,.58);margin-bottom:14px;line-height:1.65;position:relative;}
-.cta-btn{display:block;width:100%;background:var(--orange);color:#fff;font-size:12px;font-weight:800;padding:11px;border-radius:8px;text-align:center;text-decoration:none;transition:all .18s;box-shadow:0 3px 12px rgba(232,99,42,.35);position:relative;letter-spacing:.02em;}
-.cta-btn:hover{background:#d45520;box-shadow:0 5px 16px rgba(232,99,42,.45);transform:translateY(-1px);}
+    .ranking{counter-reset:rank}
+    .ranking-item{
+      counter-increment:rank;display:grid;grid-template-columns:30px 1fr;gap:9px;
+      padding:12px 0;border-top:1px solid var(--line);font-size:14px;line-height:1.5;
+    }
+    .ranking-item:before{
+      content:counter(rank);width:24px;height:24px;border-radius:50%;
+      display:grid;place-items:center;background:#f0b83a;color:#fff;font-weight:800;
+    }
 
-/* ===== FOOTER ===== */
-footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding:32px 28px;}
-.foot-in{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
-.foot-logo{color:rgba(255,255,255,.9);font-size:14px;font-weight:900;display:flex;align-items:center;gap:8px;}
-.foot-logo-mark{background:var(--gold);color:var(--navy);font-size:9px;font-weight:900;padding:2px 6px;border-radius:3px;}
-.foot-copy{font-size:11px;color:rgba(255,255,255,.32);}
-#st .sec-ttl::before{background:linear-gradient(to bottom,#c8a020,#e8c040);}
+    .purpose-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:12px}
+    .purpose{
+      min-height:130px;border:1px solid var(--line);border-radius:12px;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      text-align:center;padding:16px;font-weight:700;color:#24558e;background:#fff;
+    }
+    .purpose span{font-size:30px;margin-bottom:10px}
 
-/* ===== TOPIC MODAL ===== */
-.tm-overlay{
-  position:fixed;inset:0;z-index:1000;
-  background:rgba(10,18,34,.62);
-  backdrop-filter:blur(4px);
-  -webkit-backdrop-filter:blur(4px);
-  opacity:0;pointer-events:none;
-  transition:opacity .22s ease;
-  display:flex;align-items:center;justify-content:center;
-  padding:20px;
-}
-.tm-overlay.open{opacity:1;pointer-events:auto;}
-.tm-box{
-  background:var(--card);
-  border-radius:16px;
-  width:100%;max-width:720px;
-  max-height:88vh;
-  display:flex;flex-direction:column;
-  box-shadow:0 24px 60px rgba(10,18,34,.35),0 4px 16px rgba(10,18,34,.2);
-  transform:translateY(12px) scale(.98);
-  transition:transform .22s ease;
-  overflow:hidden;
-}
-.tm-overlay.open .tm-box{transform:none;}
-.tm-head{
-  padding:20px 24px 0;
-  border-bottom:1px solid var(--border-lt);
-  flex-shrink:0;
-}
-.tm-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
-.tm-category{display:flex;align-items:center;gap:10px;}
-.tm-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
-.tm-box.c-food .tm-icon{background:var(--teal-lt);}
-.tm-box.c-cosme .tm-icon{background:#fce8f4;}
-.tm-box.c-general .tm-icon{background:#f0edf8;}
-.tm-name{font-size:16px;font-weight:900;color:var(--navy);line-height:1.3;}
-.tm-count{font-size:11px;color:var(--muted);font-weight:600;margin-top:2px;}
-.tm-close{
-  width:32px;height:32px;border-radius:8px;
-  background:var(--bg);border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  font-size:16px;color:var(--muted);
-  cursor:pointer;transition:all .15s;flex-shrink:0;
-  font-family:inherit;
-}
-.tm-close:hover{background:var(--navy);color:#fff;border-color:var(--navy);}
-.tm-tabs{
-  display:flex;gap:0;
-  overflow-x:auto;scrollbar-width:none;
-  margin:0 -24px;padding:0 24px;
-}
-.tm-tabs::-webkit-scrollbar{display:none;}
-.tm-tab{
-  padding:10px 16px;
-  font-size:12px;font-weight:700;
-  color:var(--muted);
-  background:none;border:none;
-  border-bottom:2.5px solid transparent;
-  cursor:pointer;font-family:inherit;
-  transition:all .15s;
-  white-space:nowrap;flex-shrink:0;
-  line-height:1;margin-bottom:-1px;
-  letter-spacing:.01em;
-}
-.tm-tab:hover{color:var(--navy);}
-.tm-tab.on{color:var(--navy);font-weight:900;}
-.tm-box.c-food   .tm-tab.on{border-bottom-color:var(--teal);}
-.tm-box.c-cosme  .tm-tab.on{border-bottom-color:#a84878;}
-.tm-box.c-general .tm-tab.on{border-bottom-color:#6858a8;}
-.tm-body{
-  flex:1;overflow-y:auto;
-  padding:28px 28px 24px;
-  scroll-behavior:smooth;
-}
-.tm-body::-webkit-scrollbar{width:4px;}
-.tm-body::-webkit-scrollbar-track{background:transparent;}
-.tm-body::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px;}
-.tm-pane{display:none;}
-.tm-pane.on{display:block;}
-.tm-pane-ttl{
-  font-size:17px;font-weight:900;color:var(--navy);
-  margin-bottom:16px;line-height:1.4;
-  padding-bottom:12px;
-  border-bottom:1px solid var(--border-lt);
-}
-.tm-box.c-food   .tm-pane-ttl{border-bottom-color:rgba(46,150,165,.2);}
-.tm-box.c-cosme  .tm-pane-ttl{border-bottom-color:rgba(168,72,120,.18);}
-.tm-box.c-general .tm-pane-ttl{border-bottom-color:rgba(104,88,168,.2);}
-.tm-pane-body{
-  font-size:13.5px;color:var(--sub);line-height:2;
-  word-break:break-word;
-}
-.tm-pane-body .tm-list-head{
-  display:block;
-  font-size:12px;font-weight:800;color:var(--navy);
-  margin:16px 0 6px;letter-spacing:.03em;
-}
-.tm-pane-body ul{
-  margin:6px 0 12px 0;padding-left:0;
-  list-style:none;display:flex;flex-direction:column;gap:4px;
-}
-.tm-pane-body ul li{
-  font-size:13px;color:var(--sub);
-  padding:6px 12px 6px 30px;
-  background:var(--bg);border-radius:6px;
-  position:relative;line-height:1.6;
-}
-.tm-pane-body ul li::before{content:"・";position:absolute;left:12px;color:var(--muted);font-weight:700;}
-.tm-foot{
-  padding:14px 24px;
-  border-top:1px solid var(--border-lt);
-  display:flex;align-items:center;justify-content:space-between;
-  flex-shrink:0;
-  background:var(--bg);
-}
-.tm-nav-btn{
-  display:flex;align-items:center;gap:6px;
-  padding:8px 14px;
-  background:var(--card);border:1.5px solid var(--border);
-  border-radius:8px;font-size:11px;font-weight:700;
-  color:var(--sub);cursor:pointer;font-family:inherit;
-  transition:all .18s;line-height:1;
-}
-.tm-nav-btn:hover:not(:disabled){background:var(--navy);color:#fff;border-color:var(--navy);}
-.tm-nav-btn:disabled{opacity:.35;cursor:default;}
-.tm-foot-center{text-align:center;}
-.tm-foot-pos{font-size:10px;color:var(--muted);font-weight:600;display:block;}
-.tm-foot-name{font-size:12px;font-weight:800;color:var(--navy);margin-top:2px;display:block;}
+    .reasons{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
+    .reason{text-align:center;padding:24px 14px;border-top:3px solid #1c5eac;background:#f8fbff}
+    .reason h3{font-size:16px}
+    .reason p{font-size:13px;color:#647289;line-height:1.7}
 
-/* ===== GLOBAL MODE SWITCH (食品⇄化粧品) ===== */
-.mode-bar{background:#fff;border-bottom:1px solid var(--border);padding:14px 28px;}
-.mode-bar-in{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;}
-.mode-bar-label{font-size:12px;color:var(--sub);font-weight:700;letter-spacing:.02em;}
-.mode-tabs{display:inline-flex;background:#eef1f7;border-radius:999px;padding:4px;gap:2px;}
-.mode-tab{appearance:none;border:none;background:transparent;padding:11px 28px;border-radius:999px;font-size:13.5px;font-weight:800;font-family:inherit;color:var(--sub);cursor:pointer;transition:all .2s;white-space:nowrap;letter-spacing:.02em;}
-.mode-tab.on[data-mode="food"]{background:var(--teal);color:#fff;box-shadow:0 3px 12px rgba(46,150,165,.35);}
-.mode-tab.on[data-mode="cosme"]{background:#a84878;color:#fff;box-shadow:0 3px 12px rgba(168,72,120,.35);}
-.mode-tab:not(.on):hover{color:var(--navy);}
+    footer{background:#071f46;color:#dfe8f5;padding:40px 28px;margin-top:30px}
+    footer .footgrid{display:grid;grid-template-columns:2fr repeat(4,1fr);gap:28px}
+    footer h4{color:#fff}
+    footer p,footer li{font-size:13px;line-height:1.8}
+    footer ul{padding-left:18px}
 
-/* 食品モード／化粧品モードでの一括出し分け */
-body.mode-food .cosme-only{display:none !important;}
-body.mode-cosme .food-only{display:none !important;}
-body.mode-cosme #ctabsBar{display:none;}
-</style>
+    [contenteditable="true"]{outline:2px dashed rgba(255,156,0,.75);outline-offset:3px}
+    .editable-image{cursor:pointer;position:relative}
+    .dragging{opacity:.45}
+    .drag-handle{
+      position:absolute;right:8px;top:8px;z-index:10;
+      background:#fff;color:#0b326d;border:1px solid var(--line);
+      border-radius:7px;padding:5px 8px;font-size:12px;font-weight:800;cursor:grab;
+      display:none;
+    }
+    .edit-mode .draggable{position:relative}
+    .edit-mode .draggable .drag-handle{display:block}
+
+    @media(max-width:1100px){
+      header{grid-template-columns:1fr}
+      .header-actions{justify-content:flex-start}
+      .category-grid{grid-template-columns:repeat(3,1fr)}
+      .content-grid{grid-template-columns:1fr}
+      .quicknav{grid-template-columns:repeat(3,1fr)}
+      .purpose-grid{grid-template-columns:repeat(3,1fr)}
+      .reasons{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:700px){
+      .hero{grid-template-columns:1fr}
+      .hero-main{padding:42px 22px}.hero-main h1{font-size:30px}
+      .section{padding:20px 14px}
+      .category-grid,.quicknav,.purpose-grid,.reasons{grid-template-columns:1fr}
+      footer .footgrid{grid-template-columns:1fr}
+      nav{padding:0 14px}
+      .article{grid-template-columns:1fr}
+      .article img{width:100%;height:180px}
+    }
+  </style>
 </head>
-<body class="mode-food">
-
-<header class="hdr">
-  <div class="hdr-in">
-    <a href="#" class="hdr-logo"><span class="hdr-logo-mark">米国</span>輸出ナビ</a>
-    <div class="hdr-right">
-      <a href="#" class="hdr-cta">AIに無料相談 →</a>
-    </div>
+<body>
+  <div class="editorbar">
+    <strong>編集モード</strong>
+    <button id="toggleEdit">編集を開始</button>
+    <button id="saveBtn">ブラウザに保存</button>
+    <button id="exportBtn">HTMLを書き出す</button>
+    <button id="resetBtn" class="danger">初期状態に戻す</button>
+    <span class="hint">編集中は文字をクリック、画像をクリック、セクションはドラッグで移動できます。</span>
   </div>
-</header>
 
-<div class="mode-bar" id="modeBar">
-  <div class="mode-bar-in">
-    <span class="mode-bar-label">このサイトの見方を選択：</span>
-    <div class="mode-tabs">
-      <button type="button" class="mode-tab on" data-mode="food" onclick="setMode('food')">🍱 食品を輸出する</button>
-      <button type="button" class="mode-tab" data-mode="cosme" onclick="setMode('cosme')">✨ 化粧品を輸出する</button>
-    </div>
-  </div>
-</div>
+  <main class="site" id="site">
+    <div class="topline" data-editable>アメリカ市場・通商・FDA・物流・Amazon輸出ビジネスの最新情報と実務ノウハウ</div>
 
-<section class="hero">
-  <div class="hero-eyebrow food-only">🇺🇸 FOOD — US EXPORT GUIDE</div>
-  <div class="hero-eyebrow cosme-only">🇺🇸 COSMETICS — US EXPORT GUIDE</div>
-  <h1 class="food-only">食品を<br><em>アメリカに輸出する</em>専門サイト</h1>
-  <h1 class="cosme-only">化粧品を<br><em>アメリカに輸出する</em>専門サイト</h1>
-  <p class="hero-lead food-only">FDA食品施設登録から販路開拓・物流・「取得後」の継続管理まで。<br><strong>迷わず動ける、一次情報で学べる。</strong>それがこのサイトです。</p>
-  <p class="hero-lead cosme-only">MoCRA対応（施設登録・製品リスティング）から販路開拓・物流・「取得後」の継続管理まで。<br><strong>迷わず動ける、一次情報で学べる。</strong>それがこのサイトです。</p>
-  <div class="hero-actions">
-    <a href="#sp" class="btn-main">自社商品の対応を調べる →</a>
-    <a href="#sf" class="btn-sub">輸出フローを確認する</a>
-  </div>
-</section>
-
-<div class="qa-sticky" id="qaSticky">
-  <div class="qa-sticky-in">
-    <a href="#sf" class="qa-card active" data-qa="sf">
-      <div class="qa-icon">🗺️</div>
-      <div class="qa-body"><div class="qa-ttl">輸出全体フロー</div><div class="qa-arr">確認する →</div></div>
-    </a>
-    <a href="#sp" class="qa-card" data-qa="sp">
-      <div class="qa-icon">🔍</div>
-      <div class="qa-body"><div class="qa-ttl">自社商品の対応</div><div class="qa-arr">探す →</div></div>
-    </a>
-    <a href="#st" class="qa-card" data-qa="st">
-      <div class="qa-icon">📚</div>
-      <div class="qa-body"><div class="qa-ttl">テーマ別に学ぶ</div><div class="qa-arr">一覧 →</div></div>
-    </a>
-    <a href="#sw" class="qa-card" data-qa="sw">
-      <div class="qa-icon">⚠️</div>
-      <div class="qa-body"><div class="qa-ttl">Warning Letter事例</div><div class="qa-arr">見る →</div></div>
-    </a>
-  </div>
-</div>
-
-<div class="page-body">
-<main>
-
-  <section id="sf" class="sec">
-    <div class="sec-head">
-      <h2 class="sec-ttl">食品・化粧品の輸出全体フローを知る</h2>
-    </div>
-    <div class="flow-wrap">
-      <a href="fda_flow.html" class="flow-step fs1">
-        <div class="flow-num">1</div>
-        <div class="flow-lbl">取る前</div>
-        <div class="flow-sub">準備・計画・<br>コスト見積もり</div>
-      </a>
-      <div class="flow-arr">▶</div>
-      <a href="fda_flow.html" class="flow-step fs2">
-        <div class="flow-num">2</div>
-        <div class="flow-lbl">取得</div>
-        <div class="flow-sub food-only">施設登録・ラベル・<br>Prior Notice</div>
-        <div class="flow-sub cosme-only">施設登録・ラベル・<br>製品リスティング</div>
-      </a>
-      <div class="flow-arr">▶</div>
-      <a href="fda_flow.html" class="flow-step fs3">
-        <div class="flow-badge">ここが本番</div>
-        <div class="flow-num">3</div>
-        <div class="flow-lbl">取った後</div>
-        <div class="flow-sub">更新・法改正対応・<br>査察・継続管理</div>
-      </a>
-    </div>
-    <div class="flow-footer">
-      <div class="flow-link"><a href="fda_flow.html">詳細フローを読む →</a></div>
-    </div>
-  </section>
-
-  <section id="sp" class="sec">
-    <div class="sec-head">
-      <h2 class="sec-ttl">自社商品で必要なFDA対応を知る</h2>
-    </div>
-    <div class="psearch-wrap">
-      <div class="psearch">
-        <span class="psearch-icon">🔍</span>
-        <input type="text" id="pq" placeholder="商品名で絞り込む（例：醤油、抹茶、チョコ、スキンケア…）">
-        <button class="pclr" id="pclr" onclick="clrS()">✕</button>
+    <header class="draggable" draggable="false">
+      <span class="drag-handle">↕ 移動</span>
+      <div class="brand">
+        <div class="brand-mark">W</div>
+        <div data-editable>WorldShift<br>Trade Watch</div>
       </div>
-    </div>
-    <div class="sres" id="sres"></div>
-    <div id="cat">
-      <div class="ctabs" id="ctabsBar">
-        <button class="ctab on food-only" data-g="f">🍱 食品</button>
-        <button class="ctab food-only" data-g="s">🍬 お菓子・スイーツ</button>
-        <button class="ctab food-only" data-g="d">🍵 茶・飲料</button>
-        <button class="ctab food-only" data-g="a">🍶 酒類</button>
-        <button class="ctab food-only" data-g="h">💊 健康食品・サプリ</button>
-        <button class="ctab cosme-only" data-g="c">✨ 化粧品・コスメ</button>
+      <div class="search" data-editable>キーワードで検索</div>
+      <div class="header-actions">
+        <button class="btn" data-editable>ニュースレター登録</button>
+        <button class="btn primary" data-editable>お問い合わせ・ご相談</button>
       </div>
-      <div class="cgroup on food-only" data-g="f">
-        <div class="pgrid">
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#c0a060,#a88040);"></div><div class="pbody"><span class="ptag tf">食品</span><div class="pname">調味料・ソース</div><div class="pdesc">醤油・味噌・たれ等。成分・栄養・アレルゲン表示の基本。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#8aaa88,#6a9068);"></div><div class="pbody"><span class="ptag tf">食品</span><div class="pname">だし・スープ類</div><div class="pdesc">原材料・アレルゲン表示と成分管理。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#b07858,#906040);"></div><div class="pbody"><span class="ptag tf">食品</span><div class="pname">レトルト・即席カレー</div><div class="pdesc">酸性化食品（LACF）・殺菌記録の対応。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#8898a8,#687888);"></div><div class="pbody"><span class="ptag tf">食品</span><div class="pname">缶詰・瓶詰</div><div class="pdesc">低酸性缶詰（FCE/SID）の登録が必要。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#a09080,#807060);"></div><div class="pbody"><span class="ptag tf">食品</span><div class="pname">ふりかけ</div><div class="pdesc">原材料・添加物・アレルゲン表示。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#5a7860,#3a5840);"></div><div class="pbody"><span class="ptag tf">食品</span><div class="pname">海苔</div><div class="pdesc">乾物の水分管理と表示・原料記録。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#706858,#504838);"></div><div class="pbody"><span class="ptag tf">食品</span><div class="pname">乾物（椎茸・昆布等）</div><div class="pdesc">水分活性・表示と原料管理。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#b09068,#907048);"></div><div class="pbody"><span class="ptag tf">食品</span><div class="pname">麺類・ラーメン</div><div class="pdesc">原材料・添加物表示とスープの成分管理。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-        </div>
-      </div>
-      <div class="cgroup food-only" data-g="s">
-        <div class="pgrid">
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#c09860,#a07840);"></div><div class="pbody"><span class="ptag ts">菓子</span><div class="pname">スナック・せんべい</div><div class="pdesc">着色料・アレルゲン・栄養表示の対応。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#d08090,#b06070);"></div><div class="pbody"><span class="ptag ts">菓子</span><div class="pname">グミ・キャンディ</div><div class="pdesc">着色料・アレルゲン表示と成分基準が要。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#6a4838,#4a2818);"></div><div class="pbody"><span class="ptag ts">菓子</span><div class="pname">チョコレート</div><div class="pdesc">乳・ナッツ等アレルゲンと成分表示。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#b0a890,#908870);"></div><div class="pbody"><span class="ptag ts">菓子</span><div class="pname">和菓子（餅・羊羹）</div><div class="pdesc">原材料・保存と表示。水分活性に注意。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-        </div>
-      </div>
-      <div class="cgroup food-only" data-g="d">
-        <div class="pgrid">
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#607848,#405830);"></div><div class="pbody"><span class="ptag td">飲料</span><div class="pname">お茶・抹茶</div><div class="pdesc">残留農薬基準と効能表現の線引きに注意。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#508040,#306020);"></div><div class="pbody"><span class="ptag td">飲料</span><div class="pname">日本茶・緑茶</div><div class="pdesc">茶葉の残留農薬・表示ルールを押さえる。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#5a3828,#3a1808);"></div><div class="pbody"><span class="ptag td">飲料</span><div class="pname">コーヒー</div><div class="pdesc">焙煎・成分表示とカフェイン表記。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#6888b0,#486890);"></div><div class="pbody"><span class="ptag td">飲料</span><div class="pname">飲料・ソフトドリンク</div><div class="pdesc">成分・栄養表示と容器表示のルール。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#d0a030,#b08010);"></div><div class="pbody"><span class="ptag td">飲料</span><div class="pname">機能性・エナジー飲料</div><div class="pdesc">カフェイン等の成分規制と表示ルール。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#90b8d0,#70a0c0);"></div><div class="pbody"><span class="ptag td">飲料</span><div class="pname">水・ミネラルウォーター</div><div class="pdesc">ボトル水のFDA基準・表示要件。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-        </div>
-      </div>
-      <div class="cgroup food-only" data-g="a">
-        <div class="pgrid">
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#c0b890,#a09870);"></div><div class="pbody"><span class="ptag ta">酒類</span><div class="pname">日本酒</div><div class="pdesc">TTB＋FDAの二重対応。ラベル承認も必須。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#d0c0a0,#b0a080);"></div><div class="pbody"><span class="ptag ta">酒類</span><div class="pname">焼酎・本格焼酎</div><div class="pdesc">蒸留酒の輸入許可とラベル承認（TTB）。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#806040,#604020);"></div><div class="pbody"><span class="ptag ta">酒類</span><div class="pname">ウイスキー・蒸留酒</div><div class="pdesc">蒸留酒の輸入許可とラベル規制（TTB）。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#d0b860,#b09840);"></div><div class="pbody"><span class="ptag ta">酒類</span><div class="pname">ビール・発泡酒</div><div class="pdesc">醸造酒の表示・輸入許可（TTB）。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#a06878,#805060);"></div><div class="pbody"><span class="ptag ta">酒類</span><div class="pname">梅酒・リキュール</div><div class="pdesc">混成酒の分類とラベル承認（TTB）。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#904858,#703040);"></div><div class="pbody"><span class="ptag ta">酒類</span><div class="pname">ワイン</div><div class="pdesc">輸入許可・産地表示・ラベル（TTB）。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-        </div>
-      </div>
-      <div class="cgroup food-only" data-g="h">
-        <div class="pgrid">
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#88a870,#688050);"></div><div class="pbody"><span class="ptag th">健康食品</span><div class="pname">サプリ・健康食品</div><div class="pdesc">ダイエタリーサプリの表示・成分規制（DSHEA）。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#a0b890,#809870);"></div><div class="pbody"><span class="ptag th">健康食品</span><div class="pname">プロテイン・栄養補助食品</div><div class="pdesc">成分・含有量表示と健康クレームの規制。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-        </div>
-      </div>
-      <div class="cgroup cosme-only" data-g="c">
-        <div class="pgrid">
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#d0a0b0,#b08090);"></div><div class="pbody"><span class="ptag tc">化粧品</span><div class="pname">化粧品・コスメ全般</div><div class="pdesc">MoCRAの施設登録・成分開示・責任者の新ルール。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#e0b8b8,#c09898);"></div><div class="pbody"><span class="ptag tc">化粧品</span><div class="pname">スキンケア</div><div class="pdesc">成分規制と効能表現（化粧品vs医薬品）の境界線。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#c890a0,#a87080);"></div><div class="pbody"><span class="ptag tc">化粧品</span><div class="pname">メイクアップ</div><div class="pdesc">FDAの認可色素添加物リストと表示の作法。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#908090,#706070);"></div><div class="pbody"><span class="ptag tc">化粧品</span><div class="pname">ヘアケア</div><div class="pdesc">化粧品扱いか、一部OTC医薬品かの境界判断。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#b0c0b0,#90a090);"></div><div class="pbody"><span class="ptag tc">化粧品</span><div class="pname">ボディケア・石けん</div><div class="pdesc">石けんの定義でFDA/CPSC管轄が分かれる。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#d0b898,#b09878);"></div><div class="pbody"><span class="ptag tc">化粧品</span><div class="pname">香水・フレグランス</div><div class="pdesc">成分開示とアルコール・引火性の取り扱い。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-          <div class="pcard"><div class="pthumb" style="background:linear-gradient(135deg,#c0a0b8,#a080a0);"></div><div class="pbody"><span class="ptag tc">化粧品</span><div class="pname">ネイル用品</div><div class="pdesc">成分規制と表示要件。施術器具は別管轄。</div><a href="#" class="plink">対応を調べる →</a></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </header>
 
-  <section id="st" class="sec">
-    <div class="sec-head">
-      <h2 class="sec-ttl">テーマ別に深く学ぶ</h2>
-      <a href="#" class="sec-more">すべて見る →</a>
-    </div>
-    <div class="topic-tabs">
-      <button class="topic-tab on food-only" data-tg="food">🍱 食品 <span class="tab-count">9</span></button>
-      <button class="topic-tab cosme-only" data-tg="cosme">✨ 化粧品 <span class="tab-count">8</span></button>
-      <button class="topic-tab" data-tg="general">⚖️ その他 <span class="tab-count">4</span></button>
-    </div>
+    <nav class="draggable" draggable="false">
+      <span class="drag-handle">↕ 移動</span>
+      <a data-editable>最新記事</a>
+      <a data-editable>FDA関連</a>
+      <a data-editable>輸出ロジ関連</a>
+      <a data-editable>米Amazon輸出ビジネス</a>
+      <a data-editable>通商・関税・政策</a>
+      <a data-editable>用語集・資料</a>
+      <a data-editable>サービス・サポート</a>
+    </nav>
 
-    <div class="topic-cat on c-food food-only" data-tg="food">
-      <div class="topic-grid">
-        <a href="#" class="tcard">
-          <div class="tcard-head"><div class="ticon">🏭</div><div><div class="tname">FDA食品施設登録</div><div class="tcount">5記事</div></div></div>
-          <div class="tcard-subs"><div class="tsub-list"><span class="tsub">施設登録とは</span><span class="tsub">対象施設</span><span class="tsub">必要情報</span><span class="tsub">更新・変更</span></div></div>        </a>
-        <a href="#" class="tcard">
-          <div class="tcard-head"><div class="ticon">🤝</div><div><div class="tname">米国代理人（US Agent）</div><div class="tcount">3記事</div></div></div>
-          <div class="tcard-subs"><div class="tsub-list"><span class="tsub">US Agentとは</span><span class="tsub">誰を選べるか</span><span class="tsub">依頼範囲</span></div></div>        </a>
-        <a href="#" class="tcard">
-          <div class="tcard-head"><div class="ticon">🔎</div><div><div class="tname">FSVP（外国供給業者検証）</div><div class="tcount">5記事</div></div></div>
-          <div class="tcard-subs"><div class="tsub-list"><span class="tsub">FSVPとは</span><span class="tsub">対象者</span><span class="tsub">FSVP Importerとは</span><span class="tsub">必要書類</span><span class="tsub">Amazon FBA時の注意</span></div></div>        </a>
-        <a href="#" class="tcard">
-          <div class="tcard-head"><div class="ticon">📋</div><div><div class="tname">事前通知（Prior Notice）</div><div class="tcount">5記事</div></div></div>
-          <div class="tcard-subs"><div class="tsub-list"><span class="tsub">Prior Noticeとは</span><span class="tsub">対象貨物</span><span class="tsub">誰が提出するか</span><span class="tsub">必要情報</span><span class="tsub">提出タイミング</span></div></div>        </a>
-        <a href="#" class="tcard">
-          <div class="tcard-head"><div class="ticon">🥫</div><div><div class="tname">FCE登録 / SID提出</div><div class="tcount">8記事</div></div></div>
-          <div class="tcard-subs"><div class="tsub-list"><span class="tsub">FCEとは</span><span class="tsub">SIDとは</span><span class="tsub">対象食品</span><span class="tsub">対象外ケース</span><span class="tsub">pH・水分活性</span><span class="tsub">レトルト・瓶詰判定</span><span class="tsub">必要情報</span><span class="tsub">よくある誤解</span></div></div>        </a>
-        <a href="#" class="tcard">
-          <div class="tcard-head"><div class="ticon">🛡️</div><div><div class="tname">PCQI / Food Safety Plan</div><div class="tcount">6記事</div></div></div>
-          <div class="tcard-subs"><div class="tsub-list"><span class="tsub">PCQIとは</span><span class="tsub">Food Safety Planとは</span><span class="tsub">必要になる事業者</span><span class="tsub">ハザード分析</span><span class="tsub">予防管理</span><span class="tsub">リコール計画</span></div></div>        </a>
-        <a href="#" class="tcard">
-          <div class="tcard-head"><div class="ticon">🏷️</div><div><div class="tname">食品ラベル</div><div class="tcount">7記事</div></div></div>
-          <div class="tcard-subs"><div class="tsub-list"><span class="tsub">必須表示</span><span class="tsub">Nutrition Facts</span><span class="tsub">原材料表示</span><span class="tsub">アレルゲン表示</span><span class="tsub">原産国表示</span><span class="tsub">クレーム表現</span><span class="tsub">サプリ表示との違い</span></div></div>        </a>
-        <a href="#" class="tcard">
-          <div class="tcard-head"><div class="ticon">🧪</div><div><div class="tname">成分・添加物確認</div><div class="tcount">8記事</div></div></div>
-          <div class="tcard-subs"><div class="tsub-list"><span class="tsub">食品添加物</span><span class="tsub">GRAS</span><span class="tsub">色素</span><span class="tsub">保存料</span><span class="tsub">甘味料</span><span class="tsub">アレルゲン</span><span class="tsub">サプリ成分</span><span class="tsub">必要書類</span></div></div>        </a>
-        <a href="#" class="tcard">
-          <div class="tcard-head"><div class="ticon">🔄</div><div><div class="tname">輸出後管理（食品）</div><div class="tcount">8記事</div></div></div>
-          <div class="tcard-subs"><div class="tsub-list"><span class="tsub">施設更新</span><span class="tsub">FSVP見直し</span><span class="tsub">ラベル変更</span><span class="tsub">原料変更</span><span class="tsub">Detention</span><span class="tsub">Import Alert</span><span class="tsub">Warning Letter</span><span class="tsub">回収対応</span></div></div>        </a>
+    <section class="hero draggable" draggable="false">
+      <span class="drag-handle">↕ 移動</span>
+      <div class="hero-main editable-image" data-bg-image>
+        <h1 data-editable>アメリカビジネスの<br>「今」と「これから」がわかる</h1>
+        <p data-editable>通商・FDA・物流・Amazon輸出の最新情報と、実務に役立つ知識をワンストップで提供</p>
+        <button class="btn" data-editable>最新記事をチェック ＞</button>
       </div>
-    </div>
+      <aside class="hero-side">
+        <h2 data-editable>注目の最新情報</h2>
+        <div class="news-mini"><span class="date" data-editable>2026.07.10</span><span class="tag" data-editable>FDA関連</span><h3 data-editable>FDAが新たな食品表示ルールを発表</h3></div>
+        <div class="news-mini"><span class="date" data-editable>2026.07.09</span><span class="tag" data-editable>通商・関税</span><h3 data-editable>米中関税の最新動向と業界への影響</h3></div>
+        <div class="news-mini"><span class="date" data-editable>2026.07.08</span><span class="tag" data-editable>輸出ロジ</span><h3 data-editable>米国向け海上輸送の最新スケジュール</h3></div>
+        <div class="news-mini"><span class="date" data-editable>2026.07.07</span><span class="tag" data-editable>Amazon輸出</span><h3 data-editable>Amazonで売れる日本商品の最新トレンド</h3></div>
+      </aside>
+    </section>
 
-    <div class="topic-cat c-cosme cosme-only" data-tg="cosme">
-      <div class="topic-grid">
-        <a href="#" class="tcard">
-          <div class="tcard-head"><div class="ticon">🏭</div><div><div class="tname">MoCRA施設登録</div><div class="tcount">6記事</div></div></div>
-          <div class="tcard-subs"><div class="tsub-list"><span class="tsub">MoCRA施設登録とは</span><span class="tsub">対象施設</span><span class="tsub">対象外施設</span><span class="tsub">小規模事業者免除</span><span class="tsub">FEI番号</span><span class="tsub">US Agent</span></div></div>        </a>
-        <a href="#" class="tcard">
-          <div class="tcard-head"><div class="ticon">📦</div><div><div class="tname">MoCRA製品リスティング</div><div class="tcount">6記事</div></div></div>
-          <div class="tcard-subs"><div class="tsub-list"><span class="tsub">製品リスティングとは</span><span class="tsub">必要情報</span><span class="tsub">成分情報</span><span class="tsub">RPの役割</span><span class="tsub">更新タイミング</span><span class="tsub">処方変更時の対応</span></div></div>        </a>
-        <a href="#" class="tcard">
-          <div class="tcard-head"><div class="ticon">👤</div><div><div class="tname">Responsible Person（RP）</div><div class="tcount">7記事</div></div></div>
-          <div class="tcard-subs"><div class="tsub-list"><span class="tsub">RPとは</span><span class="tsub">誰がなれるか</span><span class="tsub">ラベル表示との関係</span><span class="tsub">US Agentとの違い</span><span class="tsub">苦情対応</span><span class="tsub">有害事象報告</span><span class="tsub">記録管理</span></div></div>        </a>
-        <a href="#" class="tcard">
-          <div class="tcard-head"><div class="ticon">🔬</div><div><div class="tname">Safety Substantiation</div><div class="tcount">7記事</div></div></div>
-          <div class="tcard-subs"><div class="tsub-list"><span class="tsub">安全性根拠とは</span><span class="tsub">必要資料</span><span class="tsub">安定性試験</span><span class="tsub">微生物試験</span><span class="tsub">保存効力試験</span><span class="tsub">刺激性確認</span><span class="tsub">ベビー・目元商品</span></div></div>        </a>
-        <a href="#" class="tcard">
-          <div class="tcard-head"><div class="ticon">🏷️</div><div><div class="tname">化粧品ラベル</div><div class="tcount">7記事</div></div></div>
-          <div class="tcard-subs"><div class="tsub-list"><span class="tsub">必須表示</span><span class="tsub">成分表示</span><span class="tsub">責任者表示</span><span class="tsub">警告表示</span><span class="tsub">効能表現</span><span class="tsub">drug claimになる表現</span><span class="tsub">香料表示</span></div></div>        </a>
-        <a href="#" class="tcard">
-          <div class="tcard-head"><div class="ticon">🧪</div><div><div class="tname">成分規制</div><div class="tcount">8記事</div></div></div>
-          <div class="tcard-subs"><div class="tsub-list"><span class="tsub">禁止・制限成分</span><span class="tsub">色素</span><span class="tsub">防腐剤</span><span class="tsub">香料</span><span class="tsub">PFAS</span><span class="tsub">タルク</span><span class="tsub">重金属</span><span class="tsub">CBD等グレー成分</span></div></div>        </a>
-        <a href="#" class="tcard">
-          <div class="tcard-head"><div class="ticon">⚕️</div><div><div class="tname">OTC・境界商品</div><div class="tcount">7記事</div></div></div>
-          <div class="tcard-subs"><div class="tsub-list"><span class="tsub">化粧品とOTCの違い</span><span class="tsub">日焼け止め</span><span class="tsub">ニキビケア</span><span class="tsub">フケ防止</span><span class="tsub">制汗剤</span><span class="tsub">オーラルケア</span><span class="tsub">石けん例外</span></div></div>        </a>
-        <a href="#" class="tcard">
-          <div class="tcard-head"><div class="ticon">🔄</div><div><div class="tname">輸出後管理（化粧品）</div><div class="tcount">7記事</div></div></div>
-          <div class="tcard-subs"><div class="tsub-list"><span class="tsub">施設登録更新</span><span class="tsub">リスティング更新</span><span class="tsub">SAE報告</span><span class="tsub">苦情対応</span><span class="tsub">回収対応</span><span class="tsub">処方変更</span><span class="tsub">Warning Letter対応</span></div></div>        </a>
+    <section class="quicknav draggable" draggable="false">
+      <span class="drag-handle">↕ 移動</span>
+      <div class="item" data-editable>📖 初めての方へ</div>
+      <div class="item" data-editable>🎯 FDAについて学ぶ</div>
+      <div class="item" data-editable>🚚 輸出ロジを調べる</div>
+      <div class="item" data-editable>🛒 Amazon輸出を学ぶ</div>
+      <div class="item" data-editable>📚 用語集を確認する</div>
+      <div class="item" data-editable>🎧 無料相談はこちら</div>
+    </section>
+
+    <section class="section draggable" draggable="false">
+      <span class="drag-handle">↕ 移動</span>
+      <div class="section-title-row"><h2 class="section-title" data-editable>カテゴリーから探す</h2><span class="more" data-editable>一覧を見る</span></div>
+      <div class="category-grid">
+        <article class="category">
+          <div class="category-head c1" data-editable>🧪 FDA関連</div>
+          <ul>
+            <li data-editable>基礎知識</li><li data-editable>施設登録・更新</li><li data-editable>食品表示（ラベル）</li>
+            <li data-editable>食品安全計画（FSMA）</li><li data-editable>化粧品規制（MoCRA）</li><li data-editable>サプリメント・NDI</li>
+          </ul><button class="btn" data-editable>詳しく見る</button>
+        </article>
+        <article class="category">
+          <div class="category-head c2" data-editable>🚚 輸出ロジ関連</div>
+          <ul>
+            <li data-editable>輸送モード別情報</li><li data-editable>海上・航空・陸送</li><li data-editable>通関手続き</li>
+            <li data-editable>必要書類・インボイス</li><li data-editable>梱包・ラベリング</li><li data-editable>物流コスト最適化</li>
+          </ul><button class="btn" data-editable>詳しく見る</button>
+        </article>
+        <article class="category">
+          <div class="category-head c3" data-editable>🛒 米Amazon輸出</div>
+          <ul>
+            <li data-editable>アカウント開設</li><li data-editable>商品リサーチ・選定</li><li data-editable>FBA・物流戦略</li>
+            <li data-editable>広告・プロモーション</li><li data-editable>売上拡大ノウハウ</li><li data-editable>成功事例</li>
+          </ul><button class="btn" data-editable>詳しく見る</button>
+        </article>
+        <article class="category">
+          <div class="category-head c4" data-editable>🏛 通商・関税・政策</div>
+          <ul>
+            <li data-editable>米国の通商政策</li><li data-editable>関税・HSコード</li><li data-editable>貿易協定</li>
+            <li data-editable>輸出管理</li><li data-editable>経済制裁・規制対応</li><li data-editable>業界別の影響分析</li>
+          </ul><button class="btn" data-editable>詳しく見る</button>
+        </article>
+        <article class="category">
+          <div class="category-head c5" data-editable>📘 用語集・資料</div>
+          <ul>
+            <li data-editable>用語集・略語集</li><li data-editable>各種テンプレート</li><li data-editable>チェックリスト</li>
+            <li data-editable>ホワイトペーパー</li><li data-editable>セミナー資料</li><li data-editable>ダウンロード資料</li>
+          </ul><button class="btn" data-editable>詳しく見る</button>
+        </article>
+        <article class="category">
+          <div class="category-head c6" data-editable>🎧 サービス・支援</div>
+          <ul>
+            <li data-editable>輸出・FDAサポート</li><li data-editable>ラベル作成サポート</li><li data-editable>物流・保管サポート</li>
+            <li data-editable>コンサルティング</li><li data-editable>セミナー・研修</li><li data-editable>お問い合わせ・相談</li>
+          </ul><button class="btn" data-editable>詳しく見る</button>
+        </article>
       </div>
-    </div>
+    </section>
 
-    <div class="topic-cat c-general" data-tg="general">
-      <div class="topic-grid">
-        <a href="#" class="tcard">
-          <div class="tcard-head"><div class="ticon">⚖️</div><div><div class="tname">管轄の切り分け</div><div class="tcount">6記事</div></div></div>
-          <div class="tcard-subs"><div class="tsub-list"><span class="tsub">FDA</span><span class="tsub">USDA</span><span class="tsub">TTB</span><span class="tsub">OTC</span><span class="tsub">CPSC</span><span class="tsub">EPAの違い</span></div></div>        </a>
-        <a href="#" class="tcard">
-          <div class="tcard-head"><div class="ticon">🗂️</div><div><div class="tname">商品分類の考え方</div><div class="tcount">4記事</div></div></div>
-          <div class="tcard-subs"><div class="tsub-list"><span class="tsub">食品かサプリか</span><span class="tsub">化粧品かOTCか</span><span class="tsub">酒類はTTB</span><span class="tsub">肉・家禽はUSDA</span></div></div>        </a>
-        <a href="#" class="tcard">
-          <div class="tcard-head"><div class="ticon">🚢</div><div><div class="tname">通関・輸入時の対応</div><div class="tcount">5記事</div></div></div>
-          <div class="tcard-subs"><div class="tsub-list"><span class="tsub">FDA照会</span><span class="tsub">CBP照会</span><span class="tsub">書類不一致</span><span class="tsub">Amazon FBA</span><span class="tsub">Importer情報</span></div></div>        </a>
-        <a href="#" class="tcard">
-          <div class="tcard-head"><div class="ticon">🚨</div><div><div class="tname">トラブル対応</div><div class="tcount">5記事</div></div></div>
-          <div class="tcard-subs"><div class="tsub-list"><span class="tsub">Detention</span><span class="tsub">Import Alert</span><span class="tsub">Warning Letter</span><span class="tsub">Recall</span><span class="tsub">査察対応</span></div></div>        </a>
-      </div>
-    </div>
-  </section>
-
-  <section id="sw" class="sec">
-    <div class="sec-head">
-      <h2 class="sec-ttl">Warning Letterの実例から学ぶ</h2>
-      <a href="#" class="sec-more">すべて見る →</a>
-    </div>
-    <p class="sec-desc">FDAが実際に発行した警告文書を、日本企業が犯しやすいミスを中心に解説。同じ轍を踏まないための実践ガイドです。</p>
-    <div class="wl-bar">
-      <button class="wf on" data-wl="all">すべて</button>
-      <button class="wf" data-wl="label">表示・ラベル</button>
-      <button class="wf" data-wl="facility">施設登録</button>
-      <button class="wf food-only" data-wl="haccp">HACCP/製造</button>
-      <button class="wf food-only" data-wl="import">輸入拒否</button>
-      <button class="wf cosme-only" data-wl="cosmetic">化粧品</button>
-    </div>
-    <div class="wl-list" id="wll">
-      <div class="wcard food-only" data-wl="label"><div class="wmeta"><span class="wbadge bl">表示・ラベル</span><span class="wdate">2026.05</span></div><div class="wttl">栄養成分の単位誤記でWarning Letter——醤油メーカーが陥った落とし穴</div><div class="wdesc">ナトリウム含有量の単位（mg→g）を誤記。小さなミスが輸入停止につながった事例と再発防止策を解説。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-      <div class="wcard food-only" data-wl="label"><div class="wmeta"><span class="wbadge bl">表示・ラベル</span><span class="wdate">2026.04</span></div><div class="wttl">「体に良い」の一言が薬効クレームと判定——緑茶飲料の警告事例</div><div class="wdesc">食品に医薬品的効能を示す文言を記載したとして指摘。食品と医薬品、どこで線が引かれるのかを整理。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-      <div class="wcard food-only" data-wl="label"><div class="wmeta"><span class="wbadge bl">表示・ラベル</span><span class="wdate">2026.03</span></div><div class="wttl">アレルゲン（大豆）の表示漏れ——だし製品が輸入差し止めになった事例</div><div class="wdesc">FALCPAに基づく9大アレルゲン表示義務を見落とした典型例。チェックリストで確認を。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-      <div class="wcard food-only" data-wl="facility"><div class="wmeta"><span class="wbadge bf">施設登録</span><span class="wdate">2026.04</span></div><div class="wttl">2年更新を忘れて全製品が輸入停止——施設登録期限を見落とした事例</div><div class="wdesc">偶数年10〜12月の更新期限を見落とし、全商品の輸入が止まった実例。管理体制の作り方も紹介。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-      <div class="wcard" data-wl="facility"><div class="wmeta"><span class="wbadge bf">施設登録</span><span class="wdate">2026.02</span></div><div class="wttl">US Agentが廃業、連絡不通でFDAから指摘——代理人管理の盲点</div><div class="wdesc">US Agentが廃業し連絡が取れない状態のまま輸入を続けた事例。代理人の選び方と管理方法を解説。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-      <div class="wcard food-only" data-wl="haccp"><div class="wmeta"><span class="wbadge bh">HACCP/製造</span><span class="wdate">2026.03</span></div><div class="wttl">HACCP記録の不備でWarning Letter——「あるだけ」では不十分だった事例</div><div class="wdesc">ハザード分析と重要管理点（CCP）の記録が不完全として指摘。FSMA規則が要求する記録水準とは。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-      <div class="wcard food-only" data-wl="haccp"><div class="wmeta"><span class="wbadge bh">HACCP/製造</span><span class="wdate">2025.12</span></div><div class="wttl">レトルト食品の殺菌記録なし——LACF規制違反の実例</div><div class="wdesc">FCE/SID登録と殺菌記録（プロセスファイリング）が未整備だった事例。低酸性食品の注意点を解説。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-      <div class="wcard food-only" data-wl="haccp"><div class="wmeta"><span class="wbadge bh">HACCP/製造</span><span class="wdate">2025.11</span></div><div class="wttl">PCQI（予防的管理適格者）が不在のまま製造を継続——FSMAの人的要件</div><div class="wdesc">PCQIの指定と訓練記録がなかったことで指摘。誰がPCQIになれるのか、資格要件と実務対応を解説。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-      <div class="wcard food-only" data-wl="import"><div class="wmeta"><span class="wbadge bi">輸入拒否</span><span class="wdate">2026.05</span></div><div class="wttl">Prior Notice未提出で全量廃棄——出港後に気づいても取り返しがつかない</div><div class="wdesc">出港前のPrior Notice提出を怠り、米国到着後に廃棄命令。提出タイミングと手順を再確認。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-      <div class="wcard food-only" data-wl="import"><div class="wmeta"><span class="wbadge bi">輸入拒否</span><span class="wdate">2026.01</span></div><div class="wttl">FSVP記録が整備されず輸入者に警告——輸出側は「知らなかった」では済まない</div><div class="wdesc">米国輸入者がFSVP計画を未整備のまま輸入を続けたケース。輸入者の義務と日本側ができる支援策。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-      <div class="wcard food-only" data-wl="import"><div class="wmeta"><span class="wbadge bi">輸入拒否</span><span class="wdate">2025.10</span></div><div class="wttl">残留農薬がEPA基準を超え緑茶が全ロット差し止め——事前検査の重要性</div><div class="wdesc">米国EPA基準を超えた農薬が検出されロット全量が差し止め。輸出前の残留農薬検査で防げた事例。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-      <div class="wcard cosme-only" data-wl="cosmetic"><div class="wmeta"><span class="wbadge bc">化粧品</span><span class="wdate">2026.04</span></div><div class="wttl">MoCRA施設登録なしで化粧品輸入——新法対応漏れが招いた警告</div><div class="wdesc">2024年施行のMoCRA（化粧品規制近代化法）に基づく施設登録を行わず輸出を続けた事例。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-      <div class="wcard cosme-only" data-wl="cosmetic"><div class="wmeta"><span class="wbadge bc">化粧品</span><span class="wdate">2026.02</span></div><div class="wttl">「シワを消す」がOTC医薬品クレームと判定——スキンケアの表現は慎重に</div><div class="wdesc">肌の再生・修復を謳う表現が医薬品クレームとされた事例。化粧品で使える表現・使えない表現を整理。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-      <div class="wcard cosme-only" data-wl="cosmetic"><div class="wmeta"><span class="wbadge bc">化粧品</span><span class="wdate">2025.11</span></div><div class="wttl">未承認の色素添加物を使用——メイクアップ製品への警告</div><div class="wdesc">FDAの認可リストにない着色料を配合し指摘を受けた事例。化粧品向け色素添加物の許可制度を解説。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-      <div class="wcard cosme-only" data-wl="cosmetic"><div class="wmeta"><span class="wbadge bc">化粧品</span><span class="wdate">2026.03</span></div><div class="wttl">重篤な有害事象の報告が15営業日を超過——SAE報告義務違反の事例</div><div class="wdesc">MoCRAが定める重篤な有害事象（SAE）の15営業日以内報告義務に違反したとして指摘された事例。Responsible Personの報告体制の作り方を解説。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-      <div class="wcard cosme-only" data-wl="cosmetic"><div class="wmeta"><span class="wbadge bc">化粧品</span><span class="wdate">2026.01</span></div><div class="wttl">安全性根拠（Safety Substantiation）記録が未整備——査察時に提出できず指摘</div><div class="wdesc">製品の安全性を裏付ける記録を求められた際に提出できなかった事例。日頃から保管すべき記録の範囲を整理。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-      <div class="wcard food-only" data-wl="label"><div class="wmeta"><span class="wbadge bl">表示・ラベル</span><span class="wdate">2025.09</span></div><div class="wttl">英語表示なしで差し止め——日本語ラベルのまま輸出した事例</div><div class="wdesc">米国向け製品に英語の成分・栄養表示がなく差し止め。最低限必要な英語表示の要件を整理。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-      <div class="wcard" data-wl="facility"><div class="wmeta"><span class="wbadge bf">施設登録</span><span class="wdate">2025.08</span></div><div class="wttl">OEM工場が未登録のまま輸出——ブランド側の登録だけでは足りない</div><div class="wdesc">ブランド企業のみが登録し、製造委託先が未登録だった事例。OEM委託時に確認すべきチェックリスト付き。</div><a href="#" class="wlink">事例を詳しく読む →</a></div>
-    </div>
-    <button class="morebtn" id="wlbtn" onclick="tgWl()">もっと見る ↓</button>
-  </section>
-
-</main>
-
-<aside class="side-col">
-  <div class="scard ai-card">
-    <div class="ai-hd"><span class="ai-chip">FDA AI</span><span class="ai-nm">AI専門家に即時相談</span></div>
-    <div class="ai-av">🤖</div>
-    <p class="ai-tx">FDA登録・MoCRA・輸出ラベル・表示規制について、専門特化したAIが24時間即答します。</p>
-    <button class="ai-btn">無料で質問してみる</button>
-    <p class="ai-note food-only">食品の米国輸出に特化</p>
-    <p class="ai-note cosme-only">化粧品の米国輸出に特化</p>
-  </div>
-  <div class="scard">
-    <div class="news-hd">最新の規制情報<a href="#">すべて →</a></div>
-    <a href="#" class="nitem"><div class="nthumb" style="background:linear-gradient(135deg,#7888b0,#5868a0);"></div><div><div class="ndate">2026.06.18</div><div class="nttl">FDA、合成着色料の段階的廃止を計画</div></div></a>
-    <a href="#" class="nitem food-only"><div class="nthumb" style="background:linear-gradient(135deg,#a0b898,#809878);"></div><div><div class="ndate">2026.06.16</div><div class="nttl">乳幼児用食品の鉛、新たな指導値を公表</div></div></a>
-    <a href="#" class="nitem food-only"><div class="nthumb" style="background:linear-gradient(135deg,#c0a860,#a08840);"></div><div><div class="ndate">2026.06.12</div><div class="nttl">食品トレーサビリティ規則（FSMA 204）の要点</div></div></a>
-    <a href="#" class="nitem food-only"><div class="nthumb" style="background:linear-gradient(135deg,#9888a0,#786880);"></div><div><div class="ndate">2026.06.09</div><div class="nttl">「healthy」表示の新定義が発効へ</div></div></a>
-    <a href="#" class="nitem food-only"><div class="nthumb" style="background:linear-gradient(135deg,#88a0b0,#688090);"></div><div><div class="ndate">2026.06.05</div><div class="nttl">前面表示（FOP）ラベル義務化の動向</div></div></a>
-    <a href="#" class="nitem cosme-only"><div class="nthumb" style="background:linear-gradient(135deg,#b09878,#907858);"></div><div><div class="ndate">2026.06.02</div><div class="nttl">MoCRA：化粧品施設登録の経過措置が終了</div></div></a>
-    <a href="#" class="nitem cosme-only"><div class="nthumb" style="background:linear-gradient(135deg,#c898b0,#a87890);"></div><div><div class="ndate">2026.02.11</div><div class="nttl">Cosmetics Direct更新、施設登録の隔年更新に対応</div></div></a>
-    <a href="#" class="nitem cosme-only"><div class="nthumb" style="background:linear-gradient(135deg,#d0a898,#b08878);"></div><div><div class="ndate">2026.05.04</div><div class="nttl">MoCRA記録開示ガイダンス案、査察対応の実務ポイント</div></div></a>
-  </div>
-  <div class="cta-box">
-    <div class="cta-ttl">FDA対応を<br>プロに任せたい方へ</div>
-    <div class="cta-desc">WorldShiftの専門コンサルタントが、御社の商品に合わせた対応をご提案します。まずは無料相談から。</div>
-    <a href="#" class="cta-btn">無料相談を申し込む →</a>
-  </div>
-</aside>
-</div>
-
-<footer>
-  <div class="foot-in">
-    <div class="foot-logo"><span class="foot-logo-mark">米国</span>輸出ナビ by WorldShift Inc.</div>
-    <div class="foot-copy">© 2026 WorldShift Inc. All rights reserved.</div>
-  </div>
-</footer>
-
-<!-- TOPIC MODAL -->
-<div class="tm-overlay" id="tmOverlay" role="dialog" aria-modal="true">
-  <div class="tm-box" id="tmBox">
-    <div class="tm-head">
-      <div class="tm-meta">
-        <div class="tm-category">
-          <div class="tm-icon" id="tmIcon"></div>
-          <div>
-            <div class="tm-name" id="tmName"></div>
-            <div class="tm-count" id="tmCount"></div>
+    <section class="section draggable" draggable="false">
+      <span class="drag-handle">↕ 移動</span>
+      <div class="content-grid">
+        <aside>
+          <div class="panel">
+            <h3 data-editable>人気のキーワード</h3>
+            <div class="keywords">
+              <span class="keyword" data-editable>#FDA施設登録</span><span class="keyword" data-editable>#食品表示</span>
+              <span class="keyword" data-editable>#FSVP</span><span class="keyword" data-editable>#Prior Notice</span>
+              <span class="keyword" data-editable>#MoCRA</span><span class="keyword" data-editable>#Amazon輸出</span>
+              <span class="keyword" data-editable>#物流代行</span><span class="keyword" data-editable>#HSコード</span>
+            </div>
           </div>
-        </div>
-        <button class="tm-close" id="tmClose" aria-label="閉じる">✕</button>
+          <div class="panel consult editable-image" data-bg-image>
+            <h3 data-editable>FDA対応でお困りの方へ</h3>
+            <p data-editable>専門コンサルタントが貴社の状況に合わせてサポートします。</p>
+            <button class="btn" data-editable>無料相談を予約する</button>
+          </div>
+          <div class="panel">
+            <h3 data-editable>最新情報をメールでお届け</h3>
+            <p data-editable>重要な制度変更や業界動向をいち早くお届けします。</p>
+            <input placeholder="メールアドレスを入力" style="width:100%;padding:11px;border:1px solid var(--line);border-radius:8px">
+            <button class="btn primary" style="width:100%;margin-top:9px" data-editable>登録する</button>
+          </div>
+        </aside>
+
+        <section class="panel">
+          <div class="section-title-row"><h2 class="section-title" style="font-size:20px" data-editable>新着記事</h2><span class="more" data-editable>一覧を見る</span></div>
+          <article class="article">
+            <img class="editable-image" src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=500&q=80" alt="">
+            <div><div class="meta" data-editable>2026.07.10　FDA関連</div><h3 data-editable>FDAが新たな食品表示ルールを発表</h3><p data-editable>Nutrition Factsの更新内容と追加表示の変更点を、実務への影響とあわせて解説します。</p></div>
+          </article>
+          <article class="article">
+            <img class="editable-image" src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=500&q=80" alt="">
+            <div><div class="meta" data-editable>2026.07.09　通商・関税</div><h3 data-editable>米中関税の最新動向と業界への影響分析</h3><p data-editable>追加関税の対象品目と今後の見通しを整理します。</p></div>
+          </article>
+          <article class="article">
+            <img class="editable-image" src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=500&q=80" alt="">
+            <div><div class="meta" data-editable>2026.07.08　輸出ロジ</div><h3 data-editable>米国向け海上輸送の最新スケジュール動向</h3><p data-editable>主要港の混雑状況とスケジュール遅延の最新情報をお届けします。</p></div>
+          </article>
+          <article class="article">
+            <img class="editable-image" src="https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?auto=format&fit=crop&w=500&q=80" alt="">
+            <div><div class="meta" data-editable>2026.07.07　Amazon輸出</div><h3 data-editable>Amazonで売れる日本商品・最新トレンド</h3><p data-editable>カテゴリー別の売れ筋商品と成功するためのポイントを紹介します。</p></div>
+          </article>
+          <button class="btn" style="display:block;margin:18px auto 0" data-editable>もっと記事を見る</button>
+        </section>
+
+        <aside>
+          <div class="panel">
+            <div class="section-title-row"><h3 data-editable>よく読まれている記事</h3><span class="more" data-editable>一覧を見る</span></div>
+            <div class="ranking">
+              <div class="ranking-item" data-editable>FDA施設登録とは？必要な手続きと期限を解説</div>
+              <div class="ranking-item" data-editable>米国向け食品ラベルの作成方法と注意点</div>
+              <div class="ranking-item" data-editable>Amazon FBA納品の手順と注意点</div>
+              <div class="ranking-item" data-editable>FSVP輸入者要件とは？実務対応を解説</div>
+              <div class="ranking-item" data-editable>米中貿易摩擦の最新状況</div>
+            </div>
+          </div>
+          <div class="panel">
+            <h3 data-editable>資料ダウンロード</h3>
+            <p data-editable>📄 FDA施設登録チェックリスト</p>
+            <p data-editable>📄 食品ラベル作成ガイド</p>
+            <p data-editable>📄 輸出手続きフローチャート</p>
+            <p data-editable>📄 米国輸出規制一覧</p>
+          </div>
+          <div class="panel editable-image" data-bg-image style="min-height:190px;color:#fff;background:linear-gradient(rgba(7,42,96,.75),rgba(7,42,96,.75)),url('https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=700&q=80') center/cover">
+            <h3 style="color:#fff" data-editable>オンラインセミナー開催中</h3>
+            <p data-editable>FDA・輸出に関する最新セミナー情報</p>
+            <button class="btn" data-editable>詳細を見る</button>
+          </div>
+        </aside>
       </div>
-      <div class="tm-tabs" id="tmTabs" role="tablist"></div>
-    </div>
-    <div class="tm-body" id="tmBody"></div>
-    <div class="tm-foot">
-      <button class="tm-nav-btn" id="tmPrev">← 前へ</button>
-      <div class="tm-foot-center">
-        <span class="tm-foot-pos" id="tmPos"></span>
-        <span class="tm-foot-name" id="tmFootName"></span>
+    </section>
+
+    <section class="section draggable" draggable="false">
+      <span class="drag-handle">↕ 移動</span>
+      <div class="section-title-row"><h2 class="section-title" data-editable>目的から探す</h2></div>
+      <div class="purpose-grid">
+        <div class="purpose"><span>🥫</span><div data-editable>食品をアメリカに輸出したい</div></div>
+        <div class="purpose"><span>🧴</span><div data-editable>化粧品をアメリカに輸出したい</div></div>
+        <div class="purpose"><span>🛒</span><div data-editable>Amazonで販売したい</div></div>
+        <div class="purpose"><span>🏢</span><div data-editable>FDA施設登録をしたい</div></div>
+        <div class="purpose"><span>📋</span><div data-editable>食品ラベルを作りたい</div></div>
+        <div class="purpose"><span>🚚</span><div data-editable>通関手続きを知りたい</div></div>
+        <div class="purpose"><span>🕒</span><div data-editable>費用・期間を知りたい</div></div>
       </div>
-      <button class="tm-nav-btn" id="tmNext">次へ →</button>
-    </div>
-  </div>
-</div>
+    </section>
 
-<script>
-// ===== 背景色制御 =====
-const ALL_BG_CLASSES=['sec-flow','sec-product','sec-topic-food','sec-topic-cosme','sec-topic-general','sec-warning'];
-function setBg(cls){document.body.classList.remove(...ALL_BG_CLASSES);if(cls)document.body.classList.add(cls);}
-let activeTopicBg='sec-topic-food';
+    <section class="section draggable" draggable="false">
+      <span class="drag-handle">↕ 移動</span>
+      <div class="section-title-row"><h2 class="section-title" data-editable>WorldShift Trade Watchが選ばれる理由</h2></div>
+      <div class="reasons">
+        <div class="reason"><h3 data-editable>最新情報を迅速に配信</h3><p data-editable>重要な制度変更や業界動向をいち早くお届けします。</p></div>
+        <div class="reason"><h3 data-editable>専門性の高い解説</h3><p data-editable>実務経験豊富な専門家が分かりやすく解説します。</p></div>
+        <div class="reason"><h3 data-editable>実務に役立つ情報</h3><p data-editable>すぐ使えるテンプレートやチェックリストを提供します。</p></div>
+        <div class="reason"><h3 data-editable>ワンストップサポート</h3><p data-editable>情報収集から実務支援まで一貫して支援します。</p></div>
+        <div class="reason"><h3 data-editable>信頼できる情報源</h3><p data-editable>公的機関に基づく正確で信頼性の高い情報を掲載します。</p></div>
+      </div>
+    </section>
 
-document.querySelectorAll('.topic-tab').forEach(t=>{
-  t.addEventListener('click',()=>{
-    const g=t.dataset.tg;
-    document.querySelectorAll('.topic-tab').forEach(x=>x.classList.remove('on'));
-    document.querySelectorAll('.topic-cat').forEach(x=>x.classList.remove('on'));
-    t.classList.add('on');
-    document.querySelector(`.topic-cat[data-tg="${g}"]`).classList.add('on');
-    const map={food:'sec-topic-food',cosme:'sec-topic-cosme',general:'sec-topic-general'};
-    activeTopicBg=map[g]||'sec-topic-food';
-    const stEl=document.getElementById('st');
-    if(stEl){const rect=stEl.getBoundingClientRect();if(rect.top<=150&&rect.bottom>0)setBg(activeTopicBg);}
-  });
-});
-setBg('sec-flow');
+    <footer class="draggable" draggable="false">
+      <span class="drag-handle">↕ 移動</span>
+      <div class="footgrid">
+        <div><h3 data-editable>WorldShift Trade Watch</h3><p data-editable>アメリカ市場・通商・FDA・物流・Amazon輸出ビジネスの最新情報と実務ノウハウを提供する専門ポータルサイトです。</p></div>
+        <div><h4 data-editable>カテゴリー</h4><ul><li data-editable>最新記事</li><li data-editable>FDA関連</li><li data-editable>輸出ロジ関連</li></ul></div>
+        <div><h4 data-editable>ビジネス</h4><ul><li data-editable>米Amazon輸出</li><li data-editable>通商・関税</li><li data-editable>市場動向</li></ul></div>
+        <div><h4 data-editable>資料</h4><ul><li data-editable>用語集</li><li data-editable>チェックリスト</li><li data-editable>資料ダウンロード</li></ul></div>
+        <div><h4 data-editable>サポート</h4><ul><li data-editable>サービス案内</li><li data-editable>無料相談</li><li data-editable>お問い合わせ</li></ul></div>
+      </div>
+    </footer>
+  </main>
 
-// SEARCH
-const AP=[
-  {n:'調味料・ソース',d:'醤油・味噌・たれ等。成分・栄養・アレルゲン表示の基本。',l:'食品',t:'tf',bg:'linear-gradient(135deg,#c0a060,#a88040)'},
-  {n:'だし・スープ類',d:'原材料・アレルゲン表示と成分管理。',l:'食品',t:'tf',bg:'linear-gradient(135deg,#8aaa88,#6a9068)'},
-  {n:'レトルト・即席カレー',d:'酸性化食品（LACF）・殺菌記録の対応。',l:'食品',t:'tf',bg:'linear-gradient(135deg,#b07858,#906040)'},
-  {n:'缶詰・瓶詰',d:'低酸性缶詰（FCE/SID）の登録が必要。',l:'食品',t:'tf',bg:'linear-gradient(135deg,#8898a8,#687888)'},
-  {n:'ふりかけ',d:'原材料・添加物・アレルゲン表示。',l:'食品',t:'tf',bg:'linear-gradient(135deg,#a09080,#807060)'},
-  {n:'海苔',d:'乾物の水分管理と表示・原料記録。',l:'食品',t:'tf',bg:'linear-gradient(135deg,#5a7860,#3a5840)'},
-  {n:'乾物（椎茸・昆布等）',d:'水分活性・表示と原料管理。',l:'食品',t:'tf',bg:'linear-gradient(135deg,#706858,#504838)'},
-  {n:'麺類・ラーメン',d:'原材料・添加物表示とスープの成分管理。',l:'食品',t:'tf',bg:'linear-gradient(135deg,#b09068,#907048)'},
-  {n:'スナック・せんべい',d:'着色料・アレルゲン・栄養表示の対応。',l:'菓子',t:'ts',bg:'linear-gradient(135deg,#c09860,#a07840)'},
-  {n:'グミ・キャンディ',d:'着色料・アレルゲン表示と成分基準が要。',l:'菓子',t:'ts',bg:'linear-gradient(135deg,#d08090,#b06070)'},
-  {n:'チョコレート',d:'乳・ナッツ等アレルゲンと成分表示。',l:'菓子',t:'ts',bg:'linear-gradient(135deg,#6a4838,#4a2818)'},
-  {n:'和菓子（餅・羊羹）',d:'原材料・保存と表示。水分活性に注意。',l:'菓子',t:'ts',bg:'linear-gradient(135deg,#b0a890,#908870)'},
-  {n:'お茶・抹茶',d:'残留農薬基準と効能表現の線引きに注意。',l:'飲料',t:'td',bg:'linear-gradient(135deg,#607848,#405830)'},
-  {n:'日本茶・緑茶',d:'茶葉の残留農薬・表示ルールを押さえる。',l:'飲料',t:'td',bg:'linear-gradient(135deg,#508040,#306020)'},
-  {n:'コーヒー',d:'焙煎・成分表示とカフェイン表記。',l:'飲料',t:'td',bg:'linear-gradient(135deg,#5a3828,#3a1808)'},
-  {n:'飲料・ソフトドリンク',d:'成分・栄養表示と容器表示のルール。',l:'飲料',t:'td',bg:'linear-gradient(135deg,#6888b0,#486890)'},
-  {n:'機能性・エナジー飲料',d:'カフェイン等の成分規制と表示ルール。',l:'飲料',t:'td',bg:'linear-gradient(135deg,#d0a030,#b08010)'},
-  {n:'水・ミネラルウォーター',d:'ボトル水のFDA基準・表示要件。',l:'飲料',t:'td',bg:'linear-gradient(135deg,#90b8d0,#70a0c0)'},
-  {n:'日本酒',d:'TTB＋FDAの二重対応。ラベル承認も必須。',l:'酒類',t:'ta',bg:'linear-gradient(135deg,#c0b890,#a09870)'},
-  {n:'焼酎・本格焼酎',d:'蒸留酒の輸入許可とラベル承認（TTB）。',l:'酒類',t:'ta',bg:'linear-gradient(135deg,#d0c0a0,#b0a080)'},
-  {n:'ウイスキー・蒸留酒',d:'蒸留酒の輸入許可とラベル規制（TTB）。',l:'酒類',t:'ta',bg:'linear-gradient(135deg,#806040,#604020)'},
-  {n:'ビール・発泡酒',d:'醸造酒の表示・輸入許可（TTB）。',l:'酒類',t:'ta',bg:'linear-gradient(135deg,#d0b860,#b09840)'},
-  {n:'梅酒・リキュール',d:'混成酒の分類とラベル承認（TTB）。',l:'酒類',t:'ta',bg:'linear-gradient(135deg,#a06878,#805060)'},
-  {n:'ワイン',d:'輸入許可・産地表示・ラベル（TTB）。',l:'酒類',t:'ta',bg:'linear-gradient(135deg,#904858,#703040)'},
-  {n:'サプリ・健康食品',d:'ダイエタリーサプリの表示・成分規制（DSHEA）。',l:'健康食品',t:'th',bg:'linear-gradient(135deg,#88a870,#688050)'},
-  {n:'プロテイン・栄養補助食品',d:'成分・含有量表示と健康クレームの規制。',l:'健康食品',t:'th',bg:'linear-gradient(135deg,#a0b890,#809870)'},
-  {n:'化粧品・コスメ全般',d:'MoCRAの施設登録・成分開示・責任者の新ルール。',l:'化粧品',t:'tc',bg:'linear-gradient(135deg,#d0a0b0,#b08090)'},
-  {n:'スキンケア',d:'成分規制と効能表現（化粧品vs医薬品）の境界線。',l:'化粧品',t:'tc',bg:'linear-gradient(135deg,#e0b8b8,#c09898)'},
-  {n:'メイクアップ',d:'FDAの認可色素添加物リストと表示の作法。',l:'化粧品',t:'tc',bg:'linear-gradient(135deg,#c890a0,#a87080)'},
-  {n:'ヘアケア',d:'化粧品扱いか、一部OTC医薬品かの境界判断。',l:'化粧品',t:'tc',bg:'linear-gradient(135deg,#908090,#706070)'},
-  {n:'ボディケア・石けん',d:'石けんの定義でFDA/CPSC管轄が分かれる。',l:'化粧品',t:'tc',bg:'linear-gradient(135deg,#b0c0b0,#90a090)'},
-  {n:'香水・フレグランス',d:'成分開示とアルコール・引火性の取り扱い。',l:'化粧品',t:'tc',bg:'linear-gradient(135deg,#d0b898,#b09878)'},
-  {n:'ネイル用品',d:'成分規制と表示要件。施術器具は別管轄。',l:'化粧品',t:'tc',bg:'linear-gradient(135deg,#c0a0b8,#a080a0)'},
-];
-const qi=document.getElementById('pq'),cl=document.getElementById('pclr'),sr=document.getElementById('sres'),ca=document.getElementById('cat');
-qi.addEventListener('input',()=>{
-  const q=qi.value.trim();
-  if(!q){clrS();return;}
-  cl.classList.add('on');ca.style.display='none';sr.classList.add('on');
-  const modeFood=document.body.classList.contains('mode-food');
-  const h=AP.filter(p=>{
-    const catOk=modeFood?p.t!=='tc':p.t==='tc';
-    return catOk&&(p.n.includes(q)||p.d.includes(q)||p.l.includes(q));
-  });
-  sr.innerHTML=h.length
-    ?h.map(p=>`<div class="pcard"><div class="pthumb" style="background:${p.bg};"></div><div class="pbody"><span class="ptag ${p.t}">${p.l}</span><div class="pname">${p.n}</div><div class="pdesc">${p.d}</div><a href="#" class="plink">対応を調べる →</a></div></div>`).join('')
-    :`<div class="sempty">「${q}」に一致する商品が見つかりませんでした。</div>`;
-});
-function clrS(){qi.value='';cl.classList.remove('on');sr.classList.remove('on');sr.innerHTML='';ca.style.display='';}
+  <input type="file" id="imagePicker" accept="image/*" hidden>
 
-document.querySelectorAll('.ctab').forEach(t=>{
-  t.addEventListener('click',()=>{
-    const g=t.dataset.g;
-    document.querySelectorAll('.ctab').forEach(x=>x.classList.remove('on'));
-    document.querySelectorAll('.cgroup').forEach(x=>x.classList.remove('on'));
-    t.classList.add('on');
-    document.querySelector(`.cgroup[data-g="${g}"]`).classList.add('on');
-  });
-});
+  <script>
+    const site = document.getElementById('site');
+    const toggle = document.getElementById('toggleEdit');
+    const imagePicker = document.getElementById('imagePicker');
+    let editMode = false;
+    let imageTarget = null;
+    let dragged = null;
 
-// WL
-const WL=6;let wo=false;
-function modeOK(el){
-  if(document.body.classList.contains('mode-food')&&el.classList.contains('cosme-only'))return false;
-  if(document.body.classList.contains('mode-cosme')&&el.classList.contains('food-only'))return false;
-  return true;
-}
-function applyWl(tag){
-  document.querySelectorAll('.wcard').forEach(c=>{
-    const match=(tag==='all'||c.dataset.wl===tag)&&modeOK(c);
-    c.classList.toggle('hide',!match);
-  });
-  wo=false;collapseWl();upBtn();
-}
-function collapseWl(){let n=0;document.querySelectorAll('.wcard:not(.hide)').forEach(c=>{n++;if(n>WL)c.classList.add('hide');});}
-function upBtn(){
-  const tag=document.querySelector('.wf.on').dataset.wl;
-  const total=[...document.querySelectorAll('.wcard')].filter(c=>(tag==='all'||c.dataset.wl===tag)&&modeOK(c)).length;
-  const btn=document.getElementById('wlbtn');
-  if(total<=WL){btn.style.display='none';}
-  else{btn.style.display='';btn.textContent=wo?'折りたたむ ↑':'もっと見る ↓';}
-}
-function tgWl(){
-  wo=!wo;
-  const tag=document.querySelector('.wf.on').dataset.wl;
-  document.querySelectorAll('.wcard').forEach(c=>{const m=(tag==='all'||c.dataset.wl===tag)&&modeOK(c);if(m)c.classList.remove('hide');});
-  if(!wo)collapseWl();upBtn();
-}
-document.querySelectorAll('.wf').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.wf').forEach(x=>x.classList.remove('on'));b.classList.add('on');applyWl(b.dataset.wl);});});
-applyWl('all');
-
-// ===== GLOBAL MODE SWITCH =====
-function setMode(mode){
-  if(document.body.classList.contains('mode-'+mode))return;
-  document.body.classList.remove('mode-food','mode-cosme');
-  document.body.classList.add('mode-'+mode);
-  document.querySelectorAll('.mode-tab').forEach(b=>b.classList.toggle('on',b.dataset.mode===mode));
-
-  // 商品検索：無関係なカテゴリタブがONのままなら既定タブへ
-  const ctabOn=document.querySelector('.ctab.on');
-  if(ctabOn){
-    const validNow=(mode==='cosme')?ctabOn.dataset.g==='c':ctabOn.dataset.g!=='c';
-    if(!validNow){
-      const fallback=document.querySelector(`.ctab[data-g="${mode==='cosme'?'c':'f'}"]`);
-      if(fallback)fallback.click();
+    function setEditMode(on){
+      editMode = on;
+      document.body.classList.toggle('edit-mode', on);
+      toggle.textContent = on ? '編集を終了' : '編集を開始';
+      document.querySelectorAll('[data-editable]').forEach(el => {
+        el.contentEditable = on ? 'true' : 'false';
+      });
+      document.querySelectorAll('.draggable').forEach(el => {
+        el.draggable = on;
+      });
     }
-  }
-  if(qi.value.trim())qi.dispatchEvent(new Event('input'));else clrS();
 
-  // テーマ別に学ぶ：無関係なタブがONのままなら既定タブへ
-  const topicOn=document.querySelector('.topic-tab.on');
-  if(topicOn&&(topicOn.dataset.tg==='food'||topicOn.dataset.tg==='cosme')){
-    const validNow=topicOn.dataset.tg===mode;
-    if(!validNow){
-      const fallback=document.querySelector(`.topic-tab[data-tg="${mode}"]`);
-      if(fallback)fallback.click();
-    }
-  }
+    toggle.addEventListener('click',()=>setEditMode(!editMode));
 
-  // Warning Letter：無関係なフィルターがONのままなら「すべて」へ
-  const wfOn=document.querySelector('.wf.on');
-  const hiddenTags=mode==='cosme'?['haccp','import']:['cosmetic'];
-  if(wfOn&&hiddenTags.includes(wfOn.dataset.wl)){
-    document.querySelector('.wf[data-wl="all"]').click();
-  }else{
-    applyWl(wfOn.dataset.wl);
-  }
-}
+    document.addEventListener('click', e => {
+      if(!editMode) return;
+      const img = e.target.closest('.editable-image');
+      if(!img) return;
+      imageTarget = img;
+      imagePicker.click();
+    });
 
-// QA SCROLL
-const SECS=['sf','sp','st','sw'];
-const SEC_BG={sf:'sec-flow',sp:'sec-product',st:null,sw:'sec-warning'};
-const QACards=document.querySelectorAll('.qa-card[data-qa]');
-window.addEventListener('scroll',()=>{
-  let cur=SECS[0];
-  const stickyH=document.getElementById('qaSticky').offsetHeight+52;
-  SECS.forEach(id=>{
-    const el=document.getElementById(id);if(!el)return;
-    const hd=el.querySelector('.sec-head')||el;
-    let absTop=0;let node=hd;while(node){absTop+=node.offsetTop;node=node.offsetParent;}
-    if(window.scrollY>=absTop-stickyH-80)cur=id;
-  });
-  QACards.forEach(c=>c.classList.toggle('active',c.dataset.qa===cur));
-  const bgCls=cur==='st'?activeTopicBg:SEC_BG[cur];
-  setBg(bgCls);
-},{passive:true});
-QACards.forEach(c=>{
-  c.addEventListener('click',e=>{
-    e.preventDefault();
-    const t=document.getElementById(c.dataset.qa);
-    if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
-  });
-});
+    imagePicker.addEventListener('change',()=>{
+      const file = imagePicker.files[0];
+      if(!file || !imageTarget) return;
+      const reader = new FileReader();
+      reader.onload = ev => {
+        if(imageTarget.tagName === 'IMG'){
+          imageTarget.src = ev.target.result;
+        } else {
+          const current = getComputedStyle(imageTarget).backgroundImage;
+          const overlay = current.includes('linear-gradient') ? 'linear-gradient(rgba(7,42,96,.78),rgba(7,42,96,.78)),' : '';
+          imageTarget.style.backgroundImage = overlay + `url("${ev.target.result}")`;
+          imageTarget.style.backgroundSize = 'cover';
+          imageTarget.style.backgroundPosition = 'center';
+        }
+      };
+      reader.readAsDataURL(file);
+      imagePicker.value = '';
+    });
 
-// ===== TOPIC MODAL =====
-const TOPIC_DATA={
-  food:[
-    {id:'facility-reg',icon:'🏭',name:'FDA食品施設登録',count:5,subs:[
-      {id:'what',title:'施設登録とは',content:`FDA食品施設登録とは、米国で消費される食品を製造・加工・包装・保管する施設について、FDAへ施設情報を登録する制度です。
-
-この登録の目的は、FDAが「どの施設が、どこで、どのような食品を扱っているか」を把握し、食品事故やリコール、査察対応の際に追跡できるようにすることです。そのため、食品施設登録は商品そのものの承認ではなく、あくまで施設情報の登録制度です。登録番号を持っていても、それだけで商品や施設がFDAに「認可」されたことにはなりません。
-
-また、食品施設登録は一度登録して終わりではなく、偶数年ごとの更新や、登録情報に変更があった場合の修正対応も必要になります。米国輸出を継続するのであれば、単なる初回手続きではなく、輸出を続けるための基礎インフラとして考える必要があります。`},
-      {id:'target',title:'対象施設',content:`FDA食品施設登録の対象になるのは、米国で消費される食品を製造・加工・包装・保管する施設です。基本的には、以下のような施設が対象候補になります。
-
-《対象になりやすい施設》
-・食品を製造する工場
-・原料や製品を加工する施設
-・充填・小分け・包装を行う施設
-・米国向け出荷前の製品を保管する倉庫
-・OEM製造先や委託先工場
-
-一方で、すべての場所が登録対象になるわけではありません。たとえば、単なる事務所、販売だけを行う拠点、またはFDA上の例外に該当する施設は、必ずしも登録対象ではありません。また、商品によっては、そもそもFDA食品ではなく、USDA/FSIS管轄の肉・家禽・一部卵製品や、TTB中心で見る酒類に当たる場合もあり、その場合はFDA食品施設登録の考え方だけでは整理できません。
-
-実務上は、「自社では製造していないが、OEM先が製造している」ケースや、「最終包装だけ別施設で行っている」ケースなどで、どこまで登録対象になるのか迷いやすくなります。食品施設登録は"ブランドオーナーの登録"ではなく、あくまで施設単位の登録なので、販売者ではなく、実際に製造・加工・包装・保管を行う施設を起点に確認することが重要です。`},
-      {id:'info',title:'必要情報',content:`FDA食品施設登録では、単に施設名を登録するだけではなく、施設の基本情報、運営者情報、食品カテゴリ、米国代理人情報など、複数の情報をFDAへ提出します。そのため、登録前には入力に必要な情報をあらかじめ整理しておくことが重要です。
-
-《主に必要になる情報》
-・施設名、所在地、連絡先
-・施設の所有者・運営者・責任者情報
-・施設で扱う食品カテゴリ
-・緊急連絡先情報
-・海外施設の場合は米国代理人（US Agent）の情報
-・UFI（Unique Facility Identifier）としてFDAが認める識別子（DUNS番号）
-
-特に近年は、食品施設登録においてUFIの提出が求められており、現時点ではFDAはD-U-N-S（DUNS番号）を受け入れ可能なUFIとして扱っています。そのため、初回登録前にDUNS番号の確認・取得が必要になるケースがあります。
-
-また、海外施設では米国代理人（US Agent）の情報が必須です。US Agentは、FDAと海外施設の間の連絡窓口となる米国内の担当者であり、食品施設登録上の重要な情報のひとつです。
-
-実務上は、「どの施設情報を入れるべきか」「どの食品カテゴリで登録するか」「US Agentを誰にするか」といった点で詰まりやすいため、事前に整理しておくとスムーズです。`},
-      {id:'update',title:'更新・変更',content:`FDA食品施設登録は、一度登録したら終わりではありません。登録後も、偶数年ごとの更新と、必要に応じた登録情報の変更が必要です。
-
-まず、食品施設登録は2年ごとの更新制で、偶数年の10月1日から12月31日までの間に更新を行う必要があります。これを過ぎると、登録は失効扱いとなり、FDA上有効な施設登録がない状態になります。輸出を継続している企業にとっては、更新漏れはそのまま輸出リスクにつながるため、かなり重要な管理項目です。
-
-また、更新とは別に、登録内容に変更があった場合は、必要に応じて登録情報を修正しなければなりません。
-
-《変更対応が必要になりやすい例》
-・施設名や所在地が変わった
-・所有者や責任者情報が変わった
-・米国代理人（US Agent）を変更した
-・取り扱う食品カテゴリが大きく変わった
-・施設の閉鎖や事業譲渡があった
-
-特に、US Agentの変更や施設の所有権変更は、見落としやすい一方で実務上の影響が大きいポイントです。たとえば所有者変更があった場合、単なる更新ではなく、既存登録の取消や再登録の検討が必要になることもあります。
-
-そのため、食品施設登録は「初回登録担当者だけが知っている状態」にせず、更新時期・変更時の確認フローを社内で管理しておくことが重要です。`}
-    ]},
-    {id:'us-agent',icon:'🤝',name:'米国代理人（US Agent）',count:3,subs:[
-      {id:'what',title:'US Agentとは',content:`米国代理人（US Agent）とは、海外の食品施設がFDA食品施設登録を行う際に設定する、米国内の連絡窓口です。FDAは、海外施設に対して直接連絡を取るだけでなく、必要に応じて米国内の窓口を通じて連絡できるようにするため、食品施設登録においてUS Agentの情報を求めています。
-
-US Agentは、FDAからの問い合わせや通知、査察関連の連絡などを受け取る役割を持つ存在であり、特に海外施設にとっては、FDAとのやり取りを円滑にするための重要な窓口です。
-
-ただし、US Agentは輸入者（Importer）やFSVP Importerとは別の役割です。US Agentはあくまで施設登録上の米国内連絡先であり、輸入通関上の責任者や、FSVPの実施主体とは一致しない場合があります。ここを混同すると、輸出スキーム全体の整理が崩れやすくなるため注意が必要です。
-
-また、US Agentを設定したからといって、その人や会社が自動的にFDA対応や輸入実務をすべて担ってくれるわけではありません。どこまで対応してもらうかは契約や依頼範囲によって異なるため、「US Agent＝米国側の何でも屋」ではないという点も押さえておく必要があります。`},
-      {id:'who',title:'誰を選べるか',content:`US Agentには、米国内に住所または事業拠点を持ち、FDAからの連絡を受けられる個人または法人を選ぶ必要があります。実務上は、以下のような候補が考えられます。
-
-《US Agentになり得る主な候補》
-・米国の輸入者・販売パートナー
-・米国内の関連会社や現地法人
-・FDA対応を行う代行会社・コンサル会社
-・米国内に拠点を持つ個人または事業者
-
-一方で、誰でも形式上名前を入れればよいわけではありません。FDAからの連絡を受けても対応できない人や、登録後に連絡が取れなくなる人を設定すると、実務上大きなリスクになります。たとえば、単に知人がアメリカに住んでいるからという理由だけでUS Agentにするのは、基本的にはおすすめできません。
-
-US Agentは、少なくともFDAからの連絡を確実に受け取り、必要に応じて施設側へつなげられる体制が必要です。そのため、選定時には「米国内にいるか」だけでなく、連絡の確実性、対応スピード、FDA関連の理解度、契約終了時の引継ぎのしやすさまで見ておくことが重要です。
-
-また、輸入者や販売パートナーをUS Agentにする場合は、将来的に取引先が変わった際に、施設登録の変更が必要になる可能性もあります。長期的に輸出を続けるのであれば、"今の取引先都合だけで決めてよいか" という視点も持っておくと安心です。`},
-      {id:'scope',title:'依頼範囲',content:`US Agentは、食品施設登録上は「FDAと海外施設の間の米国内窓口」という位置づけですが、実務上はどこまで対応してもらうかを事前に整理しておくことが重要です。US Agentという名称だけでは、具体的な業務範囲は自動的には決まりません。
-
-最低限、US Agentに期待されるのは、FDAからの連絡を受け取ること、そして必要に応じて海外施設へ連携することです。ただし、実際には依頼先によって、対応範囲はかなり異なります。
-
-《最低限の窓口業務のみ》
-・食品施設登録にUS Agentとして名前を載せる
-・FDAからの連絡を受領し、施設側へ転送する
-
-《実務サポートを含むケース》
-・FDAからの問い合わせ内容を整理して共有する
-・施設登録の更新・変更時のサポートを行う
-・緊急時の連絡窓口になる
-・査察・Warning Letter・輸入時照会などの初動連携をサポートする
-
-そのため、US Agentを選ぶ際には、「名前だけ借りるのか」「緊急時の窓口まで頼むのか」「FDA関連の実務サポートまで含めるのか」を明確にしておく必要があります。
-
-特に注意したいのは、US AgentはFSVPの実施主体ではないという点です。US Agentにしている会社が、そのままFSVP対応や輸入実務まで担ってくれるとは限りません。もし、食品施設登録だけでなく、FSVP、Prior Notice、FDA照会対応まで一括で任せたい場合は、US Agentの役割とあわせて、別途どの業務を委託するのかを整理して契約しておくことが大切です。`}
-    ]},
-    {id:'fsvp',icon:'🔎',name:'FSVP（外国供給業者検証）',count:5,subs:[{id:'p1',title:'FSVPとは',content:'準備中'},{id:'p2',title:'対象者',content:'準備中'},{id:'p3',title:'FSVP Importerとは',content:'準備中'},{id:'p4',title:'必要書類',content:'準備中'},{id:'p5',title:'Amazon FBA時の注意',content:'準備中'}]},
-    {id:'prior-notice',icon:'📋',name:'事前通知（Prior Notice）',count:5,subs:[{id:'p1',title:'Prior Noticeとは',content:'準備中'},{id:'p2',title:'対象貨物',content:'準備中'},{id:'p3',title:'誰が提出するか',content:'準備中'},{id:'p4',title:'必要情報',content:'準備中'},{id:'p5',title:'提出タイミング',content:'準備中'}]},
-    {id:'fce',icon:'🥫',name:'FCE登録 / SID提出',count:8,subs:[{id:'p1',title:'FCEとは',content:'準備中'},{id:'p2',title:'SIDとは',content:'準備中'},{id:'p3',title:'対象食品',content:'準備中'},{id:'p4',title:'対象外ケース',content:'準備中'},{id:'p5',title:'pH・水分活性',content:'準備中'},{id:'p6',title:'レトルト・瓶詰判定',content:'準備中'},{id:'p7',title:'必要情報',content:'準備中'},{id:'p8',title:'よくある誤解',content:'準備中'}]},
-    {id:'pcqi',icon:'🛡️',name:'PCQI / Food Safety Plan',count:6,subs:[{id:'p1',title:'PCQIとは',content:'準備中'},{id:'p2',title:'Food Safety Planとは',content:'準備中'},{id:'p3',title:'必要になる事業者',content:'準備中'},{id:'p4',title:'ハザード分析',content:'準備中'},{id:'p5',title:'予防管理',content:'準備中'},{id:'p6',title:'リコール計画',content:'準備中'}]},
-    {id:'label-food',icon:'🏷️',name:'食品ラベル',count:7,subs:[{id:'p1',title:'必須表示',content:'準備中'},{id:'p2',title:'Nutrition Facts',content:'準備中'},{id:'p3',title:'原材料表示',content:'準備中'},{id:'p4',title:'アレルゲン表示',content:'準備中'},{id:'p5',title:'原産国表示',content:'準備中'},{id:'p6',title:'クレーム表現',content:'準備中'},{id:'p7',title:'サプリ表示との違い',content:'準備中'}]},
-    {id:'ingredient-food',icon:'🧪',name:'成分・添加物確認',count:8,subs:[{id:'p1',title:'食品添加物',content:'準備中'},{id:'p2',title:'GRAS',content:'準備中'},{id:'p3',title:'色素',content:'準備中'},{id:'p4',title:'保存料',content:'準備中'},{id:'p5',title:'甘味料',content:'準備中'},{id:'p6',title:'アレルゲン',content:'準備中'},{id:'p7',title:'サプリ成分',content:'準備中'},{id:'p8',title:'必要書類',content:'準備中'}]},
-    {id:'post-food',icon:'🔄',name:'輸出後管理（食品）',count:8,subs:[{id:'p1',title:'施設更新',content:'準備中'},{id:'p2',title:'FSVP見直し',content:'準備中'},{id:'p3',title:'ラベル変更',content:'準備中'},{id:'p4',title:'原料変更',content:'準備中'},{id:'p5',title:'Detention',content:'準備中'},{id:'p6',title:'Import Alert',content:'準備中'},{id:'p7',title:'Warning Letter',content:'準備中'},{id:'p8',title:'回収対応',content:'準備中'}]},
-  ],
-  cosme:[
-    {id:'mocra-reg',icon:'🏭',name:'MoCRA施設登録',count:6,subs:[{id:'p1',title:'MoCRA施設登録とは',content:'準備中'},{id:'p2',title:'対象施設',content:'準備中'},{id:'p3',title:'対象外施設',content:'準備中'},{id:'p4',title:'小規模事業者免除',content:'準備中'},{id:'p5',title:'FEI番号',content:'準備中'},{id:'p6',title:'US Agent',content:'準備中'}]},
-    {id:'mocra-list',icon:'📦',name:'MoCRA製品リスティング',count:6,subs:[{id:'p1',title:'製品リスティングとは',content:'準備中'},{id:'p2',title:'必要情報',content:'準備中'},{id:'p3',title:'成分情報',content:'準備中'},{id:'p4',title:'RPの役割',content:'準備中'},{id:'p5',title:'更新タイミング',content:'準備中'},{id:'p6',title:'処方変更時の対応',content:'準備中'}]},
-    {id:'rp',icon:'👤',name:'Responsible Person（RP）',count:7,subs:[{id:'p1',title:'RPとは',content:'準備中'},{id:'p2',title:'誰がなれるか',content:'準備中'},{id:'p3',title:'ラベル表示との関係',content:'準備中'},{id:'p4',title:'US Agentとの違い',content:'準備中'},{id:'p5',title:'苦情対応',content:'準備中'},{id:'p6',title:'有害事象報告',content:'準備中'},{id:'p7',title:'記録管理',content:'準備中'}]},
-    {id:'safety',icon:'🔬',name:'Safety Substantiation',count:7,subs:[{id:'p1',title:'安全性根拠とは',content:'準備中'},{id:'p2',title:'必要資料',content:'準備中'},{id:'p3',title:'安定性試験',content:'準備中'},{id:'p4',title:'微生物試験',content:'準備中'},{id:'p5',title:'保存効力試験',content:'準備中'},{id:'p6',title:'刺激性確認',content:'準備中'},{id:'p7',title:'ベビー・目元商品',content:'準備中'}]},
-    {id:'label-cosme',icon:'🏷️',name:'化粧品ラベル',count:7,subs:[{id:'p1',title:'必須表示',content:'準備中'},{id:'p2',title:'成分表示',content:'準備中'},{id:'p3',title:'責任者表示',content:'準備中'},{id:'p4',title:'警告表示',content:'準備中'},{id:'p5',title:'効能表現',content:'準備中'},{id:'p6',title:'drug claimになる表現',content:'準備中'},{id:'p7',title:'香料表示',content:'準備中'}]},
-    {id:'ingredient-cosme',icon:'🧪',name:'成分規制',count:8,subs:[{id:'p1',title:'禁止・制限成分',content:'準備中'},{id:'p2',title:'色素',content:'準備中'},{id:'p3',title:'防腐剤',content:'準備中'},{id:'p4',title:'香料',content:'準備中'},{id:'p5',title:'PFAS',content:'準備中'},{id:'p6',title:'タルク',content:'準備中'},{id:'p7',title:'重金属',content:'準備中'},{id:'p8',title:'CBD等グレー成分',content:'準備中'}]},
-    {id:'otc',icon:'⚕️',name:'OTC・境界商品',count:7,subs:[{id:'p1',title:'化粧品とOTCの違い',content:'準備中'},{id:'p2',title:'日焼け止め',content:'準備中'},{id:'p3',title:'ニキビケア',content:'準備中'},{id:'p4',title:'フケ防止',content:'準備中'},{id:'p5',title:'制汗剤',content:'準備中'},{id:'p6',title:'オーラルケア',content:'準備中'},{id:'p7',title:'石けん例外',content:'準備中'}]},
-    {id:'post-cosme',icon:'🔄',name:'輸出後管理（化粧品）',count:7,subs:[{id:'p1',title:'施設登録更新',content:'準備中'},{id:'p2',title:'リスティング更新',content:'準備中'},{id:'p3',title:'SAE報告',content:'準備中'},{id:'p4',title:'苦情対応',content:'準備中'},{id:'p5',title:'回収対応',content:'準備中'},{id:'p6',title:'処方変更',content:'準備中'},{id:'p7',title:'Warning Letter対応',content:'準備中'}]},
-  ],
-  general:[
-    {id:'jurisdiction',icon:'⚖️',name:'管轄の切り分け',count:6,subs:[{id:'p1',title:'FDA',content:'準備中'},{id:'p2',title:'USDA',content:'準備中'},{id:'p3',title:'TTB',content:'準備中'},{id:'p4',title:'OTC',content:'準備中'},{id:'p5',title:'CPSC',content:'準備中'},{id:'p6',title:'EPAの違い',content:'準備中'}]},
-    {id:'classification',icon:'🗂️',name:'商品分類の考え方',count:4,subs:[{id:'p1',title:'食品かサプリか',content:'準備中'},{id:'p2',title:'化粧品かOTCか',content:'準備中'},{id:'p3',title:'酒類はTTB',content:'準備中'},{id:'p4',title:'肉・家禽はUSDA',content:'準備中'}]},
-    {id:'customs',icon:'🚢',name:'通関・輸入時の対応',count:5,subs:[{id:'p1',title:'FDA照会',content:'準備中'},{id:'p2',title:'CBP照会',content:'準備中'},{id:'p3',title:'書類不一致',content:'準備中'},{id:'p4',title:'Amazon FBA',content:'準備中'},{id:'p5',title:'Importer情報',content:'準備中'}]},
-    {id:'trouble',icon:'🚨',name:'トラブル対応',count:5,subs:[{id:'p1',title:'Detention',content:'準備中'},{id:'p2',title:'Import Alert',content:'準備中'},{id:'p3',title:'Warning Letter',content:'準備中'},{id:'p4',title:'Recall',content:'準備中'},{id:'p5',title:'査察対応',content:'準備中'}]},
-  ]
-};
-
-const CAT_CLASS={food:'c-food',cosme:'c-cosme',general:'c-general'};
-let flatList=[];
-Object.keys(TOPIC_DATA).forEach(catKey=>{
-  TOPIC_DATA[catKey].forEach((item,idx)=>{flatList.push({catKey,catClass:CAT_CLASS[catKey],item,idx});});
-});
-
-let curFlat=0,curSub=0;
-const tmOverlay=document.getElementById('tmOverlay');
-const tmBox=document.getElementById('tmBox');
-const tmIcon=document.getElementById('tmIcon');
-const tmName=document.getElementById('tmName');
-const tmCount=document.getElementById('tmCount');
-const tmTabs=document.getElementById('tmTabs');
-const tmBody=document.getElementById('tmBody');
-const tmPos=document.getElementById('tmPos');
-const tmFootName=document.getElementById('tmFootName');
-const tmPrev=document.getElementById('tmPrev');
-const tmNext=document.getElementById('tmNext');
-document.getElementById('tmClose').addEventListener('click',closeModal);
-
-function renderModal(flatIdx,subIdx){
-  curFlat=flatIdx;
-  const item=flatList[flatIdx].item;
-  curSub=Math.max(0,Math.min(subIdx,item.subs.length-1));
-  const catClass=flatList[flatIdx].catClass;
-  tmBox.className='tm-box '+catClass;
-  tmIcon.textContent=item.icon;
-  tmName.textContent=item.name;
-  tmCount.textContent=item.subs.length+'記事';
-  tmTabs.innerHTML=item.subs.map((s,i)=>
-    `<button class="tm-tab${i===curSub?' on':''}" data-si="${i}">${s.title}</button>`
-  ).join('');
-  tmTabs.querySelectorAll('.tm-tab').forEach(t=>{
-    t.addEventListener('click',()=>renderModal(curFlat,parseInt(t.dataset.si)));
-  });
-  renderPane(item.subs[curSub]);
-  tmBody.scrollTop=0;
-  tmPos.textContent=`${curFlat+1} / ${flatList.length}`;
-  tmFootName.textContent=item.name;
-  tmPrev.disabled=curFlat<=0;
-  tmNext.disabled=curFlat>=flatList.length-1;
-}
-
-function renderPane(sub){
-  const lines=sub.content.split('\n');
-  let html=`<div class="tm-pane-ttl">${sub.title}</div><div class="tm-pane-body">`;
-  let inList=false;
-  lines.forEach(line=>{
-    const t=line.trim();
-    if(!t){if(inList){html+='</ul>';inList=false;}html+='<br>';return;}
-    if(t.startsWith('《')&&t.endsWith('》')){if(inList){html+='</ul>';inList=false;}html+=`<span class="tm-list-head">${t}</span>`;return;}
-    if(t.startsWith('・')){if(!inList){html+='<ul>';inList=true;}html+=`<li>${t.slice(1)}</li>`;return;}
-    if(inList){html+='</ul>';inList=false;}
-    html+=`<p style="margin-bottom:10px">${t}</p>`;
-  });
-  if(inList)html+='</ul>';
-  html+='</div>';
-  tmBody.innerHTML=html;
-}
-
-function openModal(flatIdx,subIdx){renderModal(flatIdx,subIdx||0);tmOverlay.classList.add('open');document.body.style.overflow='hidden';}
-function closeModal(){tmOverlay.classList.remove('open');document.body.style.overflow='';}
-tmPrev.addEventListener('click',()=>{if(curFlat>0)renderModal(curFlat-1,0);});
-tmNext.addEventListener('click',()=>{if(curFlat<flatList.length-1)renderModal(curFlat+1,0);});
-tmOverlay.addEventListener('click',e=>{if(e.target===tmOverlay)closeModal();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
-
-// tcard / tsub クリックフック
-document.querySelectorAll('.topic-cat .tcard').forEach(card=>{
-  const cat=card.closest('.topic-cat');if(!cat)return;
-  const catKey=cat.dataset.tg;
-  const cards=Array.from(cat.querySelectorAll('.tcard'));
-  const cardIdx=cards.indexOf(card);
-  const flatIdx=flatList.findIndex(f=>f.catKey===catKey&&f.idx===cardIdx);
-  if(flatIdx<0)return;
-  card.addEventListener('click',e=>{
-    const tsub=e.target.closest('.tsub');
-    if(tsub){
+    document.addEventListener('dragstart',e=>{
+      if(!editMode) return;
+      const el = e.target.closest('.draggable');
+      if(!el) return;
+      dragged = el;
+      el.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+    });
+    document.addEventListener('dragend',()=>{
+      if(dragged) dragged.classList.remove('dragging');
+      dragged = null;
+    });
+    document.addEventListener('dragover',e=>{
+      if(!editMode || !dragged) return;
       e.preventDefault();
-      const subs=Array.from(card.querySelectorAll('.tsub'));
-      const subIdx=subs.indexOf(tsub);
-      openModal(flatIdx,subIdx>=0?subIdx:0);
-    } else if(e.target.closest('.tcard-head,.tcard-subs,.tcard-foot')){
-      e.preventDefault();
-      openModal(flatIdx,0);
-    }
-  });
-});
-</script>
+      const target = e.target.closest('.draggable');
+      if(!target || target===dragged || target.parentElement!==dragged.parentElement) return;
+      const rect = target.getBoundingClientRect();
+      const after = e.clientY > rect.top + rect.height/2;
+      target.parentElement.insertBefore(dragged, after ? target.nextSibling : target);
+    });
+
+    document.getElementById('saveBtn').addEventListener('click',()=>{
+      const clone = site.cloneNode(true);
+      clone.querySelectorAll('[contenteditable]').forEach(el=>el.removeAttribute('contenteditable'));
+      localStorage.setItem('worldshiftEditableSite', clone.innerHTML);
+      alert('ブラウザに保存しました。');
+    });
+
+    document.getElementById('resetBtn').addEventListener('click',()=>{
+      if(confirm('保存内容を削除して初期状態に戻しますか？')){
+        localStorage.removeItem('worldshiftEditableSite');
+        location.reload();
+      }
+    });
+
+    document.getElementById('exportBtn').addEventListener('click',()=>{
+      const clone = document.documentElement.cloneNode(true);
+      clone.querySelectorAll('[contenteditable]').forEach(el=>el.removeAttribute('contenteditable'));
+      clone.querySelector('.editorbar')?.remove();
+      clone.querySelector('#imagePicker')?.remove();
+      clone.querySelectorAll('.drag-handle').forEach(el=>el.remove());
+      clone.querySelector('body')?.classList.remove('edit-mode');
+      clone.querySelectorAll('.draggable').forEach(el=>el.removeAttribute('draggable'));
+      const blob = new Blob(['<!DOCTYPE html>\n'+clone.outerHTML],{type:'text/html'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'worldshift-trade-watch.html';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+
+    const saved = localStorage.getItem('worldshiftEditableSite');
+    if(saved) site.innerHTML = saved;
+    setEditMode(false);
+  </script>
 </body>
 </html>
-
