@@ -45,15 +45,197 @@
 <footer class="footer editable"><div class="footergrid"><div><h3 data-editable>WorldShift Trade Watch</h3><p data-editable>米国輸出の最新情報と実務知識を提供する専門ポータルです。</p></div><div><h4 data-editable>ニュース</h4><ul><li data-editable>最新記事</li><li data-editable>市場トレンド</li></ul></div><div><h4 data-editable>専門情報</h4><ul><li data-editable>FDA規制</li><li data-editable>物流・通関</li></ul></div><div><h4 data-editable>学ぶ</h4><ul><li data-editable>教科書・ガイド</li><li data-editable>調査・レポート</li></ul></div><div><h4 data-editable>サポート</h4><ul><li data-editable>ニュースレター</li><li data-editable>無料相談</li></ul></div></div></footer>
 </main></div></div>
 <script>
-let edit=false,selected=null;const site=document.getElementById('site'),nameBox=document.getElementById('selname');
-function hex(rgb){if(!rgb||rgb==='transparent')return'#ffffff';let m=rgb.match(/\d+/g);return m?'#'+m.slice(0,3).map(x=>(+x).toString(16).padStart(2,'0')).join(''):'#ffffff'}
-function pick(el){document.querySelectorAll('.selected').forEach(x=>x.classList.remove('selected'));selected=el;if(!el)return;el.classList.add('selected');nameBox.textContent=(el.tagName+' '+el.className).slice(0,80);let c=getComputedStyle(el);bg.value=hex(c.backgroundColor);fg.value=hex(c.color);pad.value=parseInt(c.paddingTop)||0;mar.value=parseInt(c.marginTop)||0;rad.value=parseInt(c.borderRadius)||0}
-toggle.onclick=()=>{edit=!edit;document.body.classList.toggle('edit-mode',edit);toggle.textContent=edit?'編集を終了':'編集を開始';document.querySelectorAll('[data-editable]').forEach(x=>x.contentEditable=edit?'true':'false')};
-document.addEventListener('click',e=>{if(!edit||e.target.closest('.panel'))return;let t=e.target.closest('.editable,[data-editable],.image-edit');if(t){e.preventDefault();pick(t)}});
-function st(k,v){if(selected)selected.style[k]=v}bg.oninput=e=>st('backgroundColor',e.target.value);fg.oninput=e=>st('color',e.target.value);pad.oninput=e=>st('padding',e.target.value+'px');mar.oninput=e=>st('margin',e.target.value+'px');rad.oninput=e=>st('borderRadius',e.target.value+'px');wid.onchange=e=>st('width',e.target.value);sh.onchange=e=>st('boxShadow',e.target.value);align.onchange=e=>st('textAlign',e.target.value);
-up.onclick=()=>{if(selected&&selected.previousElementSibling)selected.parentElement.insertBefore(selected,selected.previousElementSibling)};down.onclick=()=>{if(selected&&selected.nextElementSibling)selected.parentElement.insertBefore(selected.nextElementSibling,selected)};dup.onclick=()=>{if(selected)selected.parentElement.insertBefore(selected.cloneNode(true),selected.nextSibling)};hide.onclick=()=>{if(selected){selected.classList.add('hidden');selected=null;nameBox.textContent='非表示にしました'}};
-picker.onchange=()=>{let f=picker.files[0];if(!f||!selected)return;let r=new FileReader();r.onload=e=>{if(selected.tagName==='IMG')selected.src=e.target.result;else{selected.style.backgroundImage=`url(${e.target.result})`;selected.style.backgroundSize='cover';selected.style.backgroundPosition='center'}};r.readAsDataURL(f)};
-maincolor.oninput=e=>document.documentElement.style.setProperty('--navy',e.target.value);sitebg.oninput=e=>document.documentElement.style.setProperty('--bg',e.target.value);pagewidth.oninput=e=>document.documentElement.style.setProperty('--page',e.target.value+'px');space.oninput=e=>document.documentElement.style.setProperty('--space',e.target.value+'px');
-save.onclick=()=>{let c=site.cloneNode(true);c.querySelectorAll('[contenteditable]').forEach(x=>x.removeAttribute('contenteditable'));localStorage.setItem('wsVisual',c.innerHTML);alert('保存しました')};reset.onclick=()=>{if(confirm('初期状態に戻しますか？')){localStorage.removeItem('wsVisual');location.reload()}};export.onclick=()=>{let c=document.documentElement.cloneNode(true);c.querySelector('.panel').remove();c.querySelector('.shell').style.display='block';c.querySelector('.canvas').style.padding='0';c.querySelectorAll('[contenteditable]').forEach(x=>x.removeAttribute('contenteditable'));c.querySelectorAll('.selected').forEach(x=>x.classList.remove('selected'));let b=new Blob(['<!DOCTYPE html>'+c.outerHTML],{type:'text/html'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='worldshift-edited.html';a.click()};let sv=localStorage.getItem('wsVisual');if(sv)site.innerHTML=sv;
+(() => {
+  'use strict';
+
+  const $ = (id) => document.getElementById(id);
+  const site = $('site');
+  const toggleBtn = $('toggle');
+  const saveBtn = $('save');
+  const exportBtn = $('export');
+  const resetBtn = $('reset');
+  const nameBox = $('selname');
+  const bgInput = $('bg');
+  const fgInput = $('fg');
+  const padInput = $('pad');
+  const marginInput = $('mar');
+  const radiusInput = $('rad');
+  const widthInput = $('wid');
+  const shadowInput = $('sh');
+  const alignInput = $('align');
+  const upBtn = $('up');
+  const downBtn = $('down');
+  const duplicateBtn = $('dup');
+  const hideBtn = $('hide');
+  const picker = $('picker');
+  const mainColorInput = $('maincolor');
+  const siteBgInput = $('sitebg');
+  const pageWidthInput = $('pagewidth');
+  const spaceInput = $('space');
+
+  let editMode = false;
+  let selected = null;
+
+  function rgbToHex(rgb) {
+    if (!rgb || rgb === 'transparent' || rgb.includes('rgba(0, 0, 0, 0)')) return '#ffffff';
+    const match = rgb.match(/\d+/g);
+    if (!match) return '#ffffff';
+    return '#' + match.slice(0, 3).map(v => Number(v).toString(16).padStart(2, '0')).join('');
+  }
+
+  function clearSelection() {
+    document.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
+  }
+
+  function selectElement(el) {
+    clearSelection();
+    selected = el;
+    if (!selected) {
+      nameBox.textContent = '未選択';
+      return;
+    }
+    selected.classList.add('selected');
+    nameBox.textContent = `${selected.tagName} ${(selected.className || '').toString()}`.slice(0, 90);
+    const cs = getComputedStyle(selected);
+    bgInput.value = rgbToHex(cs.backgroundColor);
+    fgInput.value = rgbToHex(cs.color);
+    padInput.value = parseInt(cs.paddingTop, 10) || 0;
+    marginInput.value = parseInt(cs.marginTop, 10) || 0;
+    radiusInput.value = parseInt(cs.borderRadius, 10) || 0;
+  }
+
+  function setEditMode(enabled) {
+    editMode = enabled;
+    document.body.classList.toggle('edit-mode', enabled);
+    toggleBtn.textContent = enabled ? '編集を終了' : '編集を開始';
+    document.querySelectorAll('[data-editable]').forEach(el => {
+      el.setAttribute('contenteditable', enabled ? 'true' : 'false');
+      el.setAttribute('spellcheck', 'false');
+    });
+    if (!enabled) {
+      clearSelection();
+      selected = null;
+      nameBox.textContent = '未選択';
+    }
+  }
+
+  function applyStyle(property, value) {
+    if (!selected) {
+      nameBox.textContent = '先に編集したい要素をクリックしてください';
+      return;
+    }
+    selected.style[property] = value;
+  }
+
+  toggleBtn.addEventListener('click', () => setEditMode(!editMode));
+
+  document.addEventListener('click', (event) => {
+    if (!editMode || event.target.closest('.panel')) return;
+    const target = event.target.closest('.editable, [data-editable], .image-edit');
+    if (!target) return;
+    if (target.closest('#site')) {
+      selectElement(target);
+      if (!target.hasAttribute('data-editable')) event.preventDefault();
+    }
+  });
+
+  bgInput.addEventListener('input', e => applyStyle('backgroundColor', e.target.value));
+  fgInput.addEventListener('input', e => applyStyle('color', e.target.value));
+  padInput.addEventListener('input', e => applyStyle('padding', `${e.target.value}px`));
+  marginInput.addEventListener('input', e => applyStyle('margin', `${e.target.value}px`));
+  radiusInput.addEventListener('input', e => applyStyle('borderRadius', `${e.target.value}px`));
+  widthInput.addEventListener('change', e => applyStyle('width', e.target.value));
+  shadowInput.addEventListener('change', e => applyStyle('boxShadow', e.target.value));
+  alignInput.addEventListener('change', e => applyStyle('textAlign', e.target.value));
+
+  upBtn.addEventListener('click', () => {
+    if (!selected || !selected.previousElementSibling) return;
+    selected.parentElement.insertBefore(selected, selected.previousElementSibling);
+  });
+
+  downBtn.addEventListener('click', () => {
+    if (!selected || !selected.nextElementSibling) return;
+    selected.parentElement.insertBefore(selected.nextElementSibling, selected);
+  });
+
+  duplicateBtn.addEventListener('click', () => {
+    if (!selected || !selected.parentElement) return;
+    const clone = selected.cloneNode(true);
+    clone.classList.remove('selected');
+    selected.parentElement.insertBefore(clone, selected.nextSibling);
+    selectElement(clone);
+  });
+
+  hideBtn.addEventListener('click', () => {
+    if (!selected) return;
+    selected.classList.add('hidden');
+    selected.classList.remove('selected');
+    selected = null;
+    nameBox.textContent = '非表示にしました';
+  });
+
+  picker.addEventListener('change', () => {
+    const file = picker.files && picker.files[0];
+    if (!file || !selected) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      if (selected.tagName === 'IMG') {
+        selected.src = e.target.result;
+      } else {
+        selected.style.backgroundImage = `url("${e.target.result}")`;
+        selected.style.backgroundSize = 'cover';
+        selected.style.backgroundPosition = 'center';
+      }
+    };
+    reader.readAsDataURL(file);
+    picker.value = '';
+  });
+
+  mainColorInput.addEventListener('input', e => {
+    document.documentElement.style.setProperty('--navy', e.target.value);
+    document.documentElement.style.setProperty('--navy2', e.target.value);
+  });
+  siteBgInput.addEventListener('input', e => document.documentElement.style.setProperty('--bg', e.target.value));
+  pageWidthInput.addEventListener('input', e => document.documentElement.style.setProperty('--page', `${e.target.value}px`));
+  spaceInput.addEventListener('input', e => document.documentElement.style.setProperty('--space', `${e.target.value}px`));
+
+  saveBtn.addEventListener('click', () => {
+    const clone = site.cloneNode(true);
+    clone.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
+    clone.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
+    localStorage.setItem('wsVisual', clone.innerHTML);
+    nameBox.textContent = 'ブラウザに保存しました';
+  });
+
+  resetBtn.addEventListener('click', () => {
+    if (!confirm('保存内容を削除して初期状態に戻しますか？')) return;
+    localStorage.removeItem('wsVisual');
+    location.reload();
+  });
+
+  exportBtn.addEventListener('click', () => {
+    setEditMode(false);
+    const clone = document.documentElement.cloneNode(true);
+    clone.querySelector('.panel')?.remove();
+    const shell = clone.querySelector('.shell');
+    if (shell) shell.style.display = 'block';
+    const canvas = clone.querySelector('.canvas');
+    if (canvas) canvas.style.padding = '0';
+    clone.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
+    clone.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
+    const blob = new Blob(['<!DOCTYPE html>\n' + clone.outerHTML], { type: 'text/html;charset=utf-8' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'worldshift-edited.html';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+  });
+
+  const saved = localStorage.getItem('wsVisual');
+  if (saved) site.innerHTML = saved;
+  setEditMode(false);
+})();
 </script>
 </body></html>
